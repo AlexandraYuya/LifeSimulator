@@ -8,7 +8,7 @@ import java.util.*;
 public class Main {
 //hej
     public static void main(String[] args) {
-        int size = 5;
+        int size = 3;
         Program p = new Program(size, 800, 1200);
         World w = p.getWorld();
 
