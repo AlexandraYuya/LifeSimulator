@@ -6,7 +6,7 @@ import itumulator.world.World;
 import java.util.*;
 
 public class Main {
-
+//hej
     public static void main(String[] args) {
         int size = 5;
         Program p = new Program(size, 800, 750);
