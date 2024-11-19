@@ -1,6 +1,5 @@
 package itumulator.world;
 
-import itumulator.executable.DisplayInformation;
 import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
@@ -21,6 +20,5 @@ public class Rabbit implements Actor {
         }
 
         world.setTile(location, this);
-        program.setDisplayInformation(Rabbit.class, new DisplayInformation(java.awt.Color.gray, "rabbit-small"));
     }
 }
