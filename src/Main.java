@@ -5,6 +5,7 @@ import itumulator.world.Location;
 import itumulator.world.World;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 import java.io.File;
 
@@ -14,8 +15,7 @@ public class Main {
         int size = 3;
         Program p = new Program(size, 800, 1200);
         World w = p.getWorld();
-
-        File grassA = new File("t1-1a");
+        File grassA = new File("./resources/data/t1-1a.txt");
 //        File grassB = new File("t1-1b");
 //        File grassC = new File("t1-1c");
         Scanner sc = new Scanner(grassA);
