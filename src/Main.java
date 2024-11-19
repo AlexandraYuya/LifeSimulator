@@ -12,7 +12,7 @@ public class Main {
         Program p = new Program(size, 800, 750);
         World w = p.getWorld();
 
-        // w.setTile(new Location(0, 0), new <MyClass>());
+         w.setTile(new Location(0, 0), new <MyClass>());
 
         p.setDisplayInformation(<MyClass>.class, new DisplayInformation(<Color>, "<ImageName>"));
 
