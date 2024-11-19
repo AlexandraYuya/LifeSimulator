@@ -11,7 +11,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Step 1: Load the file, we can switch out with any file here and they should all work
-        File file = new File("./resources/data/t1-2cde.txt"); // Change filename as needed
+//        File file = new File("./resources/data/t1-2cde.txt"); // Change filename as needed
+        File file = new File("./resources/data/t1-1c.txt"); // Change filename as needed
         Scanner sc = new Scanner(file);
 
         // Step 2: Read the world size
@@ -42,9 +43,23 @@ public class Main {
                     // Place entities "grass, rabbit or burrow" based on type
                     switch (type) {
                         case "grass":
-                            if (world.isTileEmpty(location)) {
-                                world.setTile(location, new Grass());
-                                program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
+                            int attempts = 0;
+                            boolean placedGrass = false;
+                            while (attempts < size * size && !placedGrass) { // Avoid infinite loops
+                                x = (int) (Math.random() * size);
+                                y = (int) (Math.random() * size);
+                                location = new Location(x, y);
+
+                                Object existing = world.getTile(location);
+                                if (existing == null || !(existing instanceof Grass)) { // Only place grass if no grass exists
+                                    world.setTile(location, new Grass());
+                                    program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
+                                    placedGrass = true; // Grass successfully placed
+                                }
+                                attempts++;
+                            }
+                            if (!placedGrass) {
+                                System.out.println("Could not place more grass, no suitable locations found.");
                             }
                             break;
 
