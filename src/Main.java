@@ -20,7 +20,7 @@ public class Main {
 
         // Step 2: Read the world size
         int size = Integer.parseInt(sc.nextLine());
-        Program p = new Program(size, 800, 1200);
+        Program p = new Program(size, 800, 1000);
         World w = p.getWorld();
 
         // Step 3: Initialize the HashMap for object types
