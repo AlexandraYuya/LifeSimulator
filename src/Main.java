@@ -16,7 +16,7 @@ public class Main {
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1000);
+        Program program = new Program(size, 800, 600);
         World world = program.getWorld();
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts

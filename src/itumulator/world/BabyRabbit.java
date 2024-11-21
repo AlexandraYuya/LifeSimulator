@@ -49,6 +49,9 @@ public class BabyRabbit implements Actor{
         if (energy <= 0) {
             world.delete(this);
         }
+        if (this.life == 100){
+            grow(world);
+        }
 
     }
 
