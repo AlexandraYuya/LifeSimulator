@@ -64,6 +64,31 @@ public class Rabbit implements Actor {
 
     }
 
+    private void tryToMate(World world) {
+        Location currentLocation = world.getLocation(this);
+        Object otherObject = world.getTile(currentLocation);
+
+        // Only proceed if the other object is a rabbit and it's not this rabbit
+        if (otherObject instanceof Rabbit && otherObject != this) {
+            // 50% chance to create a baby
+            if (new Random().nextBoolean()) {
+                // Look for empty tile to place baby
+                Set<Location> emptyTiles = world.getEmptySurroundingTiles(currentLocation);
+                if (!emptyTiles.isEmpty()) {
+                    // Pick a random empty tile for the baby
+                    List<Location> tilesList = new ArrayList<>(emptyTiles);
+                    Location babyLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+
+                    // Create and place baby
+                    BabyRabbit baby = new BabyRabbit();
+                    world.add(baby);
+                    world.setTile(babyLocation, baby);
+                }
+            }
+        }
+    }
+
+
     /**
      * WRITE ALL PARAM?
      * @param world an absolute URL giving the base location of the ima

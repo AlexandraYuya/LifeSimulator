@@ -49,6 +49,7 @@ public class Main {
                             babyrabbit.placeInWorld(world, program);
                             program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
                             babyrabbit.act(world);
+                            //Have to check if we need a if/else for creating a new baby when they "mate"
                             break;
                         default:
                             System.out.println("Unknown entity type: " + type);
