@@ -64,7 +64,7 @@ public class Rabbit implements Actor {
 
     }
 
-    private void tryToMate(World world) {
+    public void tryToMate(World world) {
         Location currentLocation = world.getLocation(this);
         Object otherObject = world.getTile(currentLocation);
 
