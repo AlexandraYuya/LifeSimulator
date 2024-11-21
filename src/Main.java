@@ -11,13 +11,20 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Load the file
-        File file = new File("./resources/data/tf1-1.txt"); // Change filename as needed
+//        File file = new File("./resources/data/tf1-1.txt"); // Change filename as needed
+        File file = new File("./resources/data/t1-2cde.txt");
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
+
+        // Set default display information for grass, rabbit, and burrow
+        program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
+        program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
+        program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.GRAY, "rabbit-small"));
+        program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
         while (sc.hasNextLine()) { // since each file have varying number of lines
@@ -27,26 +34,21 @@ public class Main {
                 String type = parts[0].trim().toLowerCase(); // normalize type
                 int count = parseCount(parts[1].trim()); // calls partsCount method, defined lower in file
 
-
-                program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.GRAY, "rabbit-small"));
-
-
                 // Place entities dynamically, (their functionality has now been moved to each respective class)
                 for (int i = 0; i < count; i++) {
                     switch (type) {
                         case "grass":
-                            new Grass().placeInWorld(world, program);
-                            program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
+                            Grass grass = new Grass();
+                            grass.placeInWorld(world, program);
+                            grass.act(world);
                             break;
                         case "rabbit":
                             Rabbit rabbit = new Rabbit();
                             rabbit.placeInWorld(world, program);
-                            program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
                             rabbit.act(world);
                             break;
                         case "burrow":
                             new Burrow().placeInWorld(world, program);
-                            program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
                             break;
                         default:
                             System.out.println("Unknown entity type: " + type);
