@@ -25,12 +25,11 @@ public class Rabbit implements Actor {
     @Override
     public void act(World world) {
         stepCount++;
-        if (stepCount == 10) { // only execute for every 20 steps 1 day
-            stepCount = 0;
-            life--;
+        if (stepCount == 20) { // only execute for every 20 steps 1 day
+            stepCount = 0; // reset step count
+            life--; // lose 1 life point after a full day has passed
         }
-            energy--;
-            int stepCounter = 0;
+            energy--; // for each step, energy is depleted by 1.
             Location curLocation = world.getLocation(this);
             Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
             if (!neighbours.isEmpty()) {
@@ -64,7 +63,7 @@ public class Rabbit implements Actor {
 
     }
 
-    public void tryToMate(World world) {
+    private void tryToMate(World world) {
 
         // First check if rabbit has enough energy to reproduce
         if (energy < 20) {  // Don't try to mate if energy is too low
@@ -81,7 +80,7 @@ public class Rabbit implements Actor {
         if (!nearbyRabbits.isEmpty()) {
             // 30% chance to create a baby
             double chance = new Random().nextDouble(); // Returns a value between 0.0 and 1.0
-            if (chance < 0.3) { // 50% chance (0.5 = 50%)
+            if (chance < 0.3) { // 30% chance (0.3 = 30%)
                 // Look for empty tile to place baby
                 Set<Location> emptyTiles = world.getEmptySurroundingTiles(currentLocation);
                 if (!emptyTiles.isEmpty()) {

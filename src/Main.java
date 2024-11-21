@@ -46,7 +46,7 @@ public class Main {
                             break;
                         case "burrow":
                             new Burrow().placeInWorld(world, program);
-                            program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole-small"));
+                            program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
                             break;
                         default:
                             System.out.println("Unknown entity type: " + type);

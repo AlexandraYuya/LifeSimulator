@@ -3,7 +3,7 @@ package itumulator.world;
 import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
-public class Burrow implements Actor {
+public class Burrow implements Actor, NonBlocking {
     @Override
     public void act(World world) {
         // Burrow behavior, if any, can go here
