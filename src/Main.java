@@ -16,7 +16,7 @@ public class Main {
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1200);
+        Program program = new Program(size, 800, 500);
         World world = program.getWorld();
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
@@ -35,8 +35,10 @@ public class Main {
                             program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
                             break;
                         case "rabbit":
-                            new Rabbit().placeInWorld(world, program);
-                            program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
+                            Rabbit rabbit = new Rabbit();
+                            rabbit.placeInWorld(world, program);
+                            program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
+                            rabbit.act(world);
                             break;
                         case "burrow":
                             new Burrow().placeInWorld(world, program);
