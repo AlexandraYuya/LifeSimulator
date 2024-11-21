@@ -43,7 +43,6 @@ public class Main {
                             rabbit.placeInWorld(world, program);
                             program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
                             rabbit.act(world);
-                            rabbit.tryToMate(world);
                             break;
                         case "burrow":
                             new Burrow().placeInWorld(world, program);
