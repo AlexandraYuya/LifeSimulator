@@ -41,6 +41,8 @@ public class Rabbit implements Actor {
                 world.setCurrentLocation(newLocation);
             }
             eat(world);
+            tryToMate(world);
+
             System.out.println("energy" + energy);
             System.out.println("Life" + life);
 
