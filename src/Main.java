@@ -19,6 +19,9 @@ public class Main {
         int size = Integer.parseInt(sc.nextLine());
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
+        // initialize grass
+//        Grass grass = new Grass();
+//        grass.act(world);
 
         // Set default display information for grass, rabbit, and burrow
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
@@ -39,16 +42,16 @@ public class Main {
                     switch (type) {
                         case "grass":
                             Grass grass = new Grass();
-                            grass.placeInWorld(world, program);
+                            grass.placeInWorld(world);
                             grass.act(world);
                             break;
                         case "rabbit":
                             Rabbit rabbit = new Rabbit();
-                            rabbit.placeInWorld(world, program);
+                            rabbit.placeInWorld(world);
                             rabbit.act(world);
                             break;
                         case "burrow":
-                            new Burrow().placeInWorld(world, program);
+                            new Burrow().placeInWorld(world);
                             break;
                         default:
                             System.out.println("Unknown entity type: " + type);

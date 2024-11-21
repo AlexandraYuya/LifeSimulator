@@ -16,7 +16,7 @@ public class Grass implements NonBlocking, Actor {
         stepCount++;
 
         // Check if no grass exists in the world and place 5 grass if necessary
-        if (!grassExists(world)) {
+        if (!world.contains(this)) {
             placeInitialGrass(world, 5);
             return; // Exit early to avoid spreading in the same step
         }
@@ -29,18 +29,6 @@ public class Grass implements NonBlocking, Actor {
                 spreadGrass(world);
             }
         }
-    }
-
-    /**
-     * Checks if any grass exists in the world.
-     *
-     * @param world The current world.
-     * @return true if grass exists, false otherwise.
-     */
-    private boolean grassExists(World world) {
-        Location curLocation = world.getLocation(this);
-        Object hasGrass = world.getNonBlocking(curLocation);
-        return hasGrass instanceof Grass;
     }
 
     /**
@@ -129,7 +117,7 @@ public class Grass implements NonBlocking, Actor {
 //        }
 //    }
 
-    public void placeInWorld(World world, Program program) {
+    public void placeInWorld(World world) {
         int size = world.getSize();
         Location location = null;
 
@@ -138,7 +126,8 @@ public class Grass implements NonBlocking, Actor {
             int y = (int) (Math.random() * size);
             location = new Location(x, y);
         }
-
-        world.setTile(location, this);
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
+        }
     }
 }

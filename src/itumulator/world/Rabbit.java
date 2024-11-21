@@ -25,30 +25,44 @@ public class Rabbit implements Actor {
     @Override
     public void act(World world) {
         stepCount++;
+
         if (stepCount == 20) { // only execute for every 20 steps 1 day
             stepCount = 0; // reset step count
             life--; // lose 1 life point after a full day has passed
         }
-            energy--; // for each step, energy is depleted by 1.
-            Location curLocation = world.getLocation(this);
-            Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
-            if (!neighbours.isEmpty()) {
-                Random rand = new Random();
-                List<Location> list = new ArrayList<>(neighbours);
-                Location newLocation = list.get(rand.nextInt(list.size()));
-                world.move(this, newLocation);
-                world.setCurrentLocation(newLocation);
-            }
-            eat(world);
-            tryToMate(world);//remember to add all stuff under act
 
-            System.out.println("energy" + energy);
-            System.out.println("Life" + life);
+        energy--; // for each step, energy is depleted by 1.
+        Location curLocation = world.getLocation(this);
+        Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
 
-            if (life == 0 || energy == 0) {
-                world.delete(this);
-                return;
+        if (!neighbours.isEmpty()) {
+            Random rand = new Random();
+            List<Location> list = new ArrayList<>(neighbours);
+            Location newLocation = list.get(rand.nextInt(list.size()));
+            world.move(this, newLocation);
+            world.setCurrentLocation(newLocation);
+        }
+
+        eat(world);
+        tryToMate(world);//remember to add all stuff under act
+
+        // Rabbit can dig hole
+        double digProbability  = 0.1; // 50% chance
+        if (Math.random() < digProbability) {
+            if (!world.containsNonBlocking(curLocation)) {
+                world.setTile(curLocation, new Burrow());
             }
+        }
+
+        System.out.println("energy" + energy);
+        System.out.println("Life" + life);
+
+        if (life == 0 || energy == 0) {
+            world.delete(this);
+            return;
+        }
+
+
     }
 
     private void eat(World world) {
@@ -107,7 +121,7 @@ public class Rabbit implements Actor {
      * param program
      *
      */
-    public void placeInWorld(World world, Program program) {
+    public void placeInWorld(World world) {
         int size = world.getSize();
         Location location = null;
 
@@ -116,7 +130,8 @@ public class Rabbit implements Actor {
             int y = (int) (Math.random() * size);
             location = new Location(x, y);
         }
-
-        world.setTile(location, this);
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
+        }
     }
 }

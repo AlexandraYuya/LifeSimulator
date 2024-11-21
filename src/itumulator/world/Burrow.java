@@ -7,9 +7,10 @@ public class Burrow implements Actor, NonBlocking {
     @Override
     public void act(World world) {
         // Burrow behavior, if any, can go here
+
     }
 
-    public void placeInWorld(World world, Program program) {
+    public void placeInWorld(World world) {
         int size = world.getSize();
         Location location = null;
 
