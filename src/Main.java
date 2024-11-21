@@ -27,6 +27,10 @@ public class Main {
                 String type = parts[0].trim().toLowerCase(); // normalize type
                 int count = parseCount(parts[1].trim()); // calls partsCount method, defined lower in file
 
+
+                program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.GRAY, "rabbit-small"));
+
+
                 // Place entities dynamically, (their functionality has now been moved to each respective class)
                 for (int i = 0; i < count; i++) {
                     switch (type) {

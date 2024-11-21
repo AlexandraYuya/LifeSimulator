@@ -66,10 +66,14 @@ public class Rabbit implements Actor {
 
     public void tryToMate(World world) {
         Location currentLocation = world.getLocation(this);
-        Object otherObject = world.getTile(currentLocation);
+        // Get only surrounding tiles (not including current location)
+        Set<Location> surroundingTiles = world.getSurroundingTiles(currentLocation);
 
-        // Only proceed if the other object is a rabbit and it's not this rabbit
-        if (otherObject instanceof Rabbit && otherObject != this) {
+        // Find rabbits in surrounding tiles
+        Set<Rabbit> nearbyRabbits = world.getAll(Rabbit.class, surroundingTiles);
+
+        // If there's at least one other rabbit nearby
+        if (!nearbyRabbits.isEmpty()) {
             // 50% chance to create a baby
             if (new Random().nextBoolean()) {
                 // Look for empty tile to place baby
