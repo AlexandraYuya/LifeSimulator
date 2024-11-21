@@ -65,11 +65,10 @@ public class Rabbit implements Actor {
 
     private void tryToMate(World world) {
 
-        // First check if rabbit has enough energy to reproduce
+        // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)
         if (energy < 20) {  // Don't try to mate if energy is too low
             return;
         }
-
         Location currentLocation = world.getLocation(this);
         // Get only surrounding tiles (not including current location)
         Set<Location> surroundingTiles = world.getSurroundingTiles(currentLocation);
