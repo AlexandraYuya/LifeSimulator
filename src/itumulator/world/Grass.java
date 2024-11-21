@@ -40,6 +40,11 @@ public class Grass implements Actor, NonBlocking {
                         world.setTile(spreadLocation, newSpreadGrass); // set new spread grass onto world
                     }
                 }
+//                if(curLocation == null) {
+//                   world.add(this);
+//                   Location emptyLocation = world.getLocation(this);
+//                    world.setTile(emptyLocation, this);
+//                }
             }
         }
     }

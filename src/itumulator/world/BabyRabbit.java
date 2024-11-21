@@ -10,13 +10,14 @@ import java.util.Set;
 
 public class BabyRabbit implements Actor{
     //should maybe BabyRabbit extend from Rabbit??
+    // maybe babyrabbit and adultrabbit can both extends from rabbit?
 
     private int life;
     private int energy;
     private int stepCount;
 
     public BabyRabbit() {
-        this.life = 10;
+        this.life = 15; // babies start with 15 lives??
         this.energy = 50;
         this.stepCount = 0;
     }
@@ -24,12 +25,11 @@ public class BabyRabbit implements Actor{
     @Override
     public void act(World world) {
         stepCount++;
-        if (stepCount == 10) { // only execute for every 20 steps 1 day
+        if (stepCount == 20) { // only execute for every 20 steps 1 day
             stepCount = 0;
             life--;
         }
         energy--;
-        int stepCounter = 0;
         Location curLocation = world.getLocation(this);
         Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
         if (!neighbours.isEmpty()) {
@@ -43,16 +43,14 @@ public class BabyRabbit implements Actor{
         System.out.println("energy" + energy);
         System.out.println("Life" + life);
 
-        if (life == 0) {
+        if (life == 0 || energy == 0) {
             world.delete(this);
-        }
-        if (energy <= 0) {
-            world.delete(this);
-        }
-        if (this.life == 100){
-            grow(world);
+            return;
         }
 
+        if (this.life == 10){
+            grow(world);
+        }
     }
 
     private void eat(World world) {

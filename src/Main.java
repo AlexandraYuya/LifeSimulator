@@ -11,12 +11,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Load the file
-        File file = new File("./resources/data/t1-2cde.txt"); // Change filename as needed
+        File file = new File("./resources/data/tf1-1.txt"); // Change filename as needed
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 600);
+        Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
