@@ -41,7 +41,7 @@ public class Rabbit implements Actor {
                 world.setCurrentLocation(newLocation);
             }
             eat(world);
-            tryToMate(world);
+            tryToMate(world);//remember to add all stuff under act
 
             System.out.println("energy" + energy);
             System.out.println("Life" + life);
@@ -70,14 +70,14 @@ public class Rabbit implements Actor {
         Location currentLocation = world.getLocation(this);
         // Get only surrounding tiles (not including current location)
         Set<Location> surroundingTiles = world.getSurroundingTiles(currentLocation);
-
         // Find rabbits in surrounding tiles
         Set<Rabbit> nearbyRabbits = world.getAll(Rabbit.class, surroundingTiles);
 
-        // If there's at least one other rabbit nearby
+        // Only proceed if there are nearby rabbits
         if (!nearbyRabbits.isEmpty()) {
-            // 50% chance to create a baby
-            if (new Random().nextBoolean()) {
+            // 30% chance to create a baby
+            double chance = new Random().nextDouble(); // Returns a value between 0.0 and 1.0
+            if (chance < 0.3) { // 50% chance (0.5 = 50%)
                 // Look for empty tile to place baby
                 Set<Location> emptyTiles = world.getEmptySurroundingTiles(currentLocation);
                 if (!emptyTiles.isEmpty()) {
@@ -89,6 +89,7 @@ public class Rabbit implements Actor {
                     BabyRabbit baby = new BabyRabbit();
                     world.add(baby);
                     world.setTile(babyLocation, baby);
+                    System.out.println("A baby rabbit was born!"); // Debug print
                 }
             }
         }
