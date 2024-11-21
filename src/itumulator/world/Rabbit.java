@@ -1,7 +1,10 @@
 package itumulator.world;
 
+
+
 import itumulator.executable.Program;
 import itumulator.simulator.Actor;
+
 
 public class Rabbit implements Actor {
     @Override
@@ -9,6 +12,12 @@ public class Rabbit implements Actor {
         // Rabbit movement logic, if applicable, can go here
     }
 
+    /**
+     * WRITE ALL PARAM?
+     * @param world an absolute URL giving the base location of the ima
+     * param program
+     *
+     */
     public void placeInWorld(World world, Program program) {
         int size = world.getSize();
         Location location = null;
