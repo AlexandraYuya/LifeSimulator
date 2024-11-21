@@ -65,6 +65,12 @@ public class Rabbit implements Actor {
     }
 
     public void tryToMate(World world) {
+
+        // First check if rabbit has enough energy to reproduce
+        if (energy < 20) {  // Don't try to mate if energy is too low
+            return;
+        }
+
         Location currentLocation = world.getLocation(this);
         // Get only surrounding tiles (not including current location)
         Set<Location> surroundingTiles = world.getSurroundingTiles(currentLocation);
@@ -87,7 +93,10 @@ public class Rabbit implements Actor {
                     BabyRabbit baby = new BabyRabbit();
                     world.add(baby);
                     world.setTile(babyLocation, baby);
-                    System.out.println("A baby rabbit was born!"); // Debug print
+
+                    // Decrease energy after successful reproduction
+                    energy -= 20;
+                    System.out.println("A baby rabbit was born! Parent energy now: " + energy);
                 }
             }
         }
