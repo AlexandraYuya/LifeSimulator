@@ -46,11 +46,9 @@ public class Rabbit implements Actor {
             System.out.println("energy" + energy);
             System.out.println("Life" + life);
 
-            if (life == 0) {
+            if (life == 0 || energy == 0) {
                 world.delete(this);
-            }
-            if (energy <= 0) {
-                world.delete(this);
+                return;
             }
     }
 

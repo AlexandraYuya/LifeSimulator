@@ -18,7 +18,7 @@ public class Grass implements Actor, NonBlocking {
             stepCount = 0; // reset count back to 0
 
             // add random spread probability
-            double spreadProbability = 0.3; // 30% chance
+            double spreadProbability = 0.5; // 50% chance
             if (Math.random() < spreadProbability) {
                 Location curLocation = world.getLocation(this); // get curLocation of 'this' grass
                 if (curLocation != null) {
