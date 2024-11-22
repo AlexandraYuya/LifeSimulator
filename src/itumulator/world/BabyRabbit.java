@@ -18,14 +18,15 @@ public class BabyRabbit implements Actor{
 
     public BabyRabbit() {
         this.life = 15; // babies start with 15 lives??
-        this.energy = 50;
+        this.energy = 100;
         this.stepCount = 0;
     }
 
     @Override
     public void act(World world) {
         stepCount++;
-        if (stepCount == 20) { // only execute for every 20 steps 1 day
+        // only execute for every 20 steps 1 day
+        if (stepCount == 20) {
             stepCount = 0;
             life--;
         }

@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-        // Load the file
-//        File file = new File("./resources/data/tf1-1.txt"); // Change filename as needed
+        // Load the file -->
+        // Change filename as needed
+//        File file = new File("./resources/data/tf1-1.txt");
         File file = new File("./resources/data/t1-2cde.txt");
         Scanner sc = new Scanner(file); // scans the file content
 
@@ -19,9 +20,6 @@ public class Main {
         int size = Integer.parseInt(sc.nextLine());
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
-        // initialize grass
-//        Grass grass = new Grass();
-//        grass.act(world);
 
         // Set default display information for grass, rabbit, and burrow
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
@@ -30,12 +28,16 @@ public class Main {
         program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
-        while (sc.hasNextLine()) { // since each file have varying number of lines
+        // since each file have varying number of lines
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            String[] parts = line.split(" "); // can be in <type> <count> pairs or <type> <countMIN-MAX>
+            // can be in <type> <count> pairs or <type> <countMIN-MAX>
+            String[] parts = line.split(" ");
             if (parts.length >= 2) {
-                String type = parts[0].trim().toLowerCase(); // normalize type
-                int count = parseCount(parts[1].trim()); // calls partsCount method, defined lower in file
+                // normalize type
+                String type = parts[0].trim().toLowerCase();
+                // calls partsCount method, defined lower in file
+                int count = parseCount(parts[1].trim());
 
                 // Place entities dynamically, (their functionality has now been moved to each respective class)
                 for (int i = 0; i < count; i++) {
@@ -74,13 +76,17 @@ public class Main {
 
     // here we handle the count (as in grass 3 or rabbit 10-20), either an integer is a value between min-max or it is just a single value
     private static int parseCount(String countStr) {
-        if (countStr.contains("-")) { // only executes in integers with intervals
-            String[] range = countStr.split("-"); // split by dash so we can process min and max value
+        // only executes in integers with intervals
+        if (countStr.contains("-")) {
+            // split by dash so we can process min and max value
+            String[] range = countStr.split("-");
             int min = Integer.parseInt(range[0].trim());
             int max = Integer.parseInt(range[1].trim());
-            return min + (int) (Math.random() * (max - min + 1)); // pick a random value between min and max
+            // pick a random value between min and max
+            return min + (int) (Math.random() * (max - min + 1));
         } else {
-            return Integer.parseInt(countStr); // else returns directly the one digit integer
+            // else returns directly the one digit integer
+            return Integer.parseInt(countStr);
         }
     }
 }

@@ -25,13 +25,16 @@ public class Rabbit implements Actor {
     @Override
     public void act(World world) {
         stepCount++;
-
-        if (stepCount == 20) { // only execute for every 20 steps 1 day
-            stepCount = 0; // reset step count
-            life--; // lose 1 life point after a full day has passed
+        // only execute for every 20 steps 1 day
+        if (stepCount == 20) {
+            // reset step count
+            stepCount = 0;
+            // lose 1 life point after a full day has passed
+            life--;
         }
 
-        energy--; // for each step, energy is depleted by 1.
+        // for each step, energy is depleted by 1.
+        energy--;
         Location curLocation = world.getLocation(this);
         Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
 
@@ -44,10 +47,12 @@ public class Rabbit implements Actor {
         }
 
         eat(world);
-        tryToMate(world);//remember to add all stuff under act
+        //remember to add all stuff under act
+        tryToMate(world);
 
         // Rabbit can dig hole
-        double digProbability  = 0.1; // 50% chance
+        // 10% chance
+        double digProbability  = 0.1;
         if (Math.random() < digProbability) {
             if (!world.containsNonBlocking(curLocation)) {
                 world.setTile(curLocation, new Burrow());
@@ -61,8 +66,6 @@ public class Rabbit implements Actor {
             world.delete(this);
             return;
         }
-
-
     }
 
     private void eat(World world) {
@@ -74,13 +77,12 @@ public class Rabbit implements Actor {
             }
             world.delete(hasGrass);
         }
-
     }
 
     private void tryToMate(World world) {
-
         // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)
-        if (energy < 20) {  // Don't try to mate if energy is too low
+        // Don't try to mate if energy is too low
+        if (energy < 20) {
             return;
         }
         Location currentLocation = world.getLocation(this);
@@ -92,8 +94,10 @@ public class Rabbit implements Actor {
         // Only proceed if there are nearby rabbits
         if (!nearbyRabbits.isEmpty()) {
             // 30% chance to create a baby
-            double chance = new Random().nextDouble(); // Returns a value between 0.0 and 1.0
-            if (chance < 0.3) { // 30% chance (0.3 = 30%)
+            // Returns a value between 0.0 and 1.0
+            double chance = new Random().nextDouble();
+            // 30% chance (0.3 = 30%)
+            if (chance < 0.3) {
                 // Look for empty tile to place baby
                 Set<Location> emptyTiles = world.getEmptySurroundingTiles(currentLocation);
                 if (!emptyTiles.isEmpty()) {
@@ -113,7 +117,6 @@ public class Rabbit implements Actor {
             }
         }
     }
-
 
     /**
      * WRITE ALL PARAM?
