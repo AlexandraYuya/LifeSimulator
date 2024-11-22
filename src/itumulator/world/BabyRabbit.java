@@ -33,11 +33,9 @@ public class BabyRabbit implements Actor{
             handleDay(world);
         }
 
-
-
-
-        if (this.life == 10){
+        if (life == 10){
             grow(world);
+            System.out.println("Baby rabbit finally grew up!!!");
         }
     }
 
@@ -56,10 +54,15 @@ public class BabyRabbit implements Actor{
             if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
                 world.remove(this);
                 isInBurrow = true;
-                System.out.println("Rabbit entered a burrow at: " + previousLocation);
+                // if they've safely made it to burrow energy goes up by 10
+                energy+=10;
+                System.out.println("Baby rabbit entered a burrow at: " + previousLocation);
             }else {
                 isSleeping = true;
-                System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
+                world.remove(this);
+                SleepingBabyRabbit sleepingBabyRabbit = new SleepingBabyRabbit(curLocation);
+                world.setTile(curLocation, sleepingBabyRabbit);
+                System.out.println("ZZZzzz Baby rabbit is sleeping outside at: " + curLocation);
             }
         }
     }
@@ -68,17 +71,23 @@ public class BabyRabbit implements Actor{
         if (isSleeping) {
             // Wake up from sleeping
             isSleeping = false;
-            System.out.println("Rabbit woke up from sleeping.");
+            System.out.println("Baby rabbit woke up from sleeping.");
+
+            Location sleepLocation = previousLocation;
+            if(sleepLocation != null) {
+                world.delete(world.getTile(sleepLocation));
+                world.setTile(sleepLocation, this);
+                previousLocation = null;
+            }
         }
 
         if(isInBurrow && !world.isOnTile(this)) {
             if (previousLocation != null) {
-                world.setTile(previousLocation, this); // Restore to previous location
+                // Restore to previous location
+                world.setTile(previousLocation, this);
                 previousLocation = null;
                 isInBurrow = false;
-                System.out.println("Previous location: " + previousLocation);
             }
-            return;
         }
 
         // Resume normal daytime behavior

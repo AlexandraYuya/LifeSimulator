@@ -18,13 +18,15 @@ public class Main {
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1200);
+        Program program = new Program(size, 800, 800);
         World world = program.getWorld();
 
-        // Set default display information for grass, rabbit, and burrow
+        // Set default display information for all entities
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
         program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
-        program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.GRAY, "rabbit-small"));
+        program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
+        program.setDisplayInformation(SleepingBabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small-sleeping"));
+        program.setDisplayInformation(SleepingRabbit.class, new DisplayInformation(Color.gray, "rabbit-sleeping"));
         program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts

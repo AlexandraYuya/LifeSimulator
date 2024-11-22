@@ -22,7 +22,7 @@ public class Burrow implements Actor, NonBlocking {
 
     @Override
     public void act(World world) {
-        // Burrow behavior, if any, can go here
+        // Burrow doesn't act
 
     }
 

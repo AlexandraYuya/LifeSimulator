@@ -1,14 +1,11 @@
 package itumulator.world;
 
 import itumulator.executable.DisplayInformation;
-import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 
 public class Rabbit implements Actor {
@@ -25,7 +22,6 @@ public class Rabbit implements Actor {
     private boolean isSleeping;
     private boolean isInBurrow;
 
-
     public Rabbit() {
         this.life = 10;
         this.energy = 100;
@@ -39,7 +35,6 @@ public class Rabbit implements Actor {
 
     @Override
     public void act(World world) {
-
         if (world.isNight()) {
             handleNight(world);
         } else {
@@ -62,9 +57,13 @@ public class Rabbit implements Actor {
             if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
                 world.remove(this);
                 isInBurrow = true;
+                energy+=10;
                 System.out.println("Rabbit entered a burrow at: " + previousLocation);
             }else {
                 isSleeping = true;
+                world.remove(this);
+                SleepingRabbit sleepingRabbit = new SleepingRabbit(curLocation);
+                world.setTile(curLocation, sleepingRabbit);
                 System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
             }
         }
@@ -75,6 +74,13 @@ public class Rabbit implements Actor {
             // Wake up from sleeping
             isSleeping = false;
             System.out.println("Rabbit woke up from sleeping.");
+
+            Location sleepLocation = previousLocation;
+            if(sleepLocation != null) {
+                world.delete(world.getTile(sleepLocation));
+                world.setTile(sleepLocation, this);
+                previousLocation = null;
+            }
         }
 
         if(isInBurrow && !world.isOnTile(this)) {
@@ -82,9 +88,7 @@ public class Rabbit implements Actor {
                 world.setTile(previousLocation, this); // Restore to previous location
                 previousLocation = null;
                 isInBurrow = false;
-                System.out.println("Previous location: " + previousLocation);
             }
-            return;
         }
 
         // Resume normal daytime behavior
