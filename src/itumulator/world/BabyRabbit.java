@@ -79,6 +79,6 @@ public class BabyRabbit implements Actor{
     }
 
 
-    public void placeInWorld(World world, Program program) {
-    }
+//    public void placeInWorld(World world, Program program) {
+//    }
 }

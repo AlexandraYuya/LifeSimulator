@@ -69,7 +69,7 @@ public class Main {
         program.show();
 
         // Simulate the world
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 250; i++) {
             program.simulate();
         }
     }

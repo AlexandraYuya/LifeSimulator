@@ -4,6 +4,22 @@ import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
 public class Burrow implements Actor, NonBlocking {
+    // Associate rabbit that dug this burrow
+    private Rabbit owner;
+
+    public Burrow() {
+        // initially there's no owner
+        this.owner = null;
+    }
+
+    public void setOwner(Rabbit rabbit) {
+        this.owner = rabbit;
+    }
+
+    public Rabbit getOwner() {
+        return owner;
+    }
+
     @Override
     public void act(World world) {
         // Burrow behavior, if any, can go here
