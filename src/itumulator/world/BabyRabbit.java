@@ -83,8 +83,18 @@ public class BabyRabbit implements Actor{
 
         if(isInBurrow) {
             if (previousLocation != null) {
-                // Restore to previous location
-                world.setTile(previousLocation, this);
+                if(world.isTileEmpty(previousLocation)) {
+                    // Restore to previous location
+                    world.setTile(previousLocation, this);
+                }else {
+                    Set<Location> emptyNeighbours = world.getEmptySurroundingTiles(previousLocation);
+                    if (!emptyNeighbours.isEmpty()) {
+                        Random rand = new Random();
+                        List<Location> list = new ArrayList<>(emptyNeighbours);
+                        Location location = list.get(rand.nextInt(list.size()));
+                        world.setTile(location, this);
+                    }
+                }
                 previousLocation = null;
                 isInBurrow = false;
             }
