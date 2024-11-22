@@ -35,13 +35,6 @@ public class Rabbit implements Actor {
 
     @Override
     public void act(World world) {
-        if (life <= 0) {
-            world.delete(this);
-            System.out.println("A rabbit has died.");
-            // Remove rabbit from the world
-            return;
-        }
-
         stepCount++;
         if (stepCount == 20) {
             stepCount = 0;
@@ -126,6 +119,11 @@ public class Rabbit implements Actor {
             eat(world);
             tryToMate(world);
             digProbability(world);
+        }
+        if (life <= 0) {
+            // Remove rabbit from the world
+            world.delete(this);
+            System.out.println("A rabbit has died.");
         }
     }
 
