@@ -35,11 +35,26 @@ public class Rabbit implements Actor {
 
     @Override
     public void act(World world) {
+        if (life <= 0) {
+            world.delete(this);
+            System.out.println("A rabbit has died.");
+            // Remove rabbit from the world
+            return;
+        }
+
+        stepCount++;
+        if (stepCount == 20) {
+            stepCount = 0;
+            life--;
+        }
+
         if (world.isNight()) {
             handleNight(world);
         } else {
             handleDay(world);
         }
+        System.out.println("Rabbit life: " + life);
+        System.out.println("Rabbit energy: " + energy);
     }
 
     private void handleNight(World world) {
@@ -57,7 +72,9 @@ public class Rabbit implements Actor {
             if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
                 world.remove(this);
                 isInBurrow = true;
-                energy+=10;
+                if(energy <= 90) {
+                    energy += 10;
+                }
                 System.out.println("Rabbit entered a burrow at: " + previousLocation);
             }else {
                 isSleeping = true;
@@ -103,11 +120,6 @@ public class Rabbit implements Actor {
         }
 
         // Resume normal daytime behavior
-        stepCount++;
-        if (stepCount == 20) {
-            stepCount = 0;
-            life--;
-        }
         if (life > 0 && energy > 0) {
             energy--;
             moveRandomly(world);

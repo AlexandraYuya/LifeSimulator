@@ -27,16 +27,25 @@ public class BabyRabbit implements Actor{
 
     @Override
     public void act(World world) {
-        if (world.isNight()) {
-            handleNight(world);
-        } else {
-            handleDay(world);
+        stepCount++;
+        if (stepCount == 20) {
+            stepCount = 0;
+            life--;
         }
 
         if (life == 10){
             grow(world);
             System.out.println("Baby rabbit finally grew up!!!");
+            return;
         }
+
+        if (world.isNight()) {
+            handleNight(world);
+        } else {
+            handleDay(world);
+        }
+        System.out.println("Baby Rabbit life: " + life);
+        System.out.println("Baby Rabbit energy: " + energy);
     }
 
     private void handleNight(World world) {
@@ -55,7 +64,9 @@ public class BabyRabbit implements Actor{
                 world.remove(this);
                 isInBurrow = true;
                 // if they've safely made it to burrow energy goes up by 10
-                energy+=10;
+                if(energy <= 90) {
+                    energy += 10;
+                }
                 System.out.println("Baby rabbit entered a burrow at: " + previousLocation);
             }else {
                 isSleeping = true;
@@ -101,11 +112,6 @@ public class BabyRabbit implements Actor{
         }
 
         // Resume normal daytime behavior
-        stepCount++;
-        if (stepCount == 20) {
-            stepCount = 0;
-            life--;
-        }
         if (life > 0 && energy > 0) {
             energy--;
             moveRandomly(world);
@@ -139,15 +145,15 @@ public class BabyRabbit implements Actor{
         }
     }
 
-    public void grow(World world) {
-        Location currentLocation = world.getLocation(this);
-        // Create new adult rabbit
-        Rabbit adultRabbit = new Rabbit();
+    private void grow(World world) {
+        Location curLocation = world.getLocation(this);
         // Delete baby rabbit (this will remove it from both world and tile)
         world.delete(this);
+        // Create new adult rabbit
+        Rabbit adultRabbit = new Rabbit();
         // Add adult rabbit to world
         world.add(adultRabbit);
         // Place adult rabbit at the location
-        world.setTile(currentLocation, adultRabbit);
+        world.setTile(curLocation, adultRabbit);
     }
 }

@@ -13,7 +13,7 @@ public class Main {
         // Load the file -->
         // Change filename as needed
         File file = new File("./resources/data/t1-2cde.txt");
-//        File file = new File("./resources/data/t1-2b.txt");
+//        File file = new File("./resources/data/t1-2fg.txt");
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
