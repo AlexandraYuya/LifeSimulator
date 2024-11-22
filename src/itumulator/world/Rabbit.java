@@ -83,9 +83,10 @@ public class Rabbit implements Actor {
             }
         }
 
-        if(isInBurrow && !world.isOnTile(this)) {
+        if(isInBurrow) {
             if (previousLocation != null) {
-                world.setTile(previousLocation, this); // Restore to previous location
+                // Restore to previous location
+                world.setTile(previousLocation, this);
                 previousLocation = null;
                 isInBurrow = false;
             }

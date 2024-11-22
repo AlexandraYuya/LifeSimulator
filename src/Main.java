@@ -12,8 +12,8 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-//        File file = new File("./resources/data/tf1-1.txt");
         File file = new File("./resources/data/t1-2cde.txt");
+//        File file = new File("./resources/data/t1-2b.txt");
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file

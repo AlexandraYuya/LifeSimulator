@@ -81,7 +81,7 @@ public class BabyRabbit implements Actor{
             }
         }
 
-        if(isInBurrow && !world.isOnTile(this)) {
+        if(isInBurrow) {
             if (previousLocation != null) {
                 // Restore to previous location
                 world.setTile(previousLocation, this);
