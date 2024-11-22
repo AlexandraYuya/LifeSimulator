@@ -1,10 +1,10 @@
 package itumulator.world;
 
-
-
+import itumulator.executable.DisplayInformation;
 import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +19,12 @@ public class Rabbit implements Actor {
     private boolean hasDugBurrow;
     // Reference to the burrow the rabbit dug
     private Burrow myBurrow;
-    private Location lastPosition;
+    // Stores location before entering a burrow
+    private Location previousLocation;
+    // Tracks if the rabbit is sleeping outside
+    private boolean isSleeping;
+    private boolean isInBurrow;
+
 
     public Rabbit() {
         this.life = 10;
@@ -27,38 +32,74 @@ public class Rabbit implements Actor {
         this.stepCount = 0;
         this.hasDugBurrow = false;
         this.myBurrow = null;
+        this.previousLocation = null;
+        this.isSleeping = false;
+        this.isInBurrow = false;
     }
 
     @Override
     public void act(World world) {
-        if (life <= 0) {
-            world.delete(this);
-            System.out.println("A rabbit has died :C");
+
+        if (world.isNight()) {
+            handleNight(world);
+        } else {
+            handleDay(world);
+        }
+    }
+
+    private void handleNight(World world) {
+        if (world.isOnTile(this)) {
+            previousLocation = world.getLocation(this); // get the location before removal
+            Location curLocation = world.getLocation(this);
+            // Get only surrounding tiles
+            Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
+            // Find burrows in surrounding tiles
+            Set<Burrow> nearbyBurrow = world.getAll(Burrow.class, surroundingTiles);
+            // check if curLocation is on a burrow
+            Object onBurrow = world.getNonBlocking(curLocation);
+
+            // Only proceed if there are nearby burrows or on a burrow
+            if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
+                world.remove(this);
+                isInBurrow = true;
+                System.out.println("Rabbit entered a burrow at: " + previousLocation);
+            }else {
+                isSleeping = true;
+                System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
+            }
+        }
+    }
+
+    private void handleDay(World world) {
+        if (isSleeping) {
+            // Wake up from sleeping
+            isSleeping = false;
+            System.out.println("Rabbit woke up from sleeping.");
+        }
+
+        if(isInBurrow && !world.isOnTile(this)) {
+            if (previousLocation != null) {
+                world.setTile(previousLocation, this); // Restore to previous location
+                previousLocation = null;
+                isInBurrow = false;
+                System.out.println("Previous location: " + previousLocation);
+            }
             return;
         }
 
+        // Resume normal daytime behavior
         stepCount++;
-
-        // only execute for every 20 steps 1 day
         if (stepCount == 20) {
-            // reset step count
             stepCount = 0;
-            // lose 1 life point after a full day has passed
             life--;
         }
-
-        // for each step, energy is depleted by 1.
-        if(energy > 0) {
+        if (life > 0 && energy > 0) {
             energy--;
+            moveRandomly(world);
+            eat(world);
+            tryToMate(world);
+            digProbability(world);
         }
-
-        moveRandomly(world);
-        eat(world);
-        tryToMate(world);
-        digProbability(world);
-
-        System.out.println("energy" + energy);
-        System.out.println("Life" + life);
     }
 
     private void moveRandomly(World world) {
@@ -76,15 +117,14 @@ public class Rabbit implements Actor {
         }
     }
 
-
     // DIG METHOD -->
     private void digProbability(World world) {
         // only 1 burrow can be dug per rabbit
         if(hasDugBurrow) {
             return;
         }
-        // 10% chance of digging
-        double digProbability  = 0.1;
+        // 30% chance of digging
+        double digProbability  = 0.3;
         if (Math.random() < digProbability) {
             Location curLocation = world.getLocation(this);
             if (!world.containsNonBlocking(curLocation)) {
