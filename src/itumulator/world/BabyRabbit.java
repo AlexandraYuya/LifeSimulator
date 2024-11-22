@@ -59,7 +59,7 @@ public class BabyRabbit implements Actor{
         Location curLocation = world.getLocation(this);
         Object hasGrass = world.getNonBlocking(curLocation);
         if(hasGrass instanceof Grass) {
-            if(energy <= 100) {
+            if(energy <= 95) {
                 energy += 5;
             }
             world.delete(hasGrass);
@@ -77,8 +77,4 @@ public class BabyRabbit implements Actor{
         // Place adult rabbit at the location
         world.setTile(currentLocation, adultRabbit);
     }
-
-
-//    public void placeInWorld(World world, Program program) {
-//    }
 }

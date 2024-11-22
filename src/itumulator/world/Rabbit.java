@@ -19,8 +19,6 @@ public class Rabbit implements Actor {
     private boolean hasDugBurrow;
     // Reference to the burrow the rabbit dug
     private Burrow myBurrow;
-    private boolean resting = false;
-    private boolean sleeping = false;
     private Location lastPosition;
 
     public Rabbit() {
@@ -54,6 +52,16 @@ public class Rabbit implements Actor {
             energy--;
         }
 
+        moveRandomly(world);
+        eat(world);
+        tryToMate(world);
+        digProbability(world);
+
+        System.out.println("energy" + energy);
+        System.out.println("Life" + life);
+    }
+
+    private void moveRandomly(World world) {
         if(energy > 0) {
             Location curLocation = world.getLocation(this);
             Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
@@ -66,14 +74,8 @@ public class Rabbit implements Actor {
                 world.setCurrentLocation(newLocation);
             }
         }
-
-        eat(world);
-        tryToMate(world);
-        digProbability(world);
-
-        System.out.println("energy" + energy);
-        System.out.println("Life" + life);
     }
+
 
     // DIG METHOD -->
     private void digProbability(World world) {
@@ -96,14 +98,6 @@ public class Rabbit implements Actor {
                 hasDugBurrow = true;
             }
         }
-    }
-
-    public Burrow getMyBurrow() {
-        return myBurrow;
-    }
-
-    public boolean hasDugBurrow() {
-        return myBurrow != null;
     }
     // <-- END DIG METHOD
 
