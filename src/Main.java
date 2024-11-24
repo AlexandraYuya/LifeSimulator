@@ -18,7 +18,7 @@ public class Main {
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 800);
+        Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
 
         // Set default display information for all entities
