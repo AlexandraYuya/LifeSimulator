@@ -25,6 +25,10 @@ public class BabyRabbit implements Actor{
         this.isInBurrow = false;
     }
 
+    /**
+     * It will make the baby rabbit grow after 5 days, and it calls two different methods one for night and one for day
+     * @param world The current world.
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -47,7 +51,11 @@ public class BabyRabbit implements Actor{
         System.out.println("Baby Rabbit life: " + life);
         System.out.println("Baby Rabbit energy: " + energy);
     }
-
+    /**
+     * This is the method we use for handling night. If differentiate between sleeping in a borrow or outside.
+     * If they sleep in a borrow they will get 10 energy.
+     * @param world The current world.
+     */
     private void handleNight(World world) {
         if (world.isOnTile(this)) {
             previousLocation = world.getLocation(this); // get the location before removal
@@ -78,6 +86,10 @@ public class BabyRabbit implements Actor{
         }
     }
 
+    /**
+     * This is the method we use for handling day. The bay rabbit will wake up and make them do normal day behavior.
+     * @param world The current world.
+     */
     private void handleDay(World world) {
         if (isSleeping) {
             // Wake up from sleeping
@@ -119,6 +131,10 @@ public class BabyRabbit implements Actor{
         }
     }
 
+    /**
+     * This is the method makes the baby rabbits move random.
+     * @param world The current world.
+     */
     private void moveRandomly(World world) {
         if(energy > 0) {
             Location curLocation = world.getLocation(this);
@@ -133,7 +149,10 @@ public class BabyRabbit implements Actor{
             }
         }
     }
-
+    /**
+     * This is the method let the baby rabbit eat while getting 5 energy from it and the grass will be deleted.
+     * @param world The current world.
+     */
     private void eat(World world) {
         Location curLocation = world.getLocation(this);
         Object hasGrass = world.getNonBlocking(curLocation);
@@ -144,7 +163,10 @@ public class BabyRabbit implements Actor{
             world.delete(hasGrass);
         }
     }
-
+    /**
+     * This is the method will grow the baby rabbit to an adult rabbit.
+     * @param world The current world.
+     */
     private void grow(World world) {
         Location curLocation = world.getLocation(this);
         // Delete baby rabbit (this will remove it from both world and tile)

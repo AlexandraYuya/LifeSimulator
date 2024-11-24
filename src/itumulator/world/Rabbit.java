@@ -32,7 +32,10 @@ public class Rabbit implements Actor {
         this.isSleeping = false;
         this.isInBurrow = false;
     }
-
+    /**
+     * counts steps and calls two different methods one for night and one for day
+     * @param world The current world.
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -50,6 +53,11 @@ public class Rabbit implements Actor {
         System.out.println("Rabbit energy: " + energy);
     }
 
+    /**
+     * This is the method we are using to handle night. It will make is possible for rabbits to in or
+     * outside the borrow.
+     * @param world The current world.
+     */
     private void handleNight(World world) {
         if (world.isOnTile(this)) {
             previousLocation = world.getLocation(this); // get the location before removal
@@ -79,6 +87,11 @@ public class Rabbit implements Actor {
         }
     }
 
+    /**
+     * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
+     * They can now do normal daytime behavior.
+     * @param world The current world.
+     */
     private void handleDay(World world) {
         if (isSleeping) {
             // Wake up from sleeping
@@ -126,7 +139,10 @@ public class Rabbit implements Actor {
             System.out.println("A rabbit has died.");
         }
     }
-
+    /**
+     * This is the method make the rabbits move random in the world.
+     * @param world The current world.
+     */
     private void moveRandomly(World world) {
         if(energy > 0) {
             Location curLocation = world.getLocation(this);
@@ -142,6 +158,10 @@ public class Rabbit implements Actor {
         }
     }
 
+    /**
+     * This is the method we use for digging borrows, and it makes sure that a rabbit can only dig one borrow.
+     * @param world The current world.
+     */
     // DIG METHOD -->
     private void digProbability(World world) {
         // only 1 burrow can be dug per rabbit
@@ -165,7 +185,10 @@ public class Rabbit implements Actor {
         }
     }
     // <-- END DIG METHOD
-
+    /**
+     * This is the method is giving energy and removing grass when a rabbit eats it.
+     * @param world The current world.
+     */
     // START EAT METHOD -->
     private void eat(World world) {
         Location curLocation = world.getLocation(this);
@@ -179,7 +202,10 @@ public class Rabbit implements Actor {
         }
     }
     // <-- END EAT METHOD
-
+    /**
+     * This is the method we are using for matting so there will come baby rabbits.
+     * @param world The current world.
+     */
     // START MATING METHOD -->
     private void tryToMate(World world) {
         // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)
@@ -222,10 +248,8 @@ public class Rabbit implements Actor {
     // <-- END MATING METHOD
 
     /**
-     * WRITE ALL PARAM?
-     * @param world an absolute URL giving the base location of the ima
-     * param program
-     *
+     * This is the method place the rabbit in the world
+     * @param world The current world.
      */
     public void placeInWorld(World world) {
         int size = world.getSize();

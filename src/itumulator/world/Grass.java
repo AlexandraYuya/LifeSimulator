@@ -12,6 +12,10 @@ public class Grass implements NonBlocking, Actor {
     // counter to track how many steps, we only want grass to move randomly for every X amount of steps
     private int stepCount = 0;
 
+    /**
+     * counts steps and spread grass every 10 steps
+     * @param world The current world.
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -28,7 +32,6 @@ public class Grass implements NonBlocking, Actor {
 
     /**
      * Spreads grass to a random empty surrounding tile.
-     *
      * @param world The current world.
      */
     private void spreadGrass(World world) {
@@ -56,6 +59,10 @@ public class Grass implements NonBlocking, Actor {
         }
     }
 
+    /**
+     * This is the method place the grass in the world
+     * @param world The current world.
+     */
     public void placeInWorld(World world) {
         int size = world.getSize();
         Location location = null;
