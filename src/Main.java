@@ -7,6 +7,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * The main class is where we run our simulating world from
+ * Here we read the files (we were given txt files)
+ * Then the world is initialized with entities(Grass,rabbits etc)
+ * So the steps are: reads the file, place the correct entities from the file, place the entities in our wold,
+ * then run the simulation with the entities
+ */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -21,7 +28,7 @@ public class Main {
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
 
-        // Set default display information for all entities
+        // Here we set the default display information for all entities, so the grass will get the png image fx
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
         program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
         program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
@@ -31,6 +38,7 @@ public class Main {
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
         // since each file have varying number of lines
+
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             // can be in <type> <count> pairs or <type> <countMIN-MAX>
@@ -41,7 +49,6 @@ public class Main {
                 // calls partsCount method, defined lower in file
                 int count = parseCount(parts[1].trim());
 
-                // Place entities dynamically, (their functionality has now been moved to each respective class)
                 for (int i = 0; i < count; i++) {
                     switch (type) {
                         case "grass":
@@ -64,7 +71,7 @@ public class Main {
                 }
             }
         }
-        // close scanner
+        // closes the scanner
         sc.close();
 
         // Show the simulation
@@ -77,6 +84,15 @@ public class Main {
     }
 
     // here we handle the count (as in grass 3 or rabbit 10-20), either an integer is a value between min-max or it is just a single value
+    /**
+     * Parses(decodes) a count string that represents either a single number or a range of numbers
+     * fx:("3" or "10-20"). If the count string contains a range (has a dash),
+     * a random number within the specified range is returned. Otherwise, the single value is returned.
+     *
+     * @param countStr the string representing the count (either a single number or a range)
+     * @return an integer representing the count, either a single value or a random value within a range
+     * See comments for better understanding of the code
+     */
     private static int parseCount(String countStr) {
         // only executes in integers with intervals
         if (countStr.contains("-")) {
