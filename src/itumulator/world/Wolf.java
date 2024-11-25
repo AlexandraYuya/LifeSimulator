@@ -1,13 +1,17 @@
 package itumulator.world;
-
+import java.util.*;
 import itumulator.simulator.Actor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class Wolf implements Actor {
     private int life;
     private int energy;
     private int stepCount;
 
-    public Wolf(){
+    public Wolf() {
         this.life = 10;
         this.energy = 100;
         this.stepCount = 0;
@@ -17,15 +21,30 @@ public class Wolf implements Actor {
     public void act(World world) {
         stepCount++;
         // check if a full night has passed with 0 energy
-        if(stepCount % 20 == 0 || energy <= 0){
-           life--;
-           System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
+        if (stepCount % 20 == 0 || energy <= 0) {
+            life--;
+            System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
         }
 
         hasDied(world);
-
-
     }
+
+    /**
+     * This method makes it possible for the wolfs to eat rabbits.
+     * @param world The current world.
+     */
+    private void eat(World world) {
+        Location curLocation = world.getLocation(this);
+        Object isRabbit = world.getNonBlocking(curLocation);
+        if (isRabbit instanceof Rabbit) {
+            energy += 10;
+            System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+        }
+        world.delete(isRabbit);
+    }
+
+
+
 /**
  * This is a method that check if the wolf has 0 life and then is remove it
  * @param world The current world.*/
@@ -34,6 +53,21 @@ public class Wolf implements Actor {
             // Remove wolf from the world
             world.delete(this);
             System.out.println("A Wolf has died.");
+        }
+    }
+
+    private void moveRandomly(World world) {
+        if(energy > 0) {
+            Location curLocation = world.getLocation(this);
+            Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
+
+            if (!neighbours.isEmpty()) {
+                Random rand = new Random();
+                List<Location> list = new ArrayList<>(neighbours);
+                Location newLocation = list.get(rand.nextInt(list.size()));
+                world.move(this, newLocation);
+                world.setCurrentLocation(newLocation);
+            }
         }
     }
 
@@ -53,4 +87,6 @@ public class Wolf implements Actor {
             world.setTile(location, this);
         }
     }
+
+
 }
