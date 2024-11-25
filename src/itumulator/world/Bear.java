@@ -25,4 +25,12 @@ public class Bear implements Actor {
             world.setTile(location, this);
         }
     }
+
+    public void placeInWorld(World world, int x, int y) {
+        int size = world.getSize();
+        Location location = new Location(x, y);
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
+        }
+    }
 }

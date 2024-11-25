@@ -19,7 +19,8 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/t2-1c.txt");
+        File file = new File("./resources/data/t2-6a.txt");
+
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
@@ -37,6 +38,7 @@ public class Main {
         program.setDisplayInformation(Bear.class, new DisplayInformation(Color.orange, "bear"));
         program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
         program.setDisplayInformation(Carcass.class, new DisplayInformation(Color.red, "carcass"));
+        program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
         // since each file have varying number of lines
@@ -44,43 +46,65 @@ public class Main {
             String line = sc.nextLine();
             // can be in <type> <count> pairs or <type> <countMIN-MAX>
             String[] parts = line.split(" ");
+
             if (parts.length >= 2) {
+                int coord1 = 0;
+                int coord2 = 0;
+                boolean hasCoordinate = false;
                 // normalize type
                 String type = parts[0].trim().toLowerCase();
                 // calls partsCount method, defined lower in file
                 int count = parseCount(parts[1].trim());
 
-                for (int i = 0; i < count; i++) {
-                    switch (type) {
-                        case "grass":
-                            Grass grass = new Grass();
-                            grass.placeInWorld(world);
-                            grass.act(world);
-                            break;
-                        case "rabbit":
-                            Rabbit rabbit = new Rabbit();
-                            rabbit.placeInWorld(world);
-                            rabbit.act(world);
-                            break;
-                        case "burrow":
-                            new Burrow().placeInWorld(world);
-                            break;
-                        case "bear":
-                            Bear bear = new Bear();
-                            bear.placeInWorld(world);
-                            bear.act(world);
-                            break;
-                        case "wolf":
-                            Wolf wolf = new Wolf();
-                            wolf.placeInWorld(world);
-                            wolf.act(world);
-                            break;
-                        default:
-                            System.out.println("Unknown entity type: " + type);
-                            break;
+                if (parts.length > 2) {
+                    hasCoordinate = true;
+                    String[] coordinate = parts[2].split(",");
+                    String coordinate1 = coordinate[0];
+                    String coordinate2 = coordinate[1];
+                    coord1 = Integer.parseInt(coordinate1.substring(1, coordinate1.length()));
+                    coord2 = Integer.parseInt(coordinate2.substring(0, coordinate2.length() - 1));
+                    System.out.println(coord1 + " " + coord2);
+                }
+
+                    for (int i = 0; i < count; i++) {
+                        switch (type) {
+                            case "grass":
+                                Grass grass = new Grass();
+                                grass.placeInWorld(world);
+                                grass.act(world);
+                                break;
+                            case "rabbit":
+                                Rabbit rabbit = new Rabbit();
+                                rabbit.placeInWorld(world);
+                                rabbit.act(world);
+                                break;
+                            case "burrow":
+                                new Burrow().placeInWorld(world);
+                                break;
+                            case "bear":
+                                Bear bear = new Bear();
+                                if(hasCoordinate) {
+                                    bear.placeInWorld(world, coord1, coord2);
+                                }else {
+                                    bear.placeInWorld(world);
+                                }
+                                bear.act(world);
+                                break;
+                            case "wolf":
+                                Wolf wolf = new Wolf();
+                                wolf.placeInWorld(world);
+                                wolf.act(world);
+                                break;
+                            case "berry":
+                                Berry berry = new Berry();
+                                berry.placeInWorld(world);
+                                break;
+                            default:
+                                System.out.println("Unknown entity type: " + type);
+                                break;
+                        }
                     }
                 }
-            }
         }
         // closes the scanner
         sc.close();
