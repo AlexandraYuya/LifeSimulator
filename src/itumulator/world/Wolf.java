@@ -17,9 +17,9 @@ public class Wolf implements Actor {
     public void act(World world) {
         stepCount++;
         // check if a full night has passed with 0 energy
-        if(stepCount % 20 == 0 && energy <= 0){
+        if(stepCount % 20 == 0 || energy <= 0){
            life--;
-           System.out.println("Wolf has lost life due to zero energy. Remaining lives: " + life);
+           System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
         }
 
         hasDied(world);
