@@ -23,7 +23,7 @@ public class Rabbit implements Actor {
     private boolean isInBurrow;
 
     public Rabbit() {
-        this.life = 10;
+        this.life = 3; // reduced to 3 life
         this.energy = 100;
         this.stepCount = 0;
         this.hasDugBurrow = false;

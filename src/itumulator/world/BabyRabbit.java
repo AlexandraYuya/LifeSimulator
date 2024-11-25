@@ -17,7 +17,7 @@ public class BabyRabbit implements Actor{
     private boolean isInBurrow;
 
     public BabyRabbit() {
-        this.life = 15; // babies start with 15 lives??
+        this.life = 5; // reduced to 5 life
         this.energy = 100;
         this.stepCount = 0;
         this.previousLocation = null;
