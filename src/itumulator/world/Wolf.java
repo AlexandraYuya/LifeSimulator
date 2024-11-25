@@ -25,7 +25,7 @@ public class Wolf implements Actor {
             life--;
             System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
         }
-
+        moveRandomly(world); //Added this so they move 
         hasDied(world);
     }
 
@@ -42,7 +42,6 @@ public class Wolf implements Actor {
         }
         world.delete(isRabbit);
     }
-
 
 
 /**
