@@ -1,5 +1,4 @@
 package itumulator.world;
-import java.util.*;
 import itumulator.simulator.Actor;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,10 @@ public class Wolf implements Actor {
             life--;
             System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
         }
-        moveRandomly(world); //Added this so they move 
+        moveRandomly(world); //Added this so they move
         hasDied(world);
+        eat(world);
+
     }
 
     /**
@@ -35,12 +36,19 @@ public class Wolf implements Actor {
      */
     private void eat(World world) {
         Location curLocation = world.getLocation(this);
-        Object isRabbit = world.getNonBlocking(curLocation);
-        if (isRabbit instanceof Rabbit) {
-            energy += 10;
-            System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+        Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
+
+        if (!surroundingTiles.isEmpty()) {
+            Location rabbitLocation = surroundingTiles.iterator().next();
+            Object isRabbit = world.getTile(rabbitLocation);
+            if (isRabbit instanceof Rabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
+                energy += 10;
+                System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+                world.delete(isRabbit);
+                world.move(this, rabbitLocation);
+            }
+
         }
-        world.delete(isRabbit);
     }
 
 
