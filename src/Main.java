@@ -19,8 +19,7 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/t1-2cde.txt");
-//        File file = new File("./resources/data/t1-2fg.txt");
+        File file = new File("./resources/data/t2-1c.txt");
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
@@ -30,15 +29,17 @@ public class Main {
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
-        program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.gray, "rabbit-large"));
+        program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.darkGray, "rabbit-large"));
+        program.setDisplayInformation(SleepingRabbit.class, new DisplayInformation(Color.darkGray, "rabbit-sleeping"));
         program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
         program.setDisplayInformation(SleepingBabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small-sleeping"));
-        program.setDisplayInformation(SleepingRabbit.class, new DisplayInformation(Color.gray, "rabbit-sleeping"));
         program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
+        program.setDisplayInformation(Bear.class, new DisplayInformation(Color.orange, "bear"));
+        program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
+        program.setDisplayInformation(Carcass.class, new DisplayInformation(Color.red, "carcass"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
         // since each file have varying number of lines
-
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             // can be in <type> <count> pairs or <type> <countMIN-MAX>
@@ -63,6 +64,16 @@ public class Main {
                             break;
                         case "burrow":
                             new Burrow().placeInWorld(world);
+                            break;
+                        case "bear":
+                            Bear bear = new Bear();
+                            bear.placeInWorld(world);
+                            bear.act(world);
+                            break;
+                        case "wolf":
+                            Wolf wolf = new Wolf();
+                            wolf.placeInWorld(world);
+                            wolf.act(world);
                             break;
                         default:
                             System.out.println("Unknown entity type: " + type);
