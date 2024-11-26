@@ -52,7 +52,7 @@ public class Bear implements Actor {
     }
 
     /**
-     * This method makes it possible for the bears to eat rabbits.
+     * This method makes it possible for the bears to eat rabbits & berries.
      * @param world The current world.
      */
     private void eat(World world) {
@@ -73,9 +73,9 @@ public class Bear implements Actor {
                 world.move(this, rabbitLocation);
             }
             if (isBerry instanceof Berry && Math.random() <= 0.2) { //here checked if it is a berry and adds 80% chance
-                energy += 10;
+                energy += 5;
                 System.out.println("Bear Ate some berries - New energy level:" + energy);
-                world.delete(isBerry);
+                ((Berry) isBerry).consumeBerries();
             }
         }
     }
