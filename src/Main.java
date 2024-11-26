@@ -19,13 +19,13 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/t2-6a.txt");
+        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 300);
+        Program program = new Program(size, 800, 1500);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
@@ -57,6 +57,7 @@ public class Main {
                 String type = parts[0].trim().toLowerCase();
                 // calls partsCount method, defined lower in file
                 int count = parseCount(parts[1].trim());
+                Wolf alphaWolf = null;
 
                 if (parts.length > 2) {
                     hasCoordinate = true;
@@ -93,9 +94,17 @@ public class Main {
                                 bear.act(world);
                                 break;
                             case "wolf":
-                                    Wolf wolf = new Wolf();
+                                // Create an alpha wolf for the first iteration
+                                if (i == 0) {
+                                    alphaWolf = new Wolf(null);
+                                    alphaWolf.placeInWorld(world);
+                                    alphaWolf.act(world);
+                                } else {
+                                    // Assign wolf to the alpha's pack
+                                    Wolf wolf = new Wolf(alphaWolf);
                                     wolf.placeInWorld(world);
                                     wolf.act(world);
+                                }
                                 break;
                             case "berry":
                                 Berry berry = new Berry();
@@ -107,7 +116,6 @@ public class Main {
                         }
                     }
                 }
-            Wolf.resetPack();
         }
         // closes the scanner
         sc.close();
