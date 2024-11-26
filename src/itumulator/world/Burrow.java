@@ -36,7 +36,7 @@ public class Burrow implements Actor, NonBlocking {
         int size = world.getSize();
         Location location = null;
 
-        while (location == null || !world.isTileEmpty(location)) {
+        while (location == null || world.getNonBlocking(location) != null) {
             int x = (int) (Math.random() * size);
             int y = (int) (Math.random() * size);
             location = new Location(x, y);
