@@ -63,7 +63,7 @@ public class Bear implements Actor {
             for (Location nearbyLocation : surroundingTiles) {  // Loop through all surrounding tiles
                 Object entity = world.getTile(nearbyLocation);
 
-                if (entity instanceof Rabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
+                if (entity instanceof AdultRabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
                     energy += 10;
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);

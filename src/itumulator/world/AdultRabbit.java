@@ -1,14 +1,12 @@
 package itumulator.world;
 
-import itumulator.executable.DisplayInformation;
 import itumulator.simulator.Actor;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 
-public class Rabbit implements Actor {
+public class AdultRabbit implements Actor {
     private int life;
     private int energy;
     private int stepCount;
@@ -22,7 +20,7 @@ public class Rabbit implements Actor {
     private boolean isSleeping;
     private boolean isInBurrow;
 
-    public Rabbit() {
+    public AdultRabbit() {
         this.life = 3; // reduced to 3 life
         this.energy = 100;
         this.stepCount = 0;
@@ -204,7 +202,7 @@ public class Rabbit implements Actor {
         // Get only surrounding tiles (not including current location)
         Set<Location> surroundingTiles = world.getSurroundingTiles(currentLocation);
         // Find rabbits in surrounding tiles
-        Set<Rabbit> nearbyRabbits = world.getAll(Rabbit.class, surroundingTiles);
+        Set<AdultRabbit> nearbyRabbits = world.getAll(AdultRabbit.class, surroundingTiles);
 
         // Only proceed if there are nearby rabbits
         if (!nearbyRabbits.isEmpty()) {

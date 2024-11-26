@@ -80,7 +80,7 @@ public class Wolf implements Actor {
         if (!surroundingTiles.isEmpty()) {
             Location rabbitLocation = surroundingTiles.iterator().next();
             Object isRabbit = world.getTile(rabbitLocation);
-            if (isRabbit instanceof Rabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
+            if (isRabbit instanceof AdultRabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
                 energy += 10;
                 System.out.println("Ate a poor Rabbit - New energy level:" + energy);
                 world.delete(isRabbit);

@@ -1,5 +1,4 @@
 package itumulator.world;
-import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
 import java.util.ArrayList;
@@ -159,7 +158,7 @@ public class BabyRabbit implements Actor{
         // Delete baby rabbit (this will remove it from both world and tile)
         world.delete(this);
         // Create new adult rabbit
-        Rabbit adultRabbit = new Rabbit();
+        AdultRabbit adultRabbit = new AdultRabbit();
         // Add adult rabbit to world
         world.add(adultRabbit);
         // Place adult rabbit at the location

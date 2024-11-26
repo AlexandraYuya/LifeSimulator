@@ -1,7 +1,7 @@
 package itumulator.world;
 import itumulator.simulator.Actor;
 
-public class SleepingRabbit extends Rabbit implements Actor {
+public class SleepingRabbit extends AdultRabbit implements Actor {
     private Location sleepLocation;
 
     public SleepingRabbit(Location location) {
@@ -13,7 +13,7 @@ public class SleepingRabbit extends Rabbit implements Actor {
         if(world.isDay()) {
             Location currentLocation = world.getLocation(this);
             world.delete(this);
-            Rabbit rabbit = new Rabbit();
+            AdultRabbit rabbit = new AdultRabbit();
             world.setTile(currentLocation, rabbit);
         }
     }

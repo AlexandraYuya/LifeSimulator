@@ -19,8 +19,8 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/t2-6a.txt");
-//        File file = new File("./resources/data/tf2-1.txt");
+//        File file = new File("./resources/data/t2-6a.txt");
+        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
@@ -31,7 +31,7 @@ public class Main {
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
         program.setDisplayInformation(Grass.class, new DisplayInformation(Color.green, "grass"));
-        program.setDisplayInformation(Rabbit.class, new DisplayInformation(Color.darkGray, "rabbit-large"));
+        program.setDisplayInformation(AdultRabbit.class, new DisplayInformation(Color.darkGray, "rabbit-large"));
         program.setDisplayInformation(SleepingRabbit.class, new DisplayInformation(Color.darkGray, "rabbit-sleeping"));
         program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
         program.setDisplayInformation(SleepingBabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small-sleeping"));
@@ -77,7 +77,7 @@ public class Main {
                                 grass.act(world);
                                 break;
                             case "rabbit":
-                                Rabbit rabbit = new Rabbit();
+                                AdultRabbit rabbit = new AdultRabbit();
                                 rabbit.placeInWorld(world);
                                 rabbit.act(world);
                                 break;

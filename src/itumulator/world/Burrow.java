@@ -1,11 +1,10 @@
 package itumulator.world;
 
-import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
 public class Burrow implements Actor, NonBlocking {
     // Associate rabbit that dug this burrow
-    private Rabbit owner;
+    private AdultRabbit owner;
 
     public Burrow() {
         // initially there's no owner
@@ -15,11 +14,11 @@ public class Burrow implements Actor, NonBlocking {
      * This is the method will get the owner of the borrow.
      * @param rabbit The current rabbit.
      */
-    public void setOwner(Rabbit rabbit) {
+    public void setOwner(AdultRabbit rabbit) {
         this.owner = rabbit;
     }
 
-    public Rabbit getOwner() {
+    public AdultRabbit getOwner() {
         return owner;
     }
 
