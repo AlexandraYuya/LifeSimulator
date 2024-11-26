@@ -35,7 +35,6 @@ public class Grass implements NonBlocking, Actor {
      * @param world The current world.
      */
     private void spreadGrass(World world) {
-
         Location curLocation = world.getLocation(this);
 
         if (curLocation != null) {
