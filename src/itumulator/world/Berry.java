@@ -19,4 +19,6 @@ public class Berry {
             world.setTile(location, this);
         }
     }
+
+
 }
