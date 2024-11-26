@@ -153,8 +153,10 @@ public class Wolf implements Actor {
                 int y = (int) (Math.random() * size);
                 location = new Location(x, y);
             }
-
-            world.setTile(location, this);
+                
+            if (!world.containsNonBlocking(location)) {
+                world.setTile(location, this);
+            }
 
         } else {
             // Places pack wolves in the world based on alpha's location
