@@ -1,9 +1,7 @@
 package itumulator.world;
 
 public class Bush extends Berry{
-    public Brush(){
-        super();
-    }
+
 
     @Override
     public void placeInWorld(World world) {
