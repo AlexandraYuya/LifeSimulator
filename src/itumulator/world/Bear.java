@@ -10,6 +10,7 @@ public class Bear implements Actor {
     @Override
     public void act(World world) {
 
+        eat(world);
     }
 
     /**
