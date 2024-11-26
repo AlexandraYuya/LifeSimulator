@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class Wolf implements Actor {
     // Tracks this pack's alpha wolf location
-    private Location alphaLocation = null;
+    private static Location alphaLocation = null;
     // Wolves in this pack
-    private List<Wolf> pack = new ArrayList<>();
+    private static List<Wolf> pack = new ArrayList<>();
     // Determines whether this wolf is the alpha
     private boolean isAlphaWolf = false;
     private int life;
@@ -162,12 +162,8 @@ public class Wolf implements Actor {
      * This method resets the pack, so that we can have unique packs per inputted line
      */
     // Reset pack for a new line of wolves
-    public void resetPack() {
-        if (isAlphaWolf) {
-            pack.clear(); // Clear the current pack
-            isAlphaWolf = false; // Reset alpha status
+    public static void resetPack() {
             alphaLocation = null; // Clear alpha's location
             System.out.println("Reset alpha wolf and its pack.");
         }
-    }
 }
