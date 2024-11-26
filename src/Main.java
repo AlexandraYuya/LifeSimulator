@@ -20,12 +20,13 @@ public class Main {
         // Load the file -->
         // Change filename as needed
         File file = new File("./resources/data/t2-6a.txt");
+//        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1500);
+        Program program = new Program(size, 800, 2000);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
@@ -42,11 +43,10 @@ public class Main {
         program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
         program.setDisplayInformation(Bush.class, new DisplayInformation(Color.red, "bush"));
 
-        // Process each line for entities (grass, rabbit, burrow) and each of their counts
-        // since each file have varying number of lines
+        // Process each line for entities (grass, rabbit, burrow) and each of their counts, (since each file have varying number of lines)
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            // can be in <type> <count> pairs or <type> <countMIN-MAX>
+            // can be in <type> <count> pairs or <type> <countMIN-MAX> <(x,y)>
             String[] parts = line.split(" ");
 
             if (parts.length >= 2) {

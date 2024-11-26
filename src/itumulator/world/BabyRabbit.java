@@ -78,7 +78,7 @@ public class BabyRabbit implements Actor{
                 System.out.println("Baby rabbit entered a burrow at: " + previousLocation);
             }else {
                 isSleeping = true;
-                world.remove(this);
+                world.delete(this);
                 SleepingBabyRabbit sleepingBabyRabbit = new SleepingBabyRabbit(curLocation);
                 world.setTile(curLocation, sleepingBabyRabbit);
                 System.out.println("ZZZzzz Baby rabbit is sleeping outside at: " + curLocation);
@@ -91,19 +91,6 @@ public class BabyRabbit implements Actor{
      * @param world The current world.
      */
     private void handleDay(World world) {
-        if (isSleeping) {
-            // Wake up from sleeping
-            isSleeping = false;
-            System.out.println("Baby rabbit woke up from sleeping.");
-
-            Location sleepLocation = previousLocation;
-            if(sleepLocation != null) {
-                world.delete(world.getTile(sleepLocation));
-                world.setTile(sleepLocation, this);
-                previousLocation = null;
-            }
-        }
-
         if(isInBurrow) {
             if (previousLocation != null) {
                 if(world.isTileEmpty(previousLocation)) {
