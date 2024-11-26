@@ -40,6 +40,7 @@ public class Main {
         program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
         program.setDisplayInformation(Carcass.class, new DisplayInformation(Color.red, "carcass"));
         program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
+        program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts
         // since each file have varying number of lines
