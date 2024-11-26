@@ -25,7 +25,7 @@ public class Main {
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 2000);
+        Program program = new Program(size, 800, 300);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
