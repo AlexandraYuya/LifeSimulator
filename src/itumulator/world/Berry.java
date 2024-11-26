@@ -19,6 +19,20 @@ public class Berry {
             world.setTile(location, this);
         }
     }
+    public boolean hasBerries() {
+        return true;
+    }
+
+    public void consumeBerries() {
+        if (hasBerries()) {
+
+        }
+        else if (!hasBerries()) {
+            
+
+        }
+    }
+
 
 
 }
