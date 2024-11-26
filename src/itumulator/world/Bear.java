@@ -60,22 +60,22 @@ public class Bear implements Actor {
         Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
 
         if (!surroundingTiles.isEmpty()) {
-            Location rabbitLocation = surroundingTiles.iterator().next();
-            Location berryLocation = surroundingTiles.iterator().next();
+            for (Location nearbyLocation : surroundingTiles) {  // Loop through all surrounding tiles
+                Object entity = world.getTile(nearbyLocation);
 
-            Object isRabbit = world.getTile(rabbitLocation);
-            Object isBerry = world.getTile(berryLocation);
-
-            if (isRabbit instanceof Rabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
-                energy += 10;
-                System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
-                world.delete(isRabbit);
-                world.move(this, rabbitLocation);
-            }
-            if (isBerry instanceof Berry && Math.random() <= 0.9 && !(isBerry instanceof Bush)) { //here checked if it is a berry and adds 80% chance
-                energy += 5;
-                System.out.println("Bear Ate some berries - New energy level:" + energy);
-                ((Berry) isBerry).consumeBerries(world);
+                if (entity instanceof Rabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
+                    energy += 10;
+                    System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
+                    world.delete(entity);
+                    world.move(this, nearbyLocation);
+                    break;
+                }
+                if (entity instanceof Berry && Math.random() <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 80% chance
+                    energy += 5;
+                    System.out.println("Bear Ate some berries - New energy level:" + energy);
+                    ((Berry) entity).consumeBerries(world);
+                    break;
+                }
             }
         }
     }
