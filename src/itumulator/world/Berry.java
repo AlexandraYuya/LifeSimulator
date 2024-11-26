@@ -42,6 +42,7 @@ private boolean hasBerries;
         } else {
             System.out.println("Attempted to consume berries but none available"); // Debug print
         }
+
         }
 
 
