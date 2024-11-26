@@ -22,19 +22,20 @@ public class Bush extends Berry implements Actor{
         }
     }
 
-    @Override
-    public void placeInWorld(World world) {
-        int size = world.getSize();
-        Location location = null;
-
-        while (location == null || world.getNonBlocking(location) != null) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
-            location = new Location(x, y);
-        }
-        if (!world.containsNonBlocking(location)) {
-            world.setTile(location, this);
-        }
-    }
+// Har fjernet da den får allerede dens placeInWorld() metode fra dens super klasse
+//    @Override
+//    public void placeInWorld(World world) {
+//        int size = world.getSize();
+//        Location location = null;
+//
+//        while (location == null || !world.isTileEmpty(location)) {
+//            int x = (int) (Math.random() * size);
+//            int y = (int) (Math.random() * size);
+//            location = new Location(x, y);
+//        }
+//        if (!world.containsNonBlocking(location)) {
+//            world.setTile(location, this);
+//        }
+//    }
 
 }
