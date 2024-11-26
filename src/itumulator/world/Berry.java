@@ -1,7 +1,7 @@
 package itumulator.world;
 
 public class Berry {
-
+private boolean hasBerries;
     /**
      * This is the method place the grass in the world
      * @param world The current world.
@@ -20,15 +20,14 @@ public class Berry {
         }
     }
     public boolean hasBerries() {
-        return true;
+        return hasBerries;
     }
 
     public void consumeBerries() {
-        if (hasBerries()) {
-
+        if (hasBerries) {
+            hasBerries = false; //eats the berries
         }
-        else if (!hasBerries()) {
-            
+
 
         }
     }
