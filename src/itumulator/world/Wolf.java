@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Wolf implements Actor {
     private static Location firstWolfLocation = null;
+    private static List<Wolf> currentPack = new ArrayList<>();
+    private boolean isAlphaWolf = true;
     private int life;
     private int energy;
     private int stepCount;
@@ -48,7 +50,12 @@ public class Wolf implements Actor {
                 world.delete(isRabbit);
                 world.move(this, rabbitLocation);
             }
-
+            if (isRabbit instanceof Rabbit && Math.random() <= 0.2 && energy == 0) { //here checked if it is a rabbit, energy = 0 and adds 20% chance
+                energy += 10;
+                System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+                world.delete(isRabbit);
+                world.move(this, rabbitLocation);
+            }
         }
     }
 
@@ -65,7 +72,7 @@ public class Wolf implements Actor {
     }
 
     private void moveRandomly(World world) {
-        if(energy > 0) {
+        if(energy > 0 && isAlphaWolf) {
             Location curLocation = world.getLocation(this);
             Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
 
@@ -79,33 +86,13 @@ public class Wolf implements Actor {
         }
     }
 
+    private void movePack(World world) {
+
+    }
+
     /**
      * This is the method place the Wolf in the world
      * @param world The current world.*/
-//    public void placeInWorld(World world) {
-//        int size = world.getSize();
-//        Location location = null;
-//
-//        while (location == null || !world.isTileEmpty(location)) {
-//            int x = (int) (Math.random() * size);
-//            int y = (int) (Math.random() * size);
-//            location = new Location(x, y);
-//        }
-//
-//        if(world.contains(this)) {
-//            Location curLocation = world.getLocation(this);
-//            Set<Location> surroundingTiles = world.getEmptySurroundingTiles(curLocation);
-//            List<Location> tilesList = new ArrayList<>(surroundingTiles);
-//            Location packLocation = tilesList.get(new Random().nextInt(tilesList.size()));
-//            world.setTile(packLocation, this);
-//            System.out.println("Placed in wolf at " + packLocation);
-//        }
-//
-//        if (!world.containsNonBlocking(location)) {
-//            world.setTile(location, this);
-//        }
-//    }
-
     public void placeInWorld(World world) {
         if (firstWolfLocation == null) {
             // Place the first wolf randomly

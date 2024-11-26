@@ -92,13 +92,9 @@ public class Main {
                                 bear.act(world);
                                 break;
                             case "wolf":
-                                System.out.println("Placing " + count + " wolves from file.");
-                                for (int j = 0; j < count; j++) {
                                     Wolf wolf = new Wolf();
                                     wolf.placeInWorld(world);
                                     wolf.act(world);
-                                }
-                                Wolf.resetPack();
                                 break;
                             case "berry":
                                 Berry berry = new Berry();
@@ -110,6 +106,7 @@ public class Main {
                         }
                     }
                 }
+            Wolf.resetPack();
         }
         // closes the scanner
         sc.close();
