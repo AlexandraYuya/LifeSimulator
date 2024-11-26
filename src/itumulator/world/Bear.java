@@ -2,41 +2,54 @@ package itumulator.world;
 
 import itumulator.simulator.Actor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Bear implements Actor {
     int energy;
+    int radius;
+    Location startingPoint;
 
     public Bear() {
         this.energy = 100;
+        this.radius = 2;
     }
     @Override
     public void act(World world) {
-
         eat(world);
-        moveRandomly(world);
+        moveInCircRandomly(world);
     }
 
-    private void moveRandomly(World world) {
+    // Move random in a circular space with radius 2
+    private void moveInCircRandomly(World world) {
         if(energy > 0) {
             Location curLocation = world.getLocation(this);
             Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
+            Set<Location> limitedNeighbours = new HashSet<>();
 
-            if (!neighbours.isEmpty()) {
+            for (Location loc : neighbours) {
+                if(isWithinRadius(startingPoint, loc, radius)){
+                    limitedNeighbours.add(loc);
+                }
+            }
+
+            if (!limitedNeighbours.isEmpty()) {
                 Random rand = new Random();
-                List<Location> list = new ArrayList<>(neighbours);
+                List<Location> list = new ArrayList<>(limitedNeighbours);
                 Location newLocation = list.get(rand.nextInt(list.size()));
                 world.move(this, newLocation);
-                world.setCurrentLocation(newLocation);
             }
         }
     }
 
+    //
+    private boolean isWithinRadius(Location center, Location target, int radius) {
+        int dx = center.getX() - target.getX();
+        int dy = center.getY() - target.getY();
+        return (dx * dx + dy * dy) <= (radius * radius);
+    }
+
     /**
-     * This method makes it possible for the wolfs to eat rabbits.
+     * This method makes it possible for the bears to eat rabbits.
      * @param world The current world.
      */
     private void eat(World world) {
@@ -50,13 +63,13 @@ public class Bear implements Actor {
             Object isRabbit = world.getTile(rabbitLocation);
             Object isBerry = world.getTile(berryLocation);
 
-            if (isRabbit instanceof Rabbit && Math.random() <= 1.0) { //here checked if it is a rabbit and adds 70% chance
+            if (isRabbit instanceof Rabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
                 energy += 10;
                 System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                 world.delete(isRabbit);
                 world.move(this, rabbitLocation);
             }
-            if (isBerry instanceof Berry && Math.random() <= 1.0) { //here checked if it is a berry and adds 80% chance
+            if (isBerry instanceof Berry && Math.random() <= 0.2) { //here checked if it is a berry and adds 80% chance
                 energy += 10;
                 System.out.println("Bear Ate some berries - New energy level:" + energy);
                 world.delete(isBerry);
@@ -87,6 +100,7 @@ public class Bear implements Actor {
             Location location = new Location(x, y);
             if (!world.containsNonBlocking(location)) {
                 world.setTile(location, this);
+                startingPoint = location;
             }
         }
     }
