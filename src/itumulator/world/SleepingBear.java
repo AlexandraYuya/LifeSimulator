@@ -12,6 +12,6 @@ public class SleepingBear implements Actor {
 
     @Override
     public void act(World world) {
-        // Sleeping rabbits doesn't act
+        // Sleeping bears doesn't act
     }
 }

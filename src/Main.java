@@ -36,6 +36,7 @@ public class Main {
         program.setDisplayInformation(SleepingBabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small-sleeping"));
         program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
         program.setDisplayInformation(Bear.class, new DisplayInformation(Color.orange, "bear"));
+        program.setDisplayInformation(SleepingBear.class, new DisplayInformation(Color.darkGray, "bear-sleeping"));
         program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
         program.setDisplayInformation(Carcass.class, new DisplayInformation(Color.red, "carcass"));
         program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
@@ -67,7 +68,6 @@ public class Main {
                 }
 
                     for (int i = 0; i < count; i++) {
-                        System.out.println("Placing " + count + " wolves from file.");
                         switch (type) {
                             case "grass":
                                 Grass grass = new Grass();

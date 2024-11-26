@@ -5,8 +5,8 @@ import itumulator.simulator.Actor;
 import java.util.*;
 
 public class Bear implements Actor {
-    int energy;
-    int radius;
+    private int energy;
+    int radius; // private or not?
     Location startingPoint;
 
     public Bear() {
@@ -15,9 +15,12 @@ public class Bear implements Actor {
     }
     @Override
     public void act(World world) {
+
         eat(world);
         moveInCircRandomly(world);
+
     }
+
 
     // Move random in a circular space with radius 2
     private void moveInCircRandomly(World world) {
