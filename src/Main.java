@@ -19,13 +19,13 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/tf2-1.txt");
+        File file = new File("./resources/data/t2-3a.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1200);
+        Program program = new Program(size, 800, 2000);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
@@ -67,6 +67,7 @@ public class Main {
                 }
 
                     for (int i = 0; i < count; i++) {
+                        System.out.println("Placing " + count + " wolves from file.");
                         switch (type) {
                             case "grass":
                                 Grass grass = new Grass();
@@ -91,9 +92,13 @@ public class Main {
                                 bear.act(world);
                                 break;
                             case "wolf":
-                                Wolf wolf = new Wolf();
-                                wolf.placeInWorld(world);
-                                wolf.act(world);
+                                System.out.println("Placing " + count + " wolves from file.");
+                                for (int j = 0; j < count; j++) {
+                                    Wolf wolf = new Wolf();
+                                    wolf.placeInWorld(world);
+                                    wolf.act(world);
+                                }
+                                Wolf.resetPack();
                                 break;
                             case "berry":
                                 Berry berry = new Berry();

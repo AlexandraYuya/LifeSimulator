@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Wolf implements Actor {
+    private static Location firstWolfLocation = null;
     private int life;
     private int energy;
     private int stepCount;
@@ -81,19 +82,59 @@ public class Wolf implements Actor {
     /**
      * This is the method place the Wolf in the world
      * @param world The current world.*/
-    public void placeInWorld(World world) {
-        int size = world.getSize();
-        Location location = null;
+//    public void placeInWorld(World world) {
+//        int size = world.getSize();
+//        Location location = null;
+//
+//        while (location == null || !world.isTileEmpty(location)) {
+//            int x = (int) (Math.random() * size);
+//            int y = (int) (Math.random() * size);
+//            location = new Location(x, y);
+//        }
+//
+//        if(world.contains(this)) {
+//            Location curLocation = world.getLocation(this);
+//            Set<Location> surroundingTiles = world.getEmptySurroundingTiles(curLocation);
+//            List<Location> tilesList = new ArrayList<>(surroundingTiles);
+//            Location packLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+//            world.setTile(packLocation, this);
+//            System.out.println("Placed in wolf at " + packLocation);
+//        }
+//
+//        if (!world.containsNonBlocking(location)) {
+//            world.setTile(location, this);
+//        }
+//    }
 
-        while (location == null || !world.isTileEmpty(location)) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
-            location = new Location(x, y);
-        }
-        if (!world.containsNonBlocking(location)) {
+    public void placeInWorld(World world) {
+        if (firstWolfLocation == null) {
+            // Place the first wolf randomly
+            int size = world.getSize();
+            Location location = null;
+
+            while (location == null || !world.isTileEmpty(location)) {
+                int x = (int) (Math.random() * size);
+                int y = (int) (Math.random() * size);
+                location = new Location(x, y);
+            }
+
             world.setTile(location, this);
+            firstWolfLocation = location; // Save the location of the first wolf
+            System.out.println("First wolf placed at: " + location);
+        } else {
+            // Place subsequent wolves near the first wolf
+            Set<Location> nearbyTiles = world.getEmptySurroundingTiles(firstWolfLocation);
+
+            if (!nearbyTiles.isEmpty()) {
+                List<Location> list = new ArrayList<>(nearbyTiles);
+                Location newLocation = list.get(new Random().nextInt(list.size()));
+                world.setTile(newLocation, this);
+                System.out.println("Wolf placed near pack at: " + newLocation);
+            }
         }
     }
-
-
+    // Reset pack for a new line of wolves
+    public static void resetPack() {
+        firstWolfLocation = null;
+    }
 }
