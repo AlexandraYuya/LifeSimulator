@@ -1,27 +1,17 @@
 package itumulator.world;
 
-public class Berry {
-private boolean hasBerries;
-    public Berry() {
-        this.hasBerries = true;  // Initialize berries to true when created
-    }
-    /**
-     * This is the method place the grass in the world
-     * @param world The current world.
-     */
-    public void placeInWorld(World world) {
-        int size = world.getSize();
-        Location location = null;
+import itumulator.simulator.Actor;
 
-        while (location == null || world.getNonBlocking(location) != null) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
-            location = new Location(x, y);
-        }
-        if (!world.containsNonBlocking(location)) {
-            world.setTile(location, this);
-        }
+import java.io.Serializable;
+
+public class Berry {
+    private boolean hasBerries;
+
+    public Berry() {
+        // Initialize berries to true when created
+        this.hasBerries = true;
     }
+
     public boolean hasBerries() {
         return hasBerries;
     }
@@ -42,10 +32,25 @@ private boolean hasBerries;
         } else {
             System.out.println("Attempted to consume berries but none available"); // Debug print
         }
+    }
 
+    /**
+     * This is the method place the grass in the world
+     * @param world The current world.
+     */
+    public void placeInWorld(World world) {
+        int size = world.getSize();
+        Location location = null;
+
+        while (location == null || !world.isTileEmpty(location)) {
+            int x = (int) (Math.random() * size);
+            int y = (int) (Math.random() * size);
+            location = new Location(x, y);
         }
-
-
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
+        }
+    }
 
     }
 
