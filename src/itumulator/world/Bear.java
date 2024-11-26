@@ -72,10 +72,10 @@ public class Bear implements Actor {
                 world.delete(isRabbit);
                 world.move(this, rabbitLocation);
             }
-            if (isBerry instanceof Berry && Math.random() <= 0.2) { //here checked if it is a berry and adds 80% chance
+            if (isBerry instanceof Berry && Math.random() <= 0.9 && !(isBerry instanceof Bush)) { //here checked if it is a berry and adds 80% chance
                 energy += 5;
                 System.out.println("Bear Ate some berries - New energy level:" + energy);
-                ((Berry) isBerry).consumeBerries();
+                ((Berry) isBerry).consumeBerries(world);
             }
         }
     }

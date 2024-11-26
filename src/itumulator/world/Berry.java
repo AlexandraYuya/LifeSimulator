@@ -2,6 +2,9 @@ package itumulator.world;
 
 public class Berry {
 private boolean hasBerries;
+    public Berry() {
+        this.hasBerries = true;  // Initialize berries to true when created
+    }
     /**
      * This is the method place the grass in the world
      * @param world The current world.
@@ -23,13 +26,26 @@ private boolean hasBerries;
         return hasBerries;
     }
 
-    public void consumeBerries() {
+    public void consumeBerries(World world) {
+        System.out.println("consumeBerries called, hasBerries is: " + hasBerries()); // Debug print
         if (hasBerries) {
-            hasBerries = false; //eats the berries
+            hasBerries = false;  // False
+            // Get current location before deleting
+            Location currentLocation = world.getLocation(this);
+            System.out.println("Transforming berry at " + currentLocation); // Debug print
+            // Remove the Berry
+            world.delete(this);
+            // Create and place new Bush in same location
+            Bush bush = new Bush();
+            world.setTile(currentLocation, bush);
+            System.out.println("Bush placed at: " + currentLocation); // Debug print
+        } else {
+            System.out.println("Attempted to consume berries but none available"); // Debug print
+        }
         }
 
 
-        }
+
     }
 
 

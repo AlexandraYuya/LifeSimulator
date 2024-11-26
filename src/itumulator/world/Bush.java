@@ -2,7 +2,6 @@ package itumulator.world;
 
 public class Bush extends Berry{
 
-
     @Override
     public void placeInWorld(World world) {
         int size = world.getSize();
