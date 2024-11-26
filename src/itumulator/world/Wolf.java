@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+
 public class Wolf implements Actor {
-    private static Location firstWolfLocation = null;
-    private static List<Wolf> currentPack = new ArrayList<>();
-    private boolean isAlphaWolf = true;
+    // Tracks this pack's alpha wolf location
+    private Location alphaLocation = null;
+    // Wolves in this pack
+    private List<Wolf> pack = new ArrayList<>();
+    // Determines whether this wolf is the alpha
+    private boolean isAlphaWolf = false;
     private int life;
     private int energy;
     private int stepCount;
@@ -19,6 +23,10 @@ public class Wolf implements Actor {
         this.stepCount = 0;
     }
 
+    /**
+     * This makes it possible for the wolves to perform their actions
+     * @param world providing details of the position on which the actor is currently located and much more.
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -27,14 +35,16 @@ public class Wolf implements Actor {
             life--;
             System.out.println("Wolf has lost life due to zero energy or a day has past. Remaining lives: " + life);
         }
-        moveRandomly(world); //Added this so they move
+        if(isAlphaWolf) {
+            moveRandomly(world); //Added this so they move
+            movePack(world);
+        }
         hasDied(world);
         eat(world);
-
     }
 
     /**
-     * This method makes it possible for the wolfs to eat rabbits.
+     * This method makes it possible for the wolves to eat rabbits.
      * @param world The current world.
      */
     private void eat(World world) {
@@ -63,7 +73,7 @@ public class Wolf implements Actor {
 /**
  * This is a method that check if the wolf has 0 life and then is remove it
  * @param world The current world.*/
-    public void hasDied(World world){
+    private void hasDied(World world){
         if (life <= 0) {
             // Remove wolf from the world
             world.delete(this);
@@ -71,6 +81,10 @@ public class Wolf implements Actor {
         }
     }
 
+    /**
+     * This method moves the alpha wolf randomly
+     * @param world the current world
+     */
     private void moveRandomly(World world) {
         if(energy > 0 && isAlphaWolf) {
             Location curLocation = world.getLocation(this);
@@ -81,20 +95,41 @@ public class Wolf implements Actor {
                 List<Location> list = new ArrayList<>(neighbours);
                 Location newLocation = list.get(rand.nextInt(list.size()));
                 world.move(this, newLocation);
-                world.setCurrentLocation(newLocation);
+                alphaLocation = newLocation;
+                System.out.println("Alpha wolf moved to: " + newLocation);
             }
         }
     }
 
+    /**
+     * This method moves the wolves in accordance to their alpha wolf
+     * @param world The current world
+     */
     private void movePack(World world) {
 
+        for(Wolf wolf : pack) {
+                Location alphaLocation = world.getLocation(this);
+                Location wolfLocation = world.getLocation(wolf);
+                Set<Location> emptyTiles = world.getEmptySurroundingTiles(alphaLocation);
+
+                if (!emptyTiles.isEmpty()) {
+                    List<Location> list = new ArrayList<>(emptyTiles);
+                    Random rand = new Random();
+                    Location newLocation = list.get(rand.nextInt(list.size()));
+
+                    world.move(wolf, newLocation);
+                    System.out.println("Pack wolf moved from " + wolfLocation + " to " + newLocation);
+            }
+        }
     }
 
     /**
-     * This is the method place the Wolf in the world
-     * @param world The current world.*/
+     * This is the method place the wolves in the world
+     * @param world The current world.
+     *
+     */
     public void placeInWorld(World world) {
-        if (firstWolfLocation == null) {
+        if (isAlphaWolf || alphaLocation == null) {
             // Place the first wolf randomly
             int size = world.getSize();
             Location location = null;
@@ -106,11 +141,12 @@ public class Wolf implements Actor {
             }
 
             world.setTile(location, this);
-            firstWolfLocation = location; // Save the location of the first wolf
+            alphaLocation = location; // Save the location of the first wolf
+            isAlphaWolf = true;
             System.out.println("First wolf placed at: " + location);
         } else {
-            // Place subsequent wolves near the first wolf
-            Set<Location> nearbyTiles = world.getEmptySurroundingTiles(firstWolfLocation);
+            // Join an existing alpha's pack
+            Set<Location> nearbyTiles = world.getEmptySurroundingTiles(alphaLocation);
 
             if (!nearbyTiles.isEmpty()) {
                 List<Location> list = new ArrayList<>(nearbyTiles);
@@ -118,10 +154,20 @@ public class Wolf implements Actor {
                 world.setTile(newLocation, this);
                 System.out.println("Wolf placed near pack at: " + newLocation);
             }
+            pack.add(this);
         }
     }
+
+    /**
+     * This method resets the pack, so that we can have unique packs per inputted line
+     */
     // Reset pack for a new line of wolves
-    public static void resetPack() {
-        firstWolfLocation = null;
+    public void resetPack() {
+        if (isAlphaWolf) {
+            pack.clear(); // Clear the current pack
+            isAlphaWolf = false; // Reset alpha status
+            alphaLocation = null; // Clear alpha's location
+            System.out.println("Reset alpha wolf and its pack.");
+        }
     }
 }
