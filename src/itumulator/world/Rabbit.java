@@ -13,8 +13,6 @@ public class Rabbit {
     protected Burrow myBurrow;
     // Stores location before entering a burrow
     protected Location previousLocation;
-    // Tracks if the rabbit is sleeping outside
-//    protected boolean isSleeping;
     protected boolean isInBurrow;
 
     public Rabbit() {
@@ -22,7 +20,6 @@ public class Rabbit {
         this.hasDugBurrow = false;
         this.myBurrow = null;
         this.previousLocation = null;
-//        this.isSleeping = false;
         this.isInBurrow = false;
     }
 
@@ -79,10 +76,6 @@ public class Rabbit {
                 }
                 System.out.println("Rabbit entered a burrow at: " + previousLocation);
             }else {
-//                isSleeping = true;
-//                world.delete(this);
-//                SleepingRabbit sleepingRabbit = new SleepingRabbit(curLocation);
-//                world.setTile(curLocation, sleepingRabbit);
                 System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
             }
         }

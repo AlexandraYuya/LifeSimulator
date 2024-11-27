@@ -1,27 +1,80 @@
 package itumulator.world;
 
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
-public class Bear implements Actor {
+public class Bear implements Actor, DynamicDisplayInformationProvider {
+    private int life;
     private int energy;
-    int radius; // private or not?
-    Location startingPoint;
+    private int stepCount;
+    private int radius;
+    private Location startingPoint;
+    private boolean isNight = false;
+
 
     public Bear() {
+        this.life = 10;
         this.energy = 100;
+        this.stepCount = 0;
         this.radius = 2;
     }
+
     @Override
-    public void act(World world) {
-
-        eat(world);
-        moveInCircRandomly(world);
-
+    public DisplayInformation getInformation() {
+        if(isNight){
+            return new DisplayInformation(Color.ORANGE, "bear-sleeping");
+        } else {
+            return new DisplayInformation(Color.ORANGE, "bear");
+        }
     }
 
+    @Override
+    public void act(World world) {
+        stepCount++;
+        if (stepCount == 20) {
+            stepCount = 0;
+            life--;
+        }
 
+        if (world.isNight()) {
+            isNight = true;
+        } else {
+            isNight = false;
+            handleDay(world);
+        }
+        System.out.println("Bear life: " + life);
+        System.out.println("Bear energy: " + energy);
+    }
+
+    /**
+     * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
+     * They can now do normal daytime behavior.
+     * @param world The current world.
+     */
+    // START DAY HANDLER METHOD -->
+    private void handleDay(World world) {
+        // Resume normal daytime behavior
+        if (life > 0 && energy > 0) {
+            energy--;
+            eat(world);
+            moveInCircRandomly(world);
+        }
+        if (life <= 0) {
+            world.delete(this);
+            System.out.println("A rabbit has died.");
+        }
+    }
+    // <-- END DAY HANDLER METHOD
+
+    /**
+     *
+     * @param world The current world.
+     */
     // Move random in a circular space with radius 2
     private void moveInCircRandomly(World world) {
         if(energy > 0) {
@@ -44,7 +97,13 @@ public class Bear implements Actor {
         }
     }
 
-    //
+    /**
+     *
+     * @param center
+     * @param target
+     * @param radius
+     * @return
+     */
     private boolean isWithinRadius(Location center, Location target, int radius) {
         int dx = center.getX() - target.getX();
         int dy = center.getY() - target.getY();
@@ -100,7 +159,6 @@ public class Bear implements Actor {
         }
 
         public void placeInWorld (World world,int x, int y){
-            int size = world.getSize();
             Location location = new Location(x, y);
             if (!world.containsNonBlocking(location)) {
                 world.setTile(location, this);

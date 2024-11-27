@@ -1,9 +1,5 @@
 package itumulator.world;
 
-import itumulator.simulator.Actor;
-
-import java.io.Serializable;
-
 public class Berry {
     private boolean hasBerries;
 
@@ -16,6 +12,10 @@ public class Berry {
         return hasBerries;
     }
 
+    /**
+     *
+     * @param world The current world.
+     */
     public void consumeBerries(World world) {
         System.out.println("consumeBerries called, hasBerries is: " + hasBerries()); // Debug print
         if (hasBerries) {
@@ -51,8 +51,7 @@ public class Berry {
             world.setTile(location, this);
         }
     }
-
-    }
+}
 
 
 

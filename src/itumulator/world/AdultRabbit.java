@@ -11,7 +11,6 @@ import java.util.List;
 
 public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
     private int life;
-    // Tracks steps
     private int stepCount;
     private boolean isNight = false;
 
@@ -53,6 +52,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             return new DisplayInformation(Color.GRAY, "rabbit-large");
         }
     }
+
     /**
      * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
      * They can now do normal daytime behavior.
