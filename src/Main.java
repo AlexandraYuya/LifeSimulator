@@ -30,7 +30,6 @@ public class Main {
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx
-        program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
         program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
         program.setDisplayInformation(Bush.class, new DisplayInformation(Color.red, "bush"));
 

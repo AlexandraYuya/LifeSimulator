@@ -1,11 +1,15 @@
 package itumulator.world;
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Wolf implements Actor {
+public class Wolf implements Actor, DynamicDisplayInformationProvider {
     // Reference to the alpha wolf of this pack
     private Wolf alphaWolf;
     // Check whether this wolf is the alpha
@@ -48,22 +52,58 @@ public class Wolf implements Actor {
     }
 
     /**
+     *
+     * @return
+     */
+    @Override
+    public DisplayInformation getInformation() {
+        return new DisplayInformation(Color.GRAY, "wolf");
+    }
+
+    /**
      * This method accounts for all the behavior of wolves
      * @param world The current world
      */
     @Override
     public void act(World world) {
         stepCount++;
-        if (stepCount % 20 == 0 || energy <= 0) {
+
+        if (stepCount % 20 == 0) {
             life--;
         }
 
-        if (isAlphaWolf) {
-            moveRandomly(world);
-        } else {
-            followAlpha(world);
+        if(world.isNight()) {
+            handleNight(world);
+        } else{
+            handleDay(world);
         }
 
+        System.out.println("Wolf life: " + life);
+        System.out.println("Wolf energy: " + energy);
+    }
+
+    /**
+     *
+     * @param world
+     */
+    private void handleNight(World world) {
+
+    }
+
+    /**
+     *
+     * @param world
+     */
+    private void handleDay(World world) {
+        if (life > 0 && energy > 0) {
+            if (isAlphaWolf) {
+                moveRandomly(world);
+                energy--;
+            } else {
+                followAlpha(world);
+                energy--;
+            }
+        }
         eat(world);
         hasDied(world);
     }
@@ -80,12 +120,27 @@ public class Wolf implements Actor {
         if (!surroundingTiles.isEmpty()) {
             Location rabbitLocation = surroundingTiles.iterator().next();
             Object isRabbit = world.getTile(rabbitLocation);
-            if (isRabbit instanceof AdultRabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
-                energy += 10;
-                System.out.println("Ate a poor Rabbit - New energy level:" + energy);
-                world.delete(isRabbit);
-                Carcass carcass = new Carcass();
-                world.setTile(rabbitLocation, carcass);
+            double eatProbability = 0.7;
+            double reducedEatProbability = 0.5;
+            if (isRabbit instanceof AdultRabbit) {
+                // 70% chance of eating a rabbit whilst having energy
+                if(energy > 0 && Math.random() <= eatProbability) {
+                    if (energy <= 90) {
+                        energy += 10;
+                    }
+                    world.delete(isRabbit);
+                    Carcass carcass = new Carcass();
+                    world.setTile(rabbitLocation, carcass);
+                    System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+                }
+                if(energy <= 0 && Math.random() <= reducedEatProbability) {
+                    // If no energy then gain more energy from eating but chances of eating are reduced
+                    energy += 20;
+                    world.delete(isRabbit);
+                    Carcass carcass = new Carcass();
+                    world.setTile(rabbitLocation, carcass);
+                    System.out.println("Ate a poor Rabbit - New energy level:" + energy + ". Rejuvenated!");
+                }
             }
         }
     }
