@@ -19,14 +19,14 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-//        File file = new File("./resources/data/t2-6a.txt");
-        File file = new File("./resources/data/tf2-1.txt");
+        File file = new File("./resources/data/t2-6a.txt");
+//        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 2000);
+        Program program = new Program(size, 800, 1500);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx

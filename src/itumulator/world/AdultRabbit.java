@@ -6,29 +6,16 @@ import java.util.*;
 import java.util.List;
 
 
-public class AdultRabbit implements Actor {
+public class AdultRabbit extends Rabbit implements Actor {
     private int life;
-    private int energy;
+    // Tracks steps
     private int stepCount;
-    // Tracks if the rabbit has already dug a burrow
-    private boolean hasDugBurrow;
-    // Reference to the burrow the rabbit dug
-    private Burrow myBurrow;
-    // Stores location before entering a burrow
-    private Location previousLocation;
-    // Tracks if the rabbit is sleeping outside
-    private boolean isSleeping;
-    private boolean isInBurrow;
 
     public AdultRabbit() {
         this.life = 3; // reduced to 3 life
-        this.energy = 100;
         this.stepCount = 0;
         this.hasDugBurrow = false;
         this.myBurrow = null;
-        this.previousLocation = null;
-        this.isSleeping = false;
-        this.isInBurrow = false;
     }
     /**
      * counts steps and calls two different methods one for night and one for day
@@ -43,7 +30,7 @@ public class AdultRabbit implements Actor {
         }
 
         if (world.isNight()) {
-            handleNight(world);
+            super.handleNight(world);
         } else {
             handleDay(world);
         }
@@ -52,69 +39,19 @@ public class AdultRabbit implements Actor {
     }
 
     /**
-     * This is the method we are using to handle night. It will make is possible for rabbits to in or
-     * outside the borrow.
-     * @param world The current world.
-     */
-    private void handleNight(World world) {
-        if (world.isOnTile(this)) {
-            previousLocation = world.getLocation(this); // get the location before removal
-            Location curLocation = world.getLocation(this);
-            // Get only surrounding tiles
-            Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
-            // Find burrows in surrounding tiles
-            Set<Burrow> nearbyBurrow = world.getAll(Burrow.class, surroundingTiles);
-            // check if curLocation is on a burrow
-            Object onBurrow = world.getNonBlocking(curLocation);
-
-            // Only proceed if there are nearby burrows or on a burrow
-            if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
-                world.remove(this);
-                isInBurrow = true;
-                if(energy <= 90) {
-                    energy += 10;
-                }
-                System.out.println("Rabbit entered a burrow at: " + previousLocation);
-            }else {
-                isSleeping = true;
-                world.delete(this);
-                SleepingRabbit sleepingRabbit = new SleepingRabbit(curLocation);
-                world.setTile(curLocation, sleepingRabbit);
-                System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
-            }
-        }
-    }
-
-    /**
      * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
      * They can now do normal daytime behavior.
      * @param world The current world.
      */
+    // START DAY HANDLER METHOD -->
     private void handleDay(World world) {
-        if(isInBurrow) {
-            if (previousLocation != null) {
-                if(world.isTileEmpty(previousLocation)) {
-                    // Restore to previous location
-                    world.setTile(previousLocation, this);
-                }else {
-                    Set<Location> emptyNeighbours = world.getEmptySurroundingTiles(previousLocation);
-                    if (!emptyNeighbours.isEmpty()) {
-                        Random rand = new Random();
-                        List<Location> list = new ArrayList<>(emptyNeighbours);
-                        Location location = list.get(rand.nextInt(list.size()));
-                        world.setTile(location, this);
-                    }
-                }
-                previousLocation = null;
-                isInBurrow = false;
-            }
-        }
+        super.checkInBurrow(world);
 
         // Resume normal daytime behavior
         if (life > 0 && energy > 0) {
             energy--;
-            moveRandomly(world);
-            eat(world);
+            super.moveRandomly(world);
+            super.eat(world);
             tryToMate(world);
             digProbability(world);
         }
@@ -124,30 +61,13 @@ public class AdultRabbit implements Actor {
             System.out.println("A rabbit has died.");
         }
     }
-    /**
-     * This is the method make the rabbits move random in the world.
-     * @param world The current world.
-     */
-    private void moveRandomly(World world) {
-        if(energy > 0) {
-            Location curLocation = world.getLocation(this);
-            Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
-
-            if (!neighbours.isEmpty()) {
-                Random rand = new Random();
-                List<Location> list = new ArrayList<>(neighbours);
-                Location newLocation = list.get(rand.nextInt(list.size()));
-                world.move(this, newLocation);
-                world.setCurrentLocation(newLocation);
-            }
-        }
-    }
+    // <-- END DAY HANDLER METHOD
 
     /**
      * This is the method we use for digging borrows, and it makes sure that a rabbit can only dig one borrow.
      * @param world The current world.
      */
-    // DIG METHOD -->
+    // START DIG METHOD -->
     private void digProbability(World world) {
         // only 1 burrow can be dug per rabbit
         if(hasDugBurrow) {
@@ -170,23 +90,7 @@ public class AdultRabbit implements Actor {
         }
     }
     // <-- END DIG METHOD
-    /**
-     * This is the method is giving energy and removing grass when a rabbit eats it.
-     * @param world The current world.
-     */
-    // START EAT METHOD -->
-    private void eat(World world) {
-        Location curLocation = world.getLocation(this);
-        Object hasGrass = world.getNonBlocking(curLocation);
-        if(hasGrass instanceof Grass) {
-            if(energy <= 95) {
-                energy += 5;
-                System.out.println("Ate grass new energy:" + energy);
-            }
-            world.delete(hasGrass);
-        }
-    }
-    // <-- END EAT METHOD
+
     /**
      * This is the method we are using for matting so there will come baby rabbits.
      * @param world The current world.
@@ -231,22 +135,4 @@ public class AdultRabbit implements Actor {
         }
     }
     // <-- END MATING METHOD
-
-    /**
-     * This is the method place the rabbit in the world
-     * @param world The current world.
-     */
-    public void placeInWorld(World world) {
-        int size = world.getSize();
-        Location location = null;
-
-        while (location == null || !world.isTileEmpty(location)) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
-            location = new Location(x, y);
-        }
-        if (!world.containsNonBlocking(location)) {
-            world.setTile(location, this);
-        }
-    }
 }
