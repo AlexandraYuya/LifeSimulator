@@ -84,7 +84,8 @@ public class Wolf implements Actor {
                 energy += 10;
                 System.out.println("Ate a poor Rabbit - New energy level:" + energy);
                 world.delete(isRabbit);
-                world.move(this, rabbitLocation);
+                Carcass carcass = new Carcass();
+                world.setTile(rabbitLocation, carcass);
             }
         }
     }

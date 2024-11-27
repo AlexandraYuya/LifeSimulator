@@ -67,7 +67,8 @@ public class Bear implements Actor {
                     energy += 10;
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
-                    world.move(this, nearbyLocation);
+                    Carcass carcass = new Carcass();
+                    world.setTile(nearbyLocation, carcass);
                     break;
                 }
                 if (entity instanceof Berry && Math.random() <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 80% chance
