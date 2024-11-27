@@ -35,7 +35,7 @@ public class Main {
         program.setDisplayInformation(SleepingRabbit.class, new DisplayInformation(Color.darkGray, "rabbit-sleeping"));
         program.setDisplayInformation(BabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small"));
         program.setDisplayInformation(SleepingBabyRabbit.class, new DisplayInformation(Color.gray, "rabbit-small-sleeping"));
-        program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole"));
+        program.setDisplayInformation(Burrow.class, new DisplayInformation(Color.black, "hole-small"));
         program.setDisplayInformation(Bear.class, new DisplayInformation(Color.orange, "bear"));
         program.setDisplayInformation(SleepingBear.class, new DisplayInformation(Color.darkGray, "bear-sleeping"));
         program.setDisplayInformation(Wolf.class, new DisplayInformation(Color.black, "wolf"));
