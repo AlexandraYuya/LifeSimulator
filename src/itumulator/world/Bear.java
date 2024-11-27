@@ -155,6 +155,7 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
             }
             if (!world.containsNonBlocking(location)) {
                 world.setTile(location, this);
+                startingPoint = location;
             }
         }
 

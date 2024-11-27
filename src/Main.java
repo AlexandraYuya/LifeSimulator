@@ -19,8 +19,8 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-//        File file = new File("./resources/data/t2-6a.txt");
-        File file = new File("./resources/data/tf2-1.txt");
+        File file = new File("./resources/data/t2-4b.txt");
+//        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
