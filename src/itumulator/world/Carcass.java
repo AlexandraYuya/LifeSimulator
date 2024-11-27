@@ -1,12 +1,21 @@
 package itumulator.world;
 
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 
-public class Carcass implements Actor {
+import java.awt.*;
+
+public class Carcass implements Actor, DynamicDisplayInformationProvider {
     private int stepCount;
 
     public Carcass() {
         stepCount = 0;
+    }
+
+    @Override
+    public DisplayInformation getInformation() {
+        return new DisplayInformation(Color.DARK_GRAY, "carcass");
     }
 
         @Override

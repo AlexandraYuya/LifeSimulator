@@ -1,19 +1,32 @@
 package itumulator.world;
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 
-public class BabyRabbit extends Rabbit implements Actor{
+public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
     private int life;
     private int stepCount;
+    private boolean isNight = false;
 
     public BabyRabbit() {
         this.life = 5; // reduced to 5 life
         this.stepCount = 0;
+    }
+
+    @Override
+    public DisplayInformation getInformation() {
+        if(isNight){
+            return new DisplayInformation(Color.BLACK, "rabbit-small-sleeping");
+        } else {
+            return new DisplayInformation(Color.GRAY, "rabbit-small");
+        }
     }
 
     /**
@@ -35,8 +48,10 @@ public class BabyRabbit extends Rabbit implements Actor{
         }
 
         if (world.isNight()) {
+            isNight = true;
             super.handleNight(world);
         } else {
+            isNight = false;
             handleDay(world);
         }
         System.out.println("Baby Rabbit life: " + life);

@@ -1,17 +1,25 @@
 package itumulator.world;
 
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Grass implements NonBlocking, Actor {
+public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvider {
     // counter to track how many steps, we only want grass to move randomly for every X amount of steps
     private int stepCount = 0;
 
+
+    @Override
+    public DisplayInformation getInformation() {
+            return new DisplayInformation(Color.GREEN, "grass");
+    }
     /**
      * counts steps and spread grass every 10 steps
      * @param world The current world.

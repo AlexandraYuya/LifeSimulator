@@ -1,8 +1,12 @@
 package itumulator.world;
 
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 
-public class Burrow implements Actor, NonBlocking {
+import java.awt.*;
+
+public class Burrow implements Actor, NonBlocking, DynamicDisplayInformationProvider {
     // Associate rabbit that dug this burrow
     private AdultRabbit owner;
 
@@ -20,6 +24,11 @@ public class Burrow implements Actor, NonBlocking {
 
     public AdultRabbit getOwner() {
         return owner;
+    }
+
+    @Override
+    public DisplayInformation getInformation() {
+        return new DisplayInformation(Color.GRAY, "hole-small");
     }
 
     @Override
