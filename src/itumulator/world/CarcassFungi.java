@@ -4,7 +4,7 @@ import itumulator.executable.DisplayInformation;
 
 import java.awt.*;
 
-public class CarcassFungi extends Carcass{
+public class CarcassFungi extends Carcass {
     protected int stepCount;
     protected int amount;
     private boolean hasAmount;
@@ -16,14 +16,8 @@ public class CarcassFungi extends Carcass{
     }
 
     @Override
-    public DisplayInformation getInformation() {
-        return new DisplayInformation(Color.DARK_GRAY, "carcass");
-    }
-
-    @Override
     public void act(World world) {
         stepCount++;
-
         // After 5 steps (half day), remove carcass
         if (stepCount == 10) {
             System.out.println("CarcassFungi removed!");
@@ -43,7 +37,7 @@ public class CarcassFungi extends Carcass{
     public boolean hasAmount() {
     }
 
-    public void eatCarcass(World world  ) {
+    public void eatCarcass(World world) {
         System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
         if (hasAmount) {
             hasAmount = false;  // False
@@ -52,6 +46,7 @@ public class CarcassFungi extends Carcass{
             System.out.println("Transforming berry at " + currentLocation); // Debug print
             // Remove the Berry
             world.delete(this);
+        }
     }
 }
 
