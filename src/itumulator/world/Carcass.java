@@ -9,15 +9,22 @@ import java.awt.*;
 public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
     private boolean hasAmount;
+    private boolean isBig;
 
     public Carcass() {
                 stepCount = 0;
                 this.hasAmount = true;
+                this.isBig = true;
     }
 
     @Override
     public DisplayInformation getInformation() {
-        return new DisplayInformation(Color.DARK_GRAY, "carcass");
+       if (isBig){
+           return new DisplayInformation(Color.DARK_GRAY, "carcass");
+       } else {
+           return new DisplayInformation(Color.BLACK, "carcass-small");
+       }
+
     }
 
         @Override
@@ -48,6 +55,10 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
 
     public boolean hasAmount() {
         return true;
+    }
+    public boolean isSmall() {
+        return isBig = false;
+
     }
 
     public void eatCarcass(World world) {
