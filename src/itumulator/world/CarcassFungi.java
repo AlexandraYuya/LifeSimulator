@@ -31,10 +31,11 @@ public class CarcassFungi extends Carcass {
     }
 
     public int getAmount() {
-
+        return 0;
     }
 
     public boolean hasAmount() {
+        return true;
     }
 
     public void eatCarcass(World world) {
@@ -46,6 +47,9 @@ public class CarcassFungi extends Carcass {
             System.out.println("Transforming berry at " + currentLocation); // Debug print
             // Remove the Berry
             world.delete(this);
+        } else {
+                System.out.println("Attempted to consume CarcassFungi but not enough amount available"); // Debug print
+            }
         }
     }
 }
