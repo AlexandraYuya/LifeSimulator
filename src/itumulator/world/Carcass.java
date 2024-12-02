@@ -7,10 +7,10 @@ import itumulator.simulator.Actor;
 import java.awt.*;
 
 public class Carcass implements Actor, DynamicDisplayInformationProvider {
-    private int stepCount;
+    protected int stepCount;
 
     public Carcass() {
-        stepCount = 0;
+                stepCount = 0;
     }
 
     @Override

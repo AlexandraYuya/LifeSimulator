@@ -9,6 +9,7 @@ public class Berry {
     }
 
     public boolean hasBerries() {
+
         return hasBerries;
     }
 

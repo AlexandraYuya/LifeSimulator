@@ -5,6 +5,7 @@ import itumulator.world.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,7 +20,7 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
-        File file = new File("./resources/data/t2-4b.txt");
+        File file = new File("./resources/data/tf3-1a.txt");
 //        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
@@ -39,6 +40,17 @@ public class Main {
             // can be in <type> <count> pairs or <type> <countMIN-MAX> <(x,y)>
             String[] parts = line.split(" ");
 
+            StringBuilder name = new StringBuilder();
+            for (String part : parts) {
+                if (!part.matches(".*\\d+.*")) {
+                    name.append(part);
+                } else {
+                    break; //if it is a number it stops
+                }
+                if (parts.length > 2){
+            parts = new String[]{name.toString(),parts[2]}; // new array
+            }
+            }
             if (parts.length >= 2) {
                 int coord1 = 0;
                 int coord2 = 0;
@@ -103,6 +115,10 @@ public class Main {
                             case "carcass":
                                 Carcass carcass = new Carcass();
                                 carcass.placeInWorld(world);
+                                break;
+                            case "carcass fungi":
+                                CarcassFungi carcassFungi = new CarcassFungi();
+                                carcassFungi.placeInWorld(world);
                                 break;
                             default:
                                 System.out.println("Unknown entity type: " + type);
