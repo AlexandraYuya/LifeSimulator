@@ -21,7 +21,6 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
     public List<Wolf> pack;
     private boolean hasCave;
     private Cave myCave;
-//    private Location previousLocation;
     private boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
@@ -30,7 +29,6 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
         this.stepCount = 0;
         this.alphaWolf = alphaWolf;
         this.myCave = null;
-//        this.previousLocation = null;
         this.hasCave = false;
         this.isInCave = false;
 
@@ -115,7 +113,8 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
 
         if (this instanceof BabyWolf) {
 //            if (life == 10 && stepCount == 20){
-            if(stepCount > 2) {
+            // TODO: FIX THIS THRESHOLD ISSUE
+            if(stepCount > 20) {
                 ((BabyWolf) this).grow(world);
                 System.out.println("Baby wolf finally grew up!!!");
             }
@@ -169,7 +168,7 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
         // Only proceed if the wolf is in the cave
         if (isInCave) {
 
-            if (life > 0 && energy > 0) {
+            if (life > 0 && energy >= 20) {
                 // NOTE: THIS DECREASES ENERGY!!!
                 tryToMate(world);
             }
@@ -327,7 +326,7 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
 
                 // Decrease energy after successful reproduction
                 // TODO: FIX THIS ENERGY ISSUE!!!!
-//                energy -= 20;
+                energy -= 20;
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++A baby wolf was born! Parent energy now: " + energy);
             }
         }
