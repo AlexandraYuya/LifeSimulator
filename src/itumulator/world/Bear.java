@@ -136,6 +136,14 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
                     ((Berry) entity).consumeBerries(world);
                     break;
                 }
+                if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
+                    energy += 5;
+                    System.out.println("Bear Ate a bit of a Carcass - New energy level:" + energy);
+                    ((Carcass) entity).eatCarcass(world);
+                    break;
+                }
+
+
             }
         }
     }

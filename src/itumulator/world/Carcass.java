@@ -8,9 +8,11 @@ import java.awt.*;
 
 public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
+    private boolean hasAmount;
 
     public Carcass() {
                 stepCount = 0;
+                this.hasAmount = true;
     }
 
     @Override
@@ -43,4 +45,24 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
             world.setTile(location, this);
         }
     }
+
+    public boolean hasAmount() {
+        return true;
     }
+
+    public void eatCarcass(World world) {
+        System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
+        if (hasAmount) {
+            hasAmount = false;  // False
+            // Get current location before deleting
+            Location currentLocation = world.getLocation(this);
+            System.out.println("Transforming berry at " + currentLocation); // Debug print
+            // Remove the Berry
+            world.delete(this);
+        } else {
+            System.out.println("Attempted to consume CarcassFungi but not enough amount available"); // Debug print
+        }
+    }
+
+
+}

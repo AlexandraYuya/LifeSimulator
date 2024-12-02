@@ -38,19 +38,19 @@ public class CarcassFungi extends Carcass {
         return true;
     }
 
-    public void eatCarcass(World world) {
-        System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
-        if (hasAmount) {
-            hasAmount = false;  // False
-            // Get current location before deleting
-            Location currentLocation = world.getLocation(this);
-            System.out.println("Transforming berry at " + currentLocation); // Debug print
-            // Remove the Berry
-            world.delete(this);
-        } else {
-                System.out.println("Attempted to consume CarcassFungi but not enough amount available"); // Debug print
-            }
-        }
+//    public void eatCarcass(World world) {
+//        System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
+//        if (hasAmount) {
+//            hasAmount = false;  // False
+//            // Get current location before deleting
+//            Location currentLocation = world.getLocation(this);
+//            System.out.println("Transforming berry at " + currentLocation); // Debug print
+//            // Remove the Berry
+//            world.delete(this);
+//        } else {
+//                System.out.println("Attempted to consume CarcassFungi but not enough amount available"); // Debug print
+//            }
+//        }
     }
-}
+
 
