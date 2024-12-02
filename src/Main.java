@@ -100,6 +100,10 @@ public class Main {
                                 Berry berry = new Berry();
                                 berry.placeInWorld(world);
                                 break;
+                            case "carcass":
+                                Carcass carcass = new Carcass();
+                                carcass.placeInWorld(world);
+                                break;
                             default:
                                 System.out.println("Unknown entity type: " + type);
                                 break;
