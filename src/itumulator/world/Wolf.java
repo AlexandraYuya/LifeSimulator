@@ -10,21 +10,29 @@ import java.util.Random;
 import java.util.Set;
 
 public class Wolf implements Actor, DynamicDisplayInformationProvider {
+    private int life;
+    private int energy;
+    private int stepCount;
     // Reference to the alpha wolf of this pack
     private Wolf alphaWolf;
     // Check whether this wolf is the alpha
     private boolean isAlphaWolf;
     // Wolves in this pack (only populated for the alpha wolf)
     private List<Wolf> pack;
-    private int life;
-    private int energy;
-    private int stepCount;
+    private boolean hasCave;
+    private Cave myCave;
+//    private Location previousLocation;
+    private boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
-        this.alphaWolf = alphaWolf;
         this.life = 10;
         this.energy = 100;
         this.stepCount = 0;
+        this.alphaWolf = alphaWolf;
+        this.myCave = null;
+//        this.previousLocation = null;
+        this.hasCave = false;
+        this.isInCave = false;
 
         if (alphaWolf == null) {
             // If there is no alpha, this wolf becomes the alpha
@@ -41,6 +49,15 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
     }
 
     /**
+     *
+     * @return
+     */
+    @Override
+    public DisplayInformation getInformation() {
+        return new DisplayInformation(Color.GRAY, "wolf");
+    }
+
+    /**
      * This adds new wolves to this alpha wolf's pack.
      * Method only used by the alpha wolf.
      * @param wolf Takes in the current wolf
@@ -51,14 +68,31 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
         }
     }
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public DisplayInformation getInformation() {
-        return new DisplayInformation(Color.GRAY, "wolf");
+    private void addCave(World world) {
+        if (isAlphaWolf && !hasCave) {
+            Location curLocation = world.getLocation(this);
+            Set<Location> emptyTiles = world.getEmptySurroundingTiles(curLocation);
+            if (!emptyTiles.isEmpty()) {
+                List<Location> tilesList = new ArrayList<>(emptyTiles);
+                Location caveLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+
+                Cave cave = new Cave();
+                world.setTile(caveLocation, cave);
+
+//                myCave = cave; // Assign the cave to this alpha wolf
+//                hasCave = true;
+
+                // Assign the same cave to all pack members
+                for (Wolf wolf : pack) {
+                    wolf.myCave = cave;
+                    wolf.hasCave = true;
+                }
+
+                System.out.println("Cave created for alpha wolf and pack at: " + caveLocation);
+            }
+        }
     }
+
 
     /**
      * This method accounts for all the behavior of wolves
@@ -74,20 +108,45 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
 
         if(world.isNight()) {
             handleNight(world);
-        } else{
+        } else {
             handleDay(world);
+            System.out.println("Wolf life: " + life);
+            System.out.println("Wolf energy: " + energy);
         }
 
-        System.out.println("Wolf life: " + life);
-        System.out.println("Wolf energy: " + energy);
+        addCave(world);
     }
 
-    /**
-     *
-     * @param world
-     */
     private void handleNight(World world) {
+        if (isAlphaWolf) {
 
+            if (myCave != null) {
+                Location caveLocation = world.getLocation(myCave);
+
+                if (caveLocation != null) {
+
+                    // Move all wolves in the pack to the cave
+                    for (Wolf wolf : pack) {
+                        if (!wolf.isInCave) {
+                            Location wolfCurLocation = world.getLocation(wolf);
+                            Set<Location> surroundingTiles = world.getSurroundingTiles(caveLocation);
+                            Set<Location> emptySurroundingTiles = world.getEmptySurroundingTiles(caveLocation);
+                            if (!surroundingTiles.contains(wolfCurLocation)) {
+                                if (!emptySurroundingTiles.isEmpty()) {
+                                    List<Location> list = new ArrayList<>(emptySurroundingTiles);
+                                    Location nextStep = list.get(new Random().nextInt(list.size()));
+                                    world.move(wolf, nextStep);
+                                }
+                            }
+                            else if (surroundingTiles.contains(wolfCurLocation)) {
+                                world.remove(wolf);
+                                wolf.isInCave = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -95,6 +154,30 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
      * @param world
      */
     private void handleDay(World world) {
+        // Only proceed if the wolf is in the cave
+        if (isInCave) {
+            if (myCave != null) {
+                // Find the cave's location
+                Location caveLocation = world.getLocation(myCave);
+                if (caveLocation != null) {
+                    // Get all empty surrounding tiles around the cave
+                    Set<Location> emptyTiles = world.getEmptySurroundingTiles(caveLocation);
+                    if (!emptyTiles.isEmpty()) {
+                        // Randomly pick one of the empty tiles
+                        List<Location> list = new ArrayList<>(emptyTiles);
+
+                        for (Wolf wolf : pack) {
+                            int randomChoice = new Random().nextInt(list.size());
+                            Location newLocation = list.get(randomChoice);
+                            list.remove(randomChoice);
+                            world.setTile(newLocation, wolf);
+                        }
+                    }
+                }
+            }
+            isInCave = false;
+        }
+
         if (life > 0 && energy > 0) {
             if (isAlphaWolf) {
                 moveRandomly(world);
@@ -181,7 +264,6 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
     private void followAlpha(World world) {
         if (alphaWolf != null && world.contains(alphaWolf)) {
             Location alphaLocation = world.getLocation(alphaWolf);
-            Location wolfLocation = world.getLocation(this);
             Set<Location> emptyTiles = world.getEmptySurroundingTiles(alphaLocation);
 
             if (!emptyTiles.isEmpty()) {
@@ -189,7 +271,6 @@ public class Wolf implements Actor, DynamicDisplayInformationProvider {
                 Random rand = new Random();
                 Location newLocation = list.get(rand.nextInt(list.size()));
                 world.move(this, newLocation);
-                System.out.println("Pack wolf moved from " + wolfLocation + " to " + newLocation);
             }
         }
     }
