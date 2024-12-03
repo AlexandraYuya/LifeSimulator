@@ -35,6 +35,7 @@ public class Rabbit extends Animal implements Actor {
                 handleNight(world);
             } else {
                 isNight = false;
+                super.die(world);
                 handleDay(world);
                 System.out.println(this + " life: " + life);
                 System.out.println(this + " energy: " + energy);

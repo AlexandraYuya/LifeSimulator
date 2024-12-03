@@ -35,6 +35,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                 isNight = true;
             } else {
                 isNight = false;
+                super.die(world);
                 handleDay(world);
                 System.out.println("Bear life: " + life);
                 System.out.println("Bear energy: " + energy);
