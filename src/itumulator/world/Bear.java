@@ -8,19 +8,14 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Bear implements Actor, DynamicDisplayInformationProvider {
-    private int life;
-    private int energy;
-    private int stepCount;
+public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider{
     private int radius;
     private Location startingPoint;
     private boolean isNight = false;
 
 
     public Bear() {
-        this.life = 10;
-        this.energy = 100;
-        this.stepCount = 0;
+        super(10,100);
         this.radius = 2;
     }
 
@@ -35,20 +30,15 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
 
     @Override
     public void act(World world) {
-        stepCount++;
-        if (stepCount == 20) {
-            stepCount = 0;
-            life--;
-        }
-
-        if (world.isNight()) {
-            isNight = true;
-        } else {
-            isNight = false;
-            handleDay(world);
-        }
-        System.out.println("Bear life: " + life);
-        System.out.println("Bear energy: " + energy);
+        super.act(world);
+            if (world.isNight()) {
+                isNight = true;
+            } else {
+                isNight = false;
+                handleDay(world);
+                System.out.println("Bear life: " + life);
+                System.out.println("Bear energy: " + energy);
+            }
     }
 
     /**
@@ -56,23 +46,16 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
      * They can now do normal daytime behavior.
      * @param world The current world.
      */
-    // START DAY HANDLER METHOD -->
-    private void handleDay(World world) {
+    @Override
+    public void handleDay(World world) {
+        super.handleDay(world);
         // Resume normal daytime behavior
         if (life > 0 && energy > 0) {
             energy--;
             eat(world);
             moveInCircRandomly(world);
         }
-        if (life <= 0) {
-            Location currentLocation = world.getLocation(this);
-            world.delete(this);
-            Carcass carcass = new Carcass();
-            world.setTile(currentLocation, carcass);
-            System.out.println("A Bear has died and now it is a Carcass.");
-        }
     }
-    // <-- END DAY HANDLER METHOD
 
     /**
      *
@@ -116,7 +99,9 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
      * This method makes it possible for the bears to eat rabbits & berries.
      * @param world The current world.
      */
-    private void eat(World world) {
+    @Override
+    public void eat(World world) {
+        super.eat(world);
         Location curLocation = world.getLocation(this);
         Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
 
@@ -144,8 +129,6 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
                     ((Carcass) entity).eatCarcass(world);
                     break;
                 }
-
-
             }
         }
     }
@@ -154,15 +137,9 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
          * This is the method place the Bear in the world
          * @param world The current world.
          */
+        @Override
         public void placeInWorld (World world){
-            int size = world.getSize();
-            Location location = null;
-
-            while (location == null || !world.isTileEmpty(location)) {
-                int x = (int) (Math.random() * size);
-                int y = (int) (Math.random() * size);
-                location = new Location(x, y);
-            }
+            super.placeInWorld(world);
             if (!world.containsNonBlocking(location)) {
                 world.setTile(location, this);
                 startingPoint = location;
