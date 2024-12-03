@@ -221,29 +221,31 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
         if (!surroundingTiles.isEmpty()) {
             Location rabbitLocation = surroundingTiles.iterator().next();
-            Object isRabbit = world.getTile(rabbitLocation);
+            Object entity = world.getTile(rabbitLocation);
             double eatProbability = 0.7;
             double reducedEatProbability = 0.5;
-            if (isRabbit instanceof AdultRabbit) {
+            if (entity instanceof AdultRabbit) {
                 // 70% chance of eating a rabbit whilst having energy
                 if(energy > 0 && Math.random() <= eatProbability) {
-                    if (energy <= 90) {
-                        energy += 10;
-                    }
-                    world.delete(isRabbit);
+                    world.delete(entity);
                     Carcass carcass = new Carcass();
                     carcass.isSmall();
                     world.setTile(rabbitLocation, carcass);
-                    System.out.println("Ate a poor Rabbit - New energy level:" + energy);
+                    System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
                 }
-                if(energy <= 0 && Math.random() <= reducedEatProbability) {
-                    // If no energy then gain more energy from eating but chances of eating are reduced
-                    energy += 20;
-                    world.delete(isRabbit);
-                    Carcass carcass = new Carcass();
-                    world.setTile(rabbitLocation, carcass);
-                    System.out.println("Ate a poor Rabbit - New energy level:" + energy + ". Rejuvenated!");
-                }
+//                if(energy <= 0 && Math.random() <= reducedEatProbability) {
+//                    // If no energy then gain more energy from eating but chances of eating are reduced
+//                    energy += 20;
+//                    world.delete(entity);
+//                    Carcass carcass = new Carcass();
+//                    world.setTile(rabbitLocation, carcass);
+//                    System.out.println("Ate a poor Rabbit - New energy level:" + energy + ". Rejuvenated!");
+//                }
+            }
+            if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
+                energy += 5;
+                System.out.println("Wolf ate a bit of a Carcass - New energy level:" + energy);
+                ((Carcass) entity).eatCarcass(world);
             }
         }
     }
