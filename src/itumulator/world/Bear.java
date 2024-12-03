@@ -95,7 +95,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         int dy = center.getY() - target.getY();
         return (dx * dx + dy * dy) <= (radius * radius);
     }
-
     /**
      * This method makes it possible for the bears to eat rabbits & berries.
      * @param world The current world.
