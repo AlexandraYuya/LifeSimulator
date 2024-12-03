@@ -43,7 +43,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
         int size = world.getSize();
         Location location = null;
 
-        while (location == null || world.getNonBlocking(location) != null) {
+        while (location == null || !world.isTileEmpty(location)) {
             int x = (int) (Math.random() * size);
             int y = (int) (Math.random() * size);
             location = new Location(x, y);
