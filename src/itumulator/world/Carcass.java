@@ -8,10 +8,10 @@ import java.awt.*;
 
 public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
-    private boolean hasAmount;
-    private boolean isBig;
-    private boolean isSmall;
-    private int amount;
+    protected boolean hasAmount;
+    protected boolean isBig;
+    protected boolean isSmall;
+    protected int amount;
 
     public Carcass() {
         stepCount = 0;
@@ -47,7 +47,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
         stepCount++;
 
         if (stepCount % 20 == 0) {
-            System.out.println("Carcass decayed by -1!");
+            System.out.println("carcass decayed by -1!");
             amount--;
         }
     }

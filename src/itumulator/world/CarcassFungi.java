@@ -8,12 +8,12 @@ import java.awt.*;
 public class CarcassFungi extends Carcass implements Actor {
     protected int stepCount;
     protected int amount;
-    private boolean hasAmount;
+//    private boolean hasAmount;
 
     public CarcassFungi() {
         stepCount = 0;
-        amount = 20;
-        this.hasAmount = true;
+        amount = 2;
+//        this.hasAmount = true;
     }
 
     @Override
@@ -21,9 +21,16 @@ public class CarcassFungi extends Carcass implements Actor {
         stepCount++;
 
         // After 20 steps (half day), remove carcass
-        if (stepCount == 20) {
-            System.out.println("CarcassFungi removed!");
+        if (stepCount % 20 == 0) {
+            System.out.println("CarcassFungi decayed by -1!");
+            amount--;
+        }
+        if (amount <= 0) {
+            Location curLocation = world.getLocation(this);
             world.delete(this);
+            Fungi fungi = new Fungi();
+            world.setTile(curLocation, fungi);
+            System.out.println("CarcassFungi removed!");
         }
     }
 
@@ -32,13 +39,13 @@ public class CarcassFungi extends Carcass implements Actor {
         super.placeInWorld(world);
     }
 
-    public int getAmount() {
-        return 0;
-    }
+//    public int getAmount() {
+//        return 0;
+//    }
 
-    public boolean hasAmount() {
-        return true;
-    }
+//    public boolean hasAmount() {
+//        return true;
+//    }
 
 
 //    public void eatCarcass(World world) {

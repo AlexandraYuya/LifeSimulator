@@ -1,12 +1,28 @@
 package itumulator.world;
 
-public class Fungi extends CarcassFungi{
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
+
+import java.awt.*;
+
+public class Fungi extends CarcassFungi implements DynamicDisplayInformationProvider {
     private int stepCount;
     private int life;
+    private boolean carcassTransformed;
 
     public Fungi(){
         this.stepCount = 0;
         this.life = 5;
+        carcassTransformed = false;
+    }
+
+    @Override
+    public DisplayInformation getInformation() {
+        if(isBig) {
+            return new DisplayInformation(Color.DARK_GRAY, "fungi");
+        }else {
+            return new DisplayInformation(Color.BLACK, "fungi-small");
+        }
     }
 
     @Override
@@ -22,7 +38,7 @@ public class Fungi extends CarcassFungi{
         Location curLocation = world.getLocation(this);
 
         int radius = 8;
-        boolean carcassTransformed = false;
+//        boolean carcassTransformed = false;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
@@ -31,7 +47,7 @@ public class Fungi extends CarcassFungi{
 
                 Location checkLocation = new Location(curLocation.getX() + dx, curLocation.getY() + dy);
 
-                // check if  the location is within radius
+                // check if the location is within radius
                 if (    checkLocation.getX() >=0 &&
                         checkLocation.getX() < world.getSize() &&
                         checkLocation.getY() >=0 &&
