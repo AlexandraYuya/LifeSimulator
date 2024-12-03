@@ -18,11 +18,10 @@ public class CarcassFungi extends Carcass implements Actor {
 
     @Override
     public void act(World world) {
-        System.out.println("act called for: " + this);
         stepCount++;
 
         nearCarcassFungi(world);
-        System.out.println("step" + stepCount);
+
         // After 20 steps (half day), remove carcass
         if (stepCount == 20) {
             System.out.println("CarcassFungi removed!");
@@ -44,11 +43,9 @@ public class CarcassFungi extends Carcass implements Actor {
     }
 
     public void nearCarcassFungi(World world) {
-        System.out.println("nearCarcassFungi called for: " + this);
 
         // Get location of the carcassFungi
         Location curLocation = world.getLocation(this);
-        System.out.println("Current location: (" + curLocation.getX() + ", " + curLocation.getY() + ")");
 
         int radius = 8;
         boolean carcassTransformed = false;
