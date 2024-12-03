@@ -115,6 +115,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
                     Carcass carcass = new Carcass();
+                    carcass.isSmall();
                     world.setTile(nearbyLocation, carcass);
                     break;
                 }
