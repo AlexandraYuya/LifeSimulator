@@ -100,6 +100,7 @@ public class Main {
                                 if (i == 0) {
                                     alphaWolf = new Wolf(null);
                                     alphaWolf.placeInWorld(world);
+                                    alphaWolf.addCave(world);
                                     alphaWolf.act(world);
                                 } else {
                                     // Assign wolf to the alpha's pack
