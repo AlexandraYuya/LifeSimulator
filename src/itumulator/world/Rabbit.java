@@ -15,7 +15,6 @@ public class Rabbit extends Animal implements Actor {
     // Stores location before entering a burrow
     protected Location previousLocation;
     protected boolean isInBurrow;
-    protected boolean isNight;
 
     public Rabbit() {
         super(0,100);
@@ -23,24 +22,11 @@ public class Rabbit extends Animal implements Actor {
         this.myBurrow = null;
         this.previousLocation = null;
         this.isInBurrow = false;
-        this.isNight = false;
     }
 
     @Override
     public void act(World world) {
         super.act(world);
-        if(life > 0) {
-            if (world.isNight()) {
-                isNight = true;
-                handleNight(world);
-            } else {
-                isNight = false;
-                super.die(world);
-                handleDay(world);
-                System.out.println(this + " life: " + life);
-                System.out.println(this + " energy: " + energy);
-            }
-        }
     }
 
     /**
@@ -69,14 +55,8 @@ public class Rabbit extends Animal implements Actor {
                     energy += 10;
                 }
                 System.out.println("Rabbit entered a burrow at: " + previousLocation);
-            }else {
-                System.out.println("ZZZzzz Rabbit is sleeping outside at: " + curLocation);
             }
         }
-//        else {
-//            System.out.println("ERROR!!!!!!!!!!!");
-//            System.exit(1);
-//        }
     }
 
     @Override
@@ -144,8 +124,5 @@ public class Rabbit extends Animal implements Actor {
     @Override
     public void placeInWorld(World world) {
         super.placeInWorld(world);
-        if (!world.containsNonBlocking(location)) {
-            world.setTile(location, this);
-        }
     }
 }

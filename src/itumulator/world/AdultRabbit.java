@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
     public AdultRabbit() {
-        life = 3; // reduced to 3 life
+        life = 3;
     }
 
     @Override
@@ -28,6 +28,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
      * They can now do normal daytime behavior.
      * @param world The current world.
      */
+    @Override
     public void handleDay(World world) {
         super.handleDay(world);
 

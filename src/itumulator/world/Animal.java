@@ -10,6 +10,7 @@ public abstract class Animal{
     protected int energy;
     protected int stepCount;
     protected Location location;
+    protected boolean isNight = false;
 
     public Animal(int life, int energy) {
         this.life = life;
@@ -21,13 +22,22 @@ public abstract class Animal{
         if (stepCount % 20 == 0) {
             life--;
         }
+
+        if (world.isNight()) {
+            isNight = true;
+            handleNight(world);
+        } else {
+            isNight = false;
+            die(world);
+            handleDay(world);
+        }
     }
 
     public void handleNight(World world) {}
     public void handleDay(World world) {}
 
     public void die(World world) {
-        if(life <= 0) {
+        if(life <= 0 && world.isOnTile(this)) {
             Location curLocation = world.getLocation(this);
             Carcass carcass = new Carcass();
             world.delete(this);
@@ -37,15 +47,17 @@ public abstract class Animal{
     }
 
     public void moveRandomly(World world) {
-        if(energy >= 0 && life >= 0) {
-            Location curLocation = world.getLocation(this);
-            Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
+        if (world.isOnTile(this)) {
+            if (energy >= 0 && life >= 0) {
+                Location curLocation = world.getLocation(this);
+                Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
 
-            if (!neighbours.isEmpty()) {
-                Random rand = new Random();
-                List<Location> list = new ArrayList<>(neighbours);
-                Location newLocation = list.get(rand.nextInt(list.size()));
-                world.move(this, newLocation);
+                if (!neighbours.isEmpty()) {
+                    Random rand = new Random();
+                    List<Location> list = new ArrayList<>(neighbours);
+                    Location newLocation = list.get(rand.nextInt(list.size()));
+                    world.move(this, newLocation);
+                }
             }
         }
     }
@@ -54,13 +66,17 @@ public abstract class Animal{
     }
 
     public void placeInWorld(World world) {
-            int size = world.getSize();
-            location = null;
+        int size = world.getSize();
+        location = null;
 
-            while (location == null || !world.isTileEmpty(location)) {
-                int x = (int) (Math.random() * size);
-                int y = (int) (Math.random() * size);
-                location = new Location(x, y);
-            }
+        while (location == null || !world.isTileEmpty(location)) {
+            int x = (int) (Math.random() * size);
+            int y = (int) (Math.random() * size);
+            location = new Location(x, y);
+        }
+
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
+        }
     }
 }

@@ -67,23 +67,23 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     public void addCave(World world) {
-        Location curLocation = world.getLocation(this);
-        Set<Location> emptyTiles = world.getEmptySurroundingTiles(curLocation);
-        if (!emptyTiles.isEmpty()) {
-            List<Location> tilesList = new ArrayList<>(emptyTiles);
-            Location caveLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+            Location curLocation = world.getLocation(this);
+            Set<Location> emptyTiles = world.getEmptySurroundingTiles(curLocation);
+            if (!emptyTiles.isEmpty()) {
+                List<Location> tilesList = new ArrayList<>(emptyTiles);
+                Location caveLocation = tilesList.get(new Random().nextInt(tilesList.size()));
 
-            Cave cave = new Cave();
-            world.setTile(caveLocation, cave);
-            this.myCave = cave;
-            this.hasCave = true;
+                Cave cave = new Cave();
+                world.setTile(caveLocation, cave);
+                this.myCave = cave;
+                this.hasCave = true;
 
-            System.out.println("Cave created for alpha wolf and pack at: " + caveLocation);
-        } else {
-            System.out.println("FATAL!!! No empty tiles found");
-            System.exit(1);
+                System.out.println("Cave created for alpha wolf and pack at: " + caveLocation);
+            } else {
+                System.out.println("FATAL!!! No empty tiles found");
+                System.exit(1);
+            }
         }
-    }
 
     /**
      * This method accounts for all the behavior of wolves
@@ -93,19 +93,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     public void act(World world) {
         super.act(world);
 
-            if (world.isNight()) {
-                handleNight(world);
-            } else {
-                handleDay(world);
-                super.die(world);
-                System.out.println(this + " life: " + life);
-                System.out.println(this + " energy: " + energy);
-            }
-
         if (this instanceof BabyWolf) {
-//            if (life == 10 && stepCount == 20){
-            // TODO: FIX THIS THRESHOLD ISSUE
-            if(stepCount > 20) {
+            if(life == 10) {
                 ((BabyWolf) this).grow(world);
                 System.out.println("Baby wolf finally grew up!!!");
             }
@@ -223,7 +212,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             Location rabbitLocation = surroundingTiles.iterator().next();
             Object entity = world.getTile(rabbitLocation);
             double eatProbability = 0.7;
-            double reducedEatProbability = 0.5;
+//            double reducedEatProbability = 0.5;
             if (entity instanceof AdultRabbit) {
                 // 70% chance of eating a rabbit whilst having energy
                 if(energy > 0 && Math.random() <= eatProbability) {
@@ -266,8 +255,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     private void followAlpha(World world) {
         if (alphaWolf != null && world.contains(alphaWolf)) {
-//            System.out.println("Contains alpha: " + world.contains(alphaWolf));
-//            System.out.println("followAlphaWolf: " + alphaWolf);
             Location alphaLocation = world.getLocation(alphaWolf);
             Set<Location> emptyTiles = world.getEmptySurroundingTiles(alphaLocation);
 
@@ -285,28 +272,25 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      * @param world The current world.
      */
     private void tryToMate(World world) {
-        // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)
         // Don't try to mate if energy is too low
         if (energy < 20) {
             return;
         }
 
         // Only proceed if there are at least two wolves in the pack (hermaphrodite wolves)
-        if (pack.size() >= 2) {
+        if (pack.size() > 1) {
             // 30% chance to create a baby
             // Returns a value between 0.0 and 1.0
             double chance = new Random().nextDouble();
 
-            // 30% chance (0.3 = 30%)
-            if(chance <= 0.3) {
+            if(chance < 0.3) {
                 // Create a baby
                 BabyWolf baby = new BabyWolf(this.alphaWolf);
                 world.add(baby);
 
                 // Decrease energy after successful reproduction
-                // TODO: FIX THIS ENERGY ISSUE!!!!
                 energy -= 20;
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++A baby wolf was born! Parent energy now: " + energy);
+                System.out.println("+++++++++++A baby wolf was born! Parent energy now: " + energy);
             }
         }
     }
@@ -320,10 +304,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         // Places alpha wolf in the world
         if (isAlphaWolf) {
             super.placeInWorld(world);
-                
-            if (!world.containsNonBlocking(location)) {
-                world.setTile(location, this);
-            }
 
         } else {
             // Places pack wolves in the world based on alpha's location

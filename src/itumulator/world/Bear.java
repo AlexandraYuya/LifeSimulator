@@ -11,7 +11,6 @@ import java.util.List;
 public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider{
     private int radius;
     private Location startingPoint;
-    private boolean isNight = false;
 
 
     public Bear() {
@@ -31,15 +30,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     @Override
     public void act(World world) {
         super.act(world);
-            if (world.isNight()) {
-                isNight = true;
-            } else {
-                isNight = false;
-                super.die(world);
-                handleDay(world);
-                System.out.println("Bear life: " + life);
-                System.out.println("Bear energy: " + energy);
-            }
     }
 
     /**
@@ -110,7 +100,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
             for (Location nearbyLocation : surroundingTiles) {  // Loop through all surrounding tiles
                 Object entity = world.getTile(nearbyLocation);
 
-                if (entity instanceof AdultRabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
+                if (entity instanceof AdultRabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
                     Carcass carcass = new Carcass();
@@ -118,7 +108,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                     world.setTile(nearbyLocation, carcass);
                     break;
                 }
-                if (entity instanceof Berry && Math.random() <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 80% chance
+                if (entity instanceof Berry && Math.random() <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
                     energy += 5;
                     System.out.println("Bear Ate some berries - New energy level:" + energy);
                     ((Berry) entity).consumeBerries(world);
@@ -141,10 +131,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         @Override
         public void placeInWorld (World world){
             super.placeInWorld(world);
-            if (!world.containsNonBlocking(location)) {
-                world.setTile(location, this);
-                startingPoint = location;
-            }
+            startingPoint = location;
         }
 
         public void placeInWorld (World world,int x, int y){

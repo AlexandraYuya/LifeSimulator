@@ -28,10 +28,9 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     public void act(World world) {
         stepCount++;
 
-        // Spread grass every 10 steps
-        if (stepCount >= 10) {
-            stepCount = 0; // Reset step count
-            double spreadProbability = 0.7; // 70% chance
+        // Spread grass every 20 steps
+        if (stepCount % 20 == 0) {
+            double spreadProbability = 0.5; // 70% chance
             if (Math.random() < spreadProbability) {
                 spreadGrass(world);
             }

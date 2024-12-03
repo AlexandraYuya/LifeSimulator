@@ -20,7 +20,7 @@ public class Main {
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
-        File file = new File("./resources/data/t3-1c.txt");
+        File file = new File("./resources/data/t2-4b.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
@@ -52,6 +52,7 @@ public class Main {
                 parts = new String[]{name.toString(),parts[2]}; // new array
             }
             System.out.println(name + " " + parts[0]);
+
             if (parts.length >= 2) {
                 int coord1 = 0;
                 int coord2 = 0;
