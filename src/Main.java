@@ -20,13 +20,13 @@ public class Main {
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
-        File file = new File("./resources/data/tf3-1a.txt");
+        File file = new File("./resources/data/t3-1c.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
         // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
-        Program program = new Program(size, 800, 1500);
+        Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
 
         // Here we set the default display information for all entities, so the grass will get the png image fx

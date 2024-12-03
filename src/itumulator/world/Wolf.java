@@ -21,7 +21,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     private boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
-        super(1, 100);
+        super(10, 100);
         this.alphaWolf = alphaWolf;
         this.myCave = null;
         this.hasCave = false;
@@ -232,6 +232,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                     }
                     world.delete(isRabbit);
                     Carcass carcass = new Carcass();
+                    carcass.isSmall();
                     world.setTile(rabbitLocation, carcass);
                     System.out.println("Ate a poor Rabbit - New energy level:" + energy);
                 }
