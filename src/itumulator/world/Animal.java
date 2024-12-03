@@ -21,20 +21,18 @@ public abstract class Animal{
         if (stepCount % 20 == 0) {
             life--;
         }
-        die(world);
     }
 
     public void handleNight(World world) {}
     public void handleDay(World world) {}
 
     public void die(World world) {
-//        Location curLocation = world.getLocation(this);
         if(life <= 0) {
+            Location curLocation = world.getLocation(this);
+            Carcass carcass = new Carcass();
             world.delete(this);
-//            Carcass carcass = new Carcass();
-//            world.add(carcass);
-//            world.setTile(curLocation, carcass);
-            System.out.println(this + "has DIEDDD!!!!");
+            world.setTile(curLocation, carcass);
+            System.out.println(this + "has Died and turned into a carcass!!!!");
         }
     }
 

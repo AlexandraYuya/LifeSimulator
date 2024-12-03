@@ -21,7 +21,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     private boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
-        super(10, 100);
+        super(1, 100);
         this.alphaWolf = alphaWolf;
         this.myCave = null;
         this.hasCave = false;
@@ -85,7 +85,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
-
     /**
      * This method accounts for all the behavior of wolves
      * @param world The current world
@@ -98,6 +97,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 handleNight(world);
             } else {
                 handleDay(world);
+                super.die(world);
                 System.out.println(this + " life: " + life);
                 System.out.println(this + " energy: " + energy);
             }
