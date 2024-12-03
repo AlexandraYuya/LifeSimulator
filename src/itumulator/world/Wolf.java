@@ -206,7 +206,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             }
         }
         eat(world);
-//        hasDied(world);
     }
 
     /**
@@ -248,17 +247,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
-//    /**
-//     * This method kills off wolves when their life is equal to 0
-//     * @param world The current world
-//     */
-//    private void hasDied(World world) {
-//        if (life <= 0) {
-//            world.delete(this);
-//            System.out.println("A Wolf has died.");
-//        }
-//    }
-
     /**
      * This method moves the alpha to a random nearby empty tile.
      * @param world The current world.
@@ -266,16 +254,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     @Override
     public void moveRandomly(World world) {
         super.moveRandomly(world);
-//        Location curLocation = world.getLocation(this);
-//        Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
-//
-//        if (!neighbours.isEmpty()) {
-//            Random rand = new Random();
-//            List<Location> list = new ArrayList<>(neighbours);
-//            Location newLocation = list.get(rand.nextInt(list.size()));
-//            world.move(this, newLocation);
-//            System.out.println("Alpha wolf moved to: " + newLocation);
-//        }
     }
 
     /**
@@ -285,8 +263,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     private void followAlpha(World world) {
         if (alphaWolf != null && world.contains(alphaWolf)) {
-            System.out.println("Contains alpha: "+world.contains(alphaWolf));
-            System.out.println("followAlphaWolf: "+alphaWolf);
+//            System.out.println("Contains alpha: " + world.contains(alphaWolf));
+//            System.out.println("followAlphaWolf: " + alphaWolf);
             Location alphaLocation = world.getLocation(alphaWolf);
             Set<Location> emptyTiles = world.getEmptySurroundingTiles(alphaLocation);
 
@@ -317,7 +295,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             double chance = new Random().nextDouble();
 
             // 30% chance (0.3 = 30%)
-            if (chance <= 0.3) {
+            if(chance <= 0.3) {
                 // Create a baby
                 BabyWolf baby = new BabyWolf(this.alphaWolf);
                 world.add(baby);
@@ -338,14 +316,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     public void placeInWorld(World world) {
         // Places alpha wolf in the world
         if (isAlphaWolf) {
-//            int size = world.getSize();
-//            Location location = null;
-//
-//            while (location == null || !world.isTileEmpty(location)) {
-//                int x = (int) (Math.random() * size);
-//                int y = (int) (Math.random() * size);
-//                location = new Location(x, y);
-//            }
             super.placeInWorld(world);
                 
             if (!world.containsNonBlocking(location)) {
