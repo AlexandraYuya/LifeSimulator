@@ -10,38 +10,8 @@ import java.util.List;
 
 
 public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
-    private int life;
-    private int stepCount;
-    private boolean isNight = false;
-
     public AdultRabbit() {
-        this.life = 3; // reduced to 3 life
-        this.stepCount = 0;
-        this.hasDugBurrow = false;
-        this.myBurrow = null;
-    }
-
-    /**
-     * counts steps and calls two different methods one for night and one for day
-     * @param world The current world.
-     */
-    @Override
-    public void act(World world) {
-        stepCount++;
-        if (stepCount == 20) {
-            stepCount = 0;
-            life--;
-        }
-
-        if (world.isNight()) {
-            isNight = true;
-            super.handleNight(world);
-        } else {
-            isNight = false;
-            handleDay(world);
-        }
-        System.out.println("Rabbit life: " + life);
-        System.out.println("Rabbit energy: " + energy);
+        life = 3; // reduced to 3 life
     }
 
     @Override
@@ -58,9 +28,8 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
      * They can now do normal daytime behavior.
      * @param world The current world.
      */
-    // START DAY HANDLER METHOD -->
-    private void handleDay(World world) {
-        super.checkInBurrow(world);
+    public void handleDay(World world) {
+        super.handleDay(world);
 
         // Resume normal daytime behavior
         if (life > 0 && energy > 0) {
@@ -70,19 +39,12 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             tryToMate(world);
             digProbability(world);
         }
-        if (life <= 0) {
-            // Remove rabbit from the world
-            world.delete(this);
-            System.out.println("A rabbit has died.");
-        }
     }
-    // <-- END DAY HANDLER METHOD
 
     /**
      * This is the method we use for digging borrows, and it makes sure that a rabbit can only dig one borrow.
      * @param world The current world.
      */
-    // START DIG METHOD -->
     private void digProbability(World world) {
         // only 1 burrow can be dug per rabbit
         if(hasDugBurrow) {
@@ -104,13 +66,11 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             }
         }
     }
-    // <-- END DIG METHOD
 
     /**
      * This is the method we are using for matting so there will come baby rabbits.
      * @param world The current world.
      */
-    // START MATING METHOD -->
     private void tryToMate(World world) {
         // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)
         // Don't try to mate if energy is too low
@@ -149,5 +109,4 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             }
         }
     }
-    // <-- END MATING METHOD
 }

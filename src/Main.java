@@ -5,7 +5,6 @@ import itumulator.world.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -20,8 +19,8 @@ public class Main {
 
         // Load the file -->
         // Change filename as needed
+//        File file = new File("./resources/data/tf3-1a.txt");
         File file = new File("./resources/data/tf3-1a.txt");
-//        File file = new File("./resources/data/tf2-1.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
@@ -39,18 +38,20 @@ public class Main {
             String line = sc.nextLine();
             // can be in <type> <count> pairs or <type> <countMIN-MAX> <(x,y)>
             String[] parts = line.split(" ");
-
             StringBuilder name = new StringBuilder();
+
             for (String part : parts) {
                 if (!part.matches(".*\\d+.*")) {
                     name.append(part);
                 } else {
-                    break; //if it is a number it stops
+                    //if it is a number it stops
+                    break;
                 }
-                if (parts.length > 2){
-            parts = new String[]{name.toString(),parts[2]}; // new array
+//                if (parts.length > 2){
+//                    parts = new String[]{name.toString(),parts[2]}; // new array
+//                }
             }
-            }
+
             if (parts.length >= 2) {
                 int coord1 = 0;
                 int coord2 = 0;

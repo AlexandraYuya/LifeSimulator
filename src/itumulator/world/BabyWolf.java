@@ -7,9 +7,10 @@ import itumulator.simulator.Actor;
 import java.awt.*;
 
 public class BabyWolf extends Wolf implements Actor, DynamicDisplayInformationProvider {
+
     public BabyWolf(Wolf alphaWolf) {
         super(alphaWolf);
-        this.life = 15; // reduced to 15 life
+        life = 15; // reduced to 15 life
     }
 
     @Override
