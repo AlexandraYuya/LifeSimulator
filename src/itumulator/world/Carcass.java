@@ -10,11 +10,27 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
     private boolean hasAmount;
     private boolean isBig;
+    private boolean isSmall;
+    private int amount;
 
     public Carcass() {
-                stepCount = 0;
-                this.hasAmount = true;
-                this.isBig = true;
+        stepCount = 0;
+        this.hasAmount = true;
+        this.isBig = false;
+        this.isSmall = false;
+        this.amount = 25;
+    }
+
+    public boolean hasAmount() {
+        return true;
+    }
+
+    public boolean isSmall() {
+        return isBig = false;
+    }
+
+    public boolean isBig() {
+        return isSmall = false;
     }
 
     @Override
@@ -24,20 +40,30 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
        } else {
            return new DisplayInformation(Color.BLACK, "carcass-small");
        }
-
     }
 
-        @Override
-        public void act(World world) {
-            stepCount++;
+    @Override
+    public void act(World world) {
+        stepCount++;
 
-            // After 5 steps (half day), remove carcass
-            if (stepCount == 5) {
-                System.out.println("Carcass removed!");
-                world.delete(this);
-            }
+        if (stepCount % 20 == 0) {
+            System.out.println("Carcass decayed by -1!");
+            amount--;
         }
+    }
 
+
+    public void eatCarcass(World world) {
+        if (hasAmount) {
+            amount--;
+        } else {
+            System.out.println("Attempted to consume carcass but not enough amount available"); // Debug print
+        }
+        if(amount <= 0){
+            hasAmount = false;
+            world.delete(this);
+        }
+    }
 
     public void placeInWorld(World world) {
         int size = world.getSize();
@@ -52,28 +78,5 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
             world.setTile(location, this);
         }
     }
-
-    public boolean hasAmount() {
-        return true;
-    }
-    public boolean isSmall() {
-        return isBig = false;
-
-    }
-
-    public void eatCarcass(World world) {
-        System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
-        if (hasAmount) {
-            hasAmount = false;  // False
-            // Get current location before deleting
-            Location currentLocation = world.getLocation(this);
-            System.out.println("Transforming berry at " + currentLocation); // Debug print
-            // Remove the Berry
-            world.delete(this);
-        } else {
-            System.out.println("Attempted to consume CarcassFungi but not enough amount available"); // Debug print
-        }
-    }
-
 
 }

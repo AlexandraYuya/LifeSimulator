@@ -20,8 +20,6 @@ public class CarcassFungi extends Carcass implements Actor {
     public void act(World world) {
         stepCount++;
 
-        nearCarcassFungi(world);
-
         // After 20 steps (half day), remove carcass
         if (stepCount == 20) {
             System.out.println("CarcassFungi removed!");
@@ -42,50 +40,7 @@ public class CarcassFungi extends Carcass implements Actor {
         return true;
     }
 
-    public void nearCarcassFungi(World world) {
 
-        // Get location of the carcassFungi
-        Location curLocation = world.getLocation(this);
-
-        int radius = 8;
-        boolean carcassTransformed = false;
-
-        for (int dx = -radius; dx <= radius; dx++) {
-            for (int dy = -radius; dy <= radius; dy++) {
-                // Skip current location
-                if (dx == 0 && dy == 0) continue;
-
-                Location checkLocation = new Location(curLocation.getX() + dx, curLocation.getY() + dy);
-
-                // check if  the location is within radius
-                if (    checkLocation.getX() >=0 &&
-                        checkLocation.getX() < world.getSize() &&
-                        checkLocation.getY() >=0 &&
-                        checkLocation.getY() < world.getSize()) {
-
-                    Object tileObject = world.getTile(checkLocation);
-                    if (tileObject == null) {
-                        System.out.println("No object at: " + checkLocation);
-                        continue;
-                    }
-
-
-                    if (tileObject instanceof Carcass && !(tileObject instanceof CarcassFungi)) {
-                        System.out.println("Carcass found at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
-
-                        world.delete(tileObject);
-                        CarcassFungi newCarcassFungi = new CarcassFungi();
-                        world.setTile(checkLocation, newCarcassFungi);
-
-                        System.out.println("Carcass transformed at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
-                        carcassTransformed = true;
-                        return;
-                    }
-                }
-            }
-        }
-        System.out.println("No carcass found in the radius of " + radius);
-    }
 //    public void eatCarcass(World world) {
 //        System.out.println("consumeBerries called, hasBerries is: " + hasAmount()); // Debug print
 //        if (hasAmount) {

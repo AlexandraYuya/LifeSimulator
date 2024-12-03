@@ -111,7 +111,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                 Object entity = world.getTile(nearbyLocation);
 
                 if (entity instanceof AdultRabbit && Math.random() <= 0.8) { //here checked if it is a rabbit and adds 70% chance
-                    energy += 10;
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
                     Carcass carcass = new Carcass();
@@ -127,7 +126,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                 }
                 if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
                     energy += 5;
-                    System.out.println("Bear Ate a bit of a Carcass - New energy level:" + energy);
+                    System.out.println("Bear Ate a bit of a carcass - New energy level:" + energy);
                     ((Carcass) entity).eatCarcass(world);
                     break;
                 }
