@@ -65,8 +65,11 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
             moveInCircRandomly(world);
         }
         if (life <= 0) {
+            Location currentLocation = world.getLocation(this);
             world.delete(this);
-            System.out.println("A rabbit has died.");
+            Carcass carcass = new Carcass();
+            world.setTile(currentLocation, carcass);
+            System.out.println("A Bear has died and now it is a Carcass.");
         }
     }
     // <-- END DAY HANDLER METHOD
@@ -109,7 +112,6 @@ public class Bear implements Actor, DynamicDisplayInformationProvider {
         int dy = center.getY() - target.getY();
         return (dx * dx + dy * dy) <= (radius * radius);
     }
-
     /**
      * This method makes it possible for the bears to eat rabbits & berries.
      * @param world The current world.
