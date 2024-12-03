@@ -2,10 +2,9 @@ package itumulator.world;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
-public abstract class Animal{
+public abstract class Animal implements PRNG {
     protected int life;
     protected int energy;
     protected int stepCount;
@@ -21,6 +20,7 @@ public abstract class Animal{
         stepCount++;
         if (stepCount % 20 == 0) {
             life--;
+            System.out.println(this +" Life: "+ life + " Energy: " + energy);
         }
 
         if (world.isNight()) {
@@ -28,22 +28,28 @@ public abstract class Animal{
             handleNight(world);
         } else {
             isNight = false;
-            die(world);
-            handleDay(world);
+            if(!die(world)) {
+                handleDay(world);
+            }
         }
     }
 
     public void handleNight(World world) {}
     public void handleDay(World world) {}
 
-    public void die(World world) {
+    public boolean die(World world) {
         if(life <= 0 && world.isOnTile(this)) {
             Location curLocation = world.getLocation(this);
             Carcass carcass = new Carcass();
             world.delete(this);
             world.setTile(curLocation, carcass);
+            if (this instanceof Wolf) {
+                System.out.println("Wolf died :ooooo");
+            }
             System.out.println(this + "has Died and turned into a carcass!!!!");
+            return true;
         }
+        return false;
     }
 
     public void moveRandomly(World world) {
@@ -53,9 +59,8 @@ public abstract class Animal{
                 Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
 
                 if (!neighbours.isEmpty()) {
-                    Random rand = new Random();
                     List<Location> list = new ArrayList<>(neighbours);
-                    Location newLocation = list.get(rand.nextInt(list.size()));
+                    Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
                     world.move(this, newLocation);
                 }
             }
@@ -69,9 +74,9 @@ public abstract class Animal{
         int size = world.getSize();
         location = null;
 
-        while (location == null || !world.isTileEmpty(location)) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
+        while (location == null || world.getTile(location) != null) {
+            int x = PRNG.rand().nextInt(size);
+            int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);
         }
 

@@ -1,6 +1,7 @@
 package itumulator.world;
 
-public class Berry {
+
+public class Berry implements PRNG {
     private boolean hasBerries;
 
     public Berry() {
@@ -43,9 +44,9 @@ public class Berry {
         int size = world.getSize();
         Location location = null;
 
-        while (location == null || !world.isTileEmpty(location)) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
+        while (location == null || world.getNonBlocking(location) != null) {
+            int x = PRNG.rand().nextInt(size);
+            int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);
         }
         if (!world.containsNonBlocking(location)) {

@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.List;
 
 
-public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
+public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider, PRNG {
     public AdultRabbit() {
         life = 3;
     }
@@ -52,8 +52,8 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             return;
         }
         // 30% chance of digging
-        double digProbability  = 0.3;
-        if (Math.random() < digProbability) {
+        double chance = PRNG.rand().nextDouble();
+        if (chance < 0.3) {
             Location curLocation = world.getLocation(this);
             if (!world.containsNonBlocking(curLocation)) {
                 Burrow burrow = new Burrow();
@@ -88,15 +88,15 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
         if (!nearbyRabbits.isEmpty()) {
             // 30% chance to create a baby
             // Returns a value between 0.0 and 1.0
-            double chance = new Random().nextDouble();
-            // 30% chance (0.3 = 30%)
-            if (chance < 0.3) {
+            double chance = PRNG.rand().nextDouble();
+            // 40% chance (0.4 = 40%)
+            if (chance <= 0.4) {
                 // Look for empty tile to place baby
                 Set<Location> emptyTiles = world.getEmptySurroundingTiles(currentLocation);
                 if (!emptyTiles.isEmpty()) {
                     // Pick a random empty tile for the baby
                     List<Location> tilesList = new ArrayList<>(emptyTiles);
-                    Location babyLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+                    Location babyLocation = tilesList.get(PRNG.rand().nextInt(tilesList.size()));
 
                     // Create and place baby
                     BabyRabbit baby = new BabyRabbit();

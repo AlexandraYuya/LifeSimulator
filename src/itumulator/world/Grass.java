@@ -2,16 +2,14 @@ package itumulator.world;
 
 import itumulator.executable.DisplayInformation;
 import itumulator.executable.DynamicDisplayInformationProvider;
-import itumulator.executable.Program;
 import itumulator.simulator.Actor;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
-public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvider {
+public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvider, PRNG {
     // counter to track how many steps, we only want grass to move randomly for every X amount of steps
     private int stepCount = 0;
 
@@ -30,8 +28,8 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
 
         // Spread grass every 20 steps
         if (stepCount % 20 == 0) {
-            double spreadProbability = 0.5; // 70% chance
-            if (Math.random() < spreadProbability) {
+            double chance = PRNG.rand().nextDouble();
+            if (chance < 0.7) {
                 spreadGrass(world);
             }
         }
@@ -57,8 +55,7 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
 
             if (!availableTiles.isEmpty()) {
                 // Randomly pick one empty surrounding tile
-                Random r = new Random();
-                Location spreadLocation = availableTiles.get(r.nextInt(availableTiles.size()));
+                Location spreadLocation = availableTiles.get(PRNG.rand().nextInt(availableTiles.size()));
                 Grass newGrass = new Grass();
                 world.setTile(spreadLocation, newGrass);
             }
@@ -74,8 +71,8 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
         Location location = null;
 
         while (location == null || world.getNonBlocking(location) != null) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
+            int x = PRNG.rand().nextInt(size);
+            int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);
         }
         if (!world.containsNonBlocking(location)) {

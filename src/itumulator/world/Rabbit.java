@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Rabbit extends Animal implements Actor {
+public class Rabbit extends Animal implements Actor, PRNG {
     // Tracks if the rabbit has already dug a burrow
     protected boolean hasDugBurrow;
     // Reference to the burrow the rabbit dug
@@ -105,9 +105,8 @@ public class Rabbit extends Animal implements Actor {
                 }else {
                     Set<Location> emptyNeighbours = world.getEmptySurroundingTiles(previousLocation);
                     if (!emptyNeighbours.isEmpty()) {
-                        Random rand = new Random();
                         List<Location> list = new ArrayList<>(emptyNeighbours);
-                        Location location = list.get(rand.nextInt(list.size()));
+                        Location location = list.get(PRNG.rand().nextInt(list.size()));
                         world.setTile(location, this);
                     }
                 }

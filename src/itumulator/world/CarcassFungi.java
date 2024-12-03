@@ -1,9 +1,7 @@
 package itumulator.world;
 
-import itumulator.executable.DisplayInformation;
 import itumulator.simulator.Actor;
 
-import java.awt.*;
 
 public class CarcassFungi extends Carcass implements Actor {
     protected int stepCount;

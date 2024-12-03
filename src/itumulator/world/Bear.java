@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider{
+public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
     private int radius;
     private Location startingPoint;
 
@@ -66,9 +66,8 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
             }
 
             if (!limitedNeighbours.isEmpty()) {
-                Random rand = new Random();
                 List<Location> list = new ArrayList<>(limitedNeighbours);
-                Location newLocation = list.get(rand.nextInt(list.size()));
+                Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
                 world.move(this, newLocation);
             }
         }
@@ -99,8 +98,9 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         if (!surroundingTiles.isEmpty()) {
             for (Location nearbyLocation : surroundingTiles) {  // Loop through all surrounding tiles
                 Object entity = world.getTile(nearbyLocation);
+                double chance = PRNG.rand().nextDouble();
 
-                if (entity instanceof AdultRabbit && Math.random() <= 0.7) { //here checked if it is a rabbit and adds 70% chance
+                if (entity instanceof AdultRabbit && chance <= 0.7) { //here checked if it is a rabbit and adds 70% chance
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
                     Carcass carcass = new Carcass();
@@ -108,7 +108,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                     world.setTile(nearbyLocation, carcass);
                     break;
                 }
-                if (entity instanceof Berry && Math.random() <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
+                if (entity instanceof Berry && chance <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
                     energy += 5;
                     System.out.println("Bear Ate some berries - New energy level:" + energy);
                     ((Berry) entity).consumeBerries(world);

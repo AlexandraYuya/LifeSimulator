@@ -2,11 +2,10 @@ package itumulator.world;
 
 import itumulator.executable.DisplayInformation;
 import itumulator.executable.DynamicDisplayInformationProvider;
-import itumulator.simulator.Actor;
 
 import java.awt.*;
 
-public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
+public class Burrow implements NonBlocking, DynamicDisplayInformationProvider, PRNG {
     // Associate rabbit that dug this burrow
     private AdultRabbit owner;
 
@@ -36,8 +35,8 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
         Location location = null;
 
         while (location == null || world.getNonBlocking(location) != null) {
-            int x = (int) (Math.random() * size);
-            int y = (int) (Math.random() * size);
+            int x = PRNG.rand().nextInt(size);
+            int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);
         }
 

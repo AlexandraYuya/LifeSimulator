@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider {
+public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
     // Reference to the alpha wolf of this pack
     public Wolf alphaWolf;
     // Check whether this wolf is the alpha
@@ -71,7 +71,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             Set<Location> emptyTiles = world.getEmptySurroundingTiles(curLocation);
             if (!emptyTiles.isEmpty()) {
                 List<Location> tilesList = new ArrayList<>(emptyTiles);
-                Location caveLocation = tilesList.get(new Random().nextInt(tilesList.size()));
+                Location caveLocation = tilesList.get(PRNG.rand().nextInt(tilesList.size()));
 
                 Cave cave = new Cave();
                 world.setTile(caveLocation, cave);
@@ -121,7 +121,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                             if (!surroundingTiles.contains(wolfCurLocation)) {
                                 if (!emptySurroundingTiles.isEmpty()) {
                                     List<Location> list = new ArrayList<>(emptySurroundingTiles);
-                                    int random_choice = new Random().nextInt(list.size());
+                                    int random_choice = PRNG.rand().nextInt(list.size());
                                     Location nextStep = list.get(random_choice);
                                     world.move(wolf, nextStep);
                                     list.remove(random_choice);
@@ -171,7 +171,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                                 System.out.println("FATAL ERROR! NO MORE FREE SPACE TO MOVE TO IN handleDay wolf");
                                 System.exit(1);
                             }
-                            int randomChoice = new Random().nextInt(list.size());
+                            int randomChoice = PRNG.rand().nextInt(list.size());
                             Location newLocation = list.get(randomChoice);
                             world.setTile(newLocation, wolf);
                             list.remove(randomChoice);
@@ -188,11 +188,10 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         if (life > 0 && energy > 0) {
             if (isAlphaWolf) {
                 moveRandomly(world);
-                energy--;
             } else {
                 followAlpha(world);
-                energy--;
             }
+            energy--;
         }
         eat(world);
     }
@@ -211,25 +210,16 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         if (!surroundingTiles.isEmpty()) {
             Location rabbitLocation = surroundingTiles.iterator().next();
             Object entity = world.getTile(rabbitLocation);
-            double eatProbability = 0.7;
-//            double reducedEatProbability = 0.5;
             if (entity instanceof AdultRabbit) {
+                double chance = PRNG.rand().nextDouble();
                 // 70% chance of eating a rabbit whilst having energy
-                if(energy > 0 && Math.random() <= eatProbability) {
+                if(energy > 0 && chance <= 0.7) {
                     world.delete(entity);
                     Carcass carcass = new Carcass();
                     carcass.isSmall();
                     world.setTile(rabbitLocation, carcass);
                     System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
                 }
-//                if(energy <= 0 && Math.random() <= reducedEatProbability) {
-//                    // If no energy then gain more energy from eating but chances of eating are reduced
-//                    energy += 20;
-//                    world.delete(entity);
-//                    Carcass carcass = new Carcass();
-//                    world.setTile(rabbitLocation, carcass);
-//                    System.out.println("Ate a poor Rabbit - New energy level:" + energy + ". Rejuvenated!");
-//                }
             }
             if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
                 energy += 5;
@@ -260,8 +250,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
             if (!emptyTiles.isEmpty()) {
                 List<Location> list = new ArrayList<>(emptyTiles);
-                Random rand = new Random();
-                Location newLocation = list.get(rand.nextInt(list.size()));
+                Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
                 world.move(this, newLocation);
             }
         }
@@ -281,7 +270,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         if (pack.size() > 1) {
             // 30% chance to create a baby
             // Returns a value between 0.0 and 1.0
-            double chance = new Random().nextDouble();
+            double chance = PRNG.rand().nextDouble();
 
             if(chance < 0.3) {
                 // Create a baby
@@ -312,9 +301,12 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
             if (!nearbyTiles.isEmpty()) {
                 List<Location> list = new ArrayList<>(nearbyTiles);
-                Location newLocation = list.get(new Random().nextInt(list.size()));
+                Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
                 world.setTile(newLocation, this);
+                this.location = newLocation;
                 System.out.println("Wolf placed near pack at: " + newLocation);
+            } else {
+                super.placeInWorld(world);
             }
         }
     }

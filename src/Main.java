@@ -5,6 +5,7 @@ import itumulator.world.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,9 @@ import java.util.Scanner;
  * So the steps are: reads the file, place the correct entities from the file, place the entities in our wold,
  * then run the simulation with the entities
  */
-public class Main {
+public class Main implements PRNG {
     public static void main(String[] args) throws FileNotFoundException {
-
+    System.out.println("USING SEED: " + seed);
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
@@ -160,7 +161,7 @@ public class Main {
             int min = Integer.parseInt(range[0].trim());
             int max = Integer.parseInt(range[1].trim());
             // pick a random value between min and max
-            return min + (int) (Math.random() * (max - min + 1));
+            return min + (PRNG.rand().nextInt(max - min + 1));
         } else {
             // else returns directly the one digit integer
             return Integer.parseInt(countStr);
