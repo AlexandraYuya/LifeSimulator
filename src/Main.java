@@ -47,11 +47,11 @@ public class Main {
                     //if it is a number it stops
                     break;
                 }
-//                if (parts.length > 2){
-//                    parts = new String[]{name.toString(),parts[2]}; // new array
-//                }
             }
-
+            if (parts.length > 2){
+                parts = new String[]{name.toString(),parts[2]}; // new array
+            }
+            System.out.println(name + " " + parts[0]);
             if (parts.length >= 2) {
                 int coord1 = 0;
                 int coord2 = 0;
@@ -118,7 +118,7 @@ public class Main {
                                 Carcass carcass = new Carcass();
                                 carcass.placeInWorld(world);
                                 break;
-                            case "carcass fungi":
+                            case "carcassfungi":
                                 CarcassFungi carcassFungi = new CarcassFungi();
                                 carcassFungi.placeInWorld(world);
                                 break;
