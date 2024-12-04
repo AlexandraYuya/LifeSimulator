@@ -16,6 +16,11 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
         carcassTransformed = false;
     }
 
+    /**
+     * This method give the fungi a small or at normal size.
+     * If the carcassFungi was big it will get a normal fungi.
+     * If it was small it will get a small fungi.
+     */
     @Override
     public DisplayInformation getInformation() {
         if(isBig) {
@@ -25,6 +30,10 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * This method accounts for all the behavior of fungi.
+     * @param world The current world.
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -32,6 +41,11 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
         nearFungi(world);
     }
 
+    /**
+     * This is the method is for the Fungi to find surrounding carcass without fungi in it.
+     * It transforms normal carcass into carcassFungi.
+     * @param world The current world.
+     */
     public void nearFungi(World world) {
 
         // Get location of the carcassFungi
