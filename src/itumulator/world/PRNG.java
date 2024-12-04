@@ -4,8 +4,8 @@ import java.util.Random;
 
 
 /**
- * By implementing this interface, other actors / objects within the world may exist on top of it.
- * However, two objects implementing {@link PRNG} cannot exist on top of each other.
+ * By implementing this interface, all random methods always have the same seed based on time of initialization.
+ * This is useful for debugging and limits random errors.
  */
 public interface PRNG {
     int seed = (int) Instant.now().getEpochSecond();
