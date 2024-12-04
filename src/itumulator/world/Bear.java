@@ -18,6 +18,11 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         this.radius = 2;
     }
 
+    /**
+     * This method give the Bear a sleeping png or an awake png.
+     * If the Bear is a sleep it will get a sleeping bear png.
+     * If it was awake it will get an awake bear.
+     */
     @Override
     public DisplayInformation getInformation() {
         if(isNight){

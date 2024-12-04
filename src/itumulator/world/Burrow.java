@@ -13,22 +13,26 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider, P
         // initially there's no owner
         this.owner = null;
     }
+
     /**
-     * This is the method will get the owner of the borrow.
-     * @param rabbit The current rabbit.
+     * This is the method will get the owner of a borrow.
+     * @param rabbit The current rabbit
      */
     public void setOwner(AdultRabbit rabbit) {
         this.owner = rabbit;
     }
 
+    /**
+     * This method display a small borrow png.
+     */
     @Override
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.GRAY, "hole-small");
     }
 
     /**
-     * This is the method place the rabbit in the world
-     * @param world The current world.
+     * This is the method place the borrow in the world
+     * @param world The current world
      */
     public void placeInWorld(World world) {
         int size = world.getSize();

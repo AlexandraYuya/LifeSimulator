@@ -23,7 +23,7 @@ public class BabyWolf extends Wolf implements Actor, DynamicDisplayInformationPr
 
     /**
      * This is the method will grow the baby wolf to an adult wolf.
-     * @param world The current world.
+     * @param world The current world
      */
     public void grow(World world) {
         Location curLocation = world.getLocation(this);

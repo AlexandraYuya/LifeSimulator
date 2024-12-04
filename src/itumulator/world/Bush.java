@@ -9,6 +9,10 @@ public class Bush extends Berry implements Actor{
         this.stepCount = 0;
     }
 
+    /**
+     * This method will count the steps and it makes the bush grow into a barry when the count is at 60
+     * @param world The current world
+     */
     public void act(World world) {
         stepCount++;
 

@@ -33,7 +33,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
      * This is the method we are using to handle day.
      * The method implement normal day behavior for rabbits such as move random, eat, mating and dig borrows.
      * handleDay, moveRandom and eat all comes from the super class Animal
-     * @param world The current world.
+     * @param world The current world
      */
     @Override
     public void handleDay(World world) {
@@ -52,7 +52,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     /**
      * This method is for digging borrows.
      * It makes sure that each rabbit only digs one borrow.
-     * @param world The current world.
+     * @param world The current world
      */
     private void digProbability(World world) {
         // only 1 burrow can be dug per rabbit
@@ -78,7 +78,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
 
     /**
      * This is the method is used for reproducing more baby rabbits.
-     * @param world The current world.
+     * @param world The current world
      */
     private void tryToMate(World world) {
         // Here we check if rabbit has enough energy to reproduce (as they go -20 if they do)

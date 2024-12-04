@@ -43,13 +43,13 @@ public abstract class Animal implements PRNG {
 
     /**
      * This method handle night for animals.
-     * @param world The current world.
+     * @param world The current world
      */
     public void handleNight(World world) {}
 
     /**
      * This method handle day for animals.
-     * @param world The current world.
+     * @param world The current world
      */
     public void handleDay(World world) {}
 
@@ -102,7 +102,7 @@ public abstract class Animal implements PRNG {
     /**
      * This method places the animals in the world.
      * Is uses the PRNG interface.
-     * @param world The current world.
+     * @param world The current world
      */
     public void placeInWorld(World world) {
         int size = world.getSize();

@@ -9,14 +9,18 @@ public class Berry implements PRNG {
         this.hasBerries = true;
     }
 
+    /**
+     * This method is used for getting the value of hasBerries.
+     * @return hasBerries
+     */
     public boolean hasBerries() {
-
         return hasBerries;
     }
 
     /**
-     *
-     * @param world The current world.
+     * This method is used when they are berry's get eaten.
+     * When it gets eat the berry will be deleted from the world and become a bush.
+     * @param world The current world
      */
     public void consumeBerries(World world) {
         System.out.println("consumeBerries called, hasBerries is: " + hasBerries()); // Debug print
@@ -37,8 +41,8 @@ public class Berry implements PRNG {
     }
 
     /**
-     * This is the method place the grass in the world
-     * @param world The current world.
+     * This is the method place the berry in the world.
+     * @param world The current world
      */
     public void placeInWorld(World world) {
         int size = world.getSize();

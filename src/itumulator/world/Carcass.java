@@ -25,14 +25,27 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         return true;
     }
 
+    /**
+     * It set the isBig to false when isSmall is true
+     * @return false
+     */
     public boolean isSmall() {
         return isBig = false;
     }
 
+    /**
+     * It set the isSmall to false when isSmall is true
+     * @return false
+     */
     public boolean isBig() {
         return isSmall = false;
     }
 
+    /**
+     * This method looks if the dead animal is big or small.
+     * If the dead animal was big it will replace it with a big carcass.
+     * If it as small it will replace it with a small carcass.
+     */
     @Override
     public DisplayInformation getInformation() {
        if (isBig){
@@ -42,6 +55,11 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
        }
     }
 
+    /**
+     * This method accounts for all the behavior of carcass.
+     * It will take from the amount every day.
+     * @param world The current world
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -52,7 +70,11 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         }
     }
 
-
+    /**
+     * This method takes from the amount when someone is eating from it.
+     * The carcass will be deleted from the world when the amount is 0.
+     * @param world The current world
+     */
     public void eatCarcass(World world) {
         if (hasAmount) {
             amount--;
@@ -65,6 +87,10 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         }
     }
 
+    /**
+     * This method places the carcass in the world.
+     * @param world The current world
+     */
     public void placeInWorld(World world) {
         int size = world.getSize();
         Location location = null;

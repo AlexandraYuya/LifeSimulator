@@ -6,14 +6,20 @@ import itumulator.simulator.Actor;
 public class CarcassFungi extends Carcass implements Actor {
     protected int stepCount;
     protected int amount;
-//    private boolean hasAmount;
+    //private boolean hasAmount;
 
     public CarcassFungi() {
         stepCount = 0;
         amount = 2;
-//        this.hasAmount = true;
+        //this.hasAmount = true;
     }
 
+    /**
+     * This method accounts for all the behavior of carcassFungi.
+     * The method takes away from the amount every day.
+     * If the amount is 0 the carcassFungi will be deleted from the world and replace it with a fungi.
+     * @param world The current world
+     */
     @Override
     public void act(World world) {
         stepCount++;
@@ -32,6 +38,10 @@ public class CarcassFungi extends Carcass implements Actor {
         }
     }
 
+    /**
+     * This method places the carcassFungi in the world by the superclass Carcass.
+     * @param world The current world
+     */
     @Override
     public void placeInWorld(World world) {
         super.placeInWorld(world);

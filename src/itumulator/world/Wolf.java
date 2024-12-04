@@ -286,7 +286,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method places the wolves based on if they're the alpha, or pack wolves.
-     * @param world The current world.
+     * @param world The current world
      */
     @Override
     public void placeInWorld(World world) {
