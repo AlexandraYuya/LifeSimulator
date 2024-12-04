@@ -27,14 +27,18 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * This method accounts for all the behavior of bear in the superclass animal
+     * @param world The current world
+     */
     @Override
     public void act(World world) {
         super.act(world);
     }
 
     /**
-     * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
-     * They can now do normal daytime behavior.
+     * This is the method is used for handle day from the super class animal.
+     * It makes them do normal daytime behavior.
      * @param world The current world.
      */
     @Override
@@ -49,10 +53,9 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *
+     *This method makes the bear walk random in a circular space within the radius of 2
      * @param world The current world.
      */
-    // Move random in a circular space with radius 2
     private void moveInCircRandomly(World world) {
         if(energy > 0) {
             Location curLocation = world.getLocation(this);
@@ -74,19 +77,18 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *
-     * @param center
-     * @param target
-     * @param radius
-     * @return
+     * This method is used for checking if the bear is within the allowed radius.
+     * @param center target radius
+     * @return (dx * dx + dy * dy) <= (radius * radius)
      */
     private boolean isWithinRadius(Location center, Location target, int radius) {
         int dx = center.getX() - target.getX();
         int dy = center.getY() - target.getY();
         return (dx * dx + dy * dy) <= (radius * radius);
     }
+
     /**
-     * This method makes it possible for the bears to eat rabbits & berries.
+     * This method makes it possible for the bears to eat rabbits, berries and carcasses.
      * @param world The current world.
      */
     @Override
@@ -133,7 +135,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
             super.placeInWorld(world);
             startingPoint = location;
         }
-
         public void placeInWorld (World world,int x, int y){
             Location location = new Location(x, y);
             if (!world.containsNonBlocking(location)) {
