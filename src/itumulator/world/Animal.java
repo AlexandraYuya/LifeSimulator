@@ -16,6 +16,13 @@ public abstract class Animal implements PRNG {
         this.energy = energy;
     }
 
+    /**
+     * This method accounts for all the behavior of all the animals in the world.
+     * The method accounts for their life, energy and if it is night or day.
+     * If it is night it will turn on the handleNight.
+     * If it is not night it will turn on handle day.
+     * @param world The current world
+     */
     public void act(World world) {
         stepCount++;
         if (stepCount % 20 == 0) {
@@ -34,9 +41,23 @@ public abstract class Animal implements PRNG {
         }
     }
 
+    /**
+     * This method handle night for animals.
+     * @param world The current world.
+     */
     public void handleNight(World world) {}
+
+    /**
+     * This method handle day for animals.
+     * @param world The current world.
+     */
     public void handleDay(World world) {}
 
+    /**
+     * This method accounts for all the dying animals and replace it with a carcass.
+     * Now it is only for wolves.
+     * @param world The current world
+     */
     public boolean die(World world) {
         if(life <= 0 && world.isOnTile(this)) {
             Location curLocation = world.getLocation(this);
@@ -52,6 +73,10 @@ public abstract class Animal implements PRNG {
         return false;
     }
 
+    /**
+     * This method accounts for the animals moving in random directions.
+     * @param world The current world
+     */
     public void moveRandomly(World world) {
         if (world.isOnTile(this)) {
             if (energy >= 0 && life >= 0) {
@@ -67,9 +92,18 @@ public abstract class Animal implements PRNG {
         }
     }
 
+    /**
+     * This method accounts for animals eating.
+     * @param world The current world
+     */
     public void eat(World world) {
     }
 
+    /**
+     * This method places the animals in the world.
+     * Is uses the PRNG interface.
+     * @param world The current world.
+     */
     public void placeInWorld(World world) {
         int size = world.getSize();
         location = null;
