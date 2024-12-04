@@ -13,6 +13,9 @@ public class BabyWolf extends Wolf implements Actor, DynamicDisplayInformationPr
         life = 15;
     }
 
+    /**
+     * This is the method will display a baby wolf in the world.
+     */
     @Override
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.GRAY, "wolf-small");

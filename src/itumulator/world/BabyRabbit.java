@@ -29,7 +29,7 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
     /**
      * This is the method we use for handling day.
      * The baby rabbit will wake up and do normal day behavior.
-     * Handle day comes from the super class
+     * Handle day comes from the super class.
      * @param world The current world.
      */
     // START DAY HANDLER METHOD -->

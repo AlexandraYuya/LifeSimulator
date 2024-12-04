@@ -28,7 +28,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method accounts for all the behavior of bear in the superclass animal
+     * This method accounts for all the behavior of bear in the superclass animal.
      * @param world The current world
      */
     @Override
@@ -53,7 +53,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *This method makes the bear walk random in a circular space within the radius of 2
+     *This method makes the bear walk random in a circular space within the radius of 2.
      * @param world The current world.
      */
     private void moveInCircRandomly(World world) {
@@ -127,7 +127,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
         /**
-         * This is the method place the Bear in the world
+         * This is the method place the Bear in the world.
          * @param world The current world.
          */
         @Override
