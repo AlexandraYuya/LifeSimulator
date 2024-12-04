@@ -14,6 +14,12 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
         life = 3;
     }
 
+
+    /**
+     * This method give the rabbit a sleeping png or an awake png.
+     * If the Rabbit is a sleep it will get a sleeping rabbit png.
+     * If it was awake it will get an awake rabbit.
+     */
     @Override
     public DisplayInformation getInformation() {
         if(isNight){
@@ -24,8 +30,9 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This is the method we are using to handle day. It will make the rabbits wake up and reset their location.
-     * They can now do normal daytime behavior.
+     * This is the method we are using to handle day.
+     * The method implement normal day behavior for rabbits such as move random, eat, mating and dig borrows.
+     * handleDay, moveRandom and eat all comes from the super class Animal
      * @param world The current world.
      */
     @Override
@@ -43,7 +50,8 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This is the method we use for digging borrows, and it makes sure that a rabbit can only dig one borrow.
+     * This method is for digging borrows.
+     * It makes sure that each rabbit only digs one borrow.
      * @param world The current world.
      */
     private void digProbability(World world) {
@@ -69,7 +77,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This is the method we are using for matting so there will come baby rabbits.
+     * This is the method is used for reproducing more baby rabbits.
      * @param world The current world.
      */
     private void tryToMate(World world) {

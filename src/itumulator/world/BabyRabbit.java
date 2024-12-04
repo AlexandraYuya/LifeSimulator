@@ -12,6 +12,11 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
         life = 5; // reduced to 5 life
     }
 
+    /**
+     * This method give the baby rabbit a sleeping png or an awake png.
+     * If the baby rabbit is a sleep it will get a sleeping baby rabbit png.
+     * If it was awake it will get an awake baby rabbit.
+     */
     @Override
     public DisplayInformation getInformation() {
         if(isNight){
@@ -22,7 +27,9 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
     }
 
     /**
-     * This is the method we use for handling day. The bay rabbit will wake up and make them do normal day behavior.
+     * This is the method we use for handling day.
+     * The baby rabbit will wake up and do normal day behavior.
+     * Handle day comes from the super class
      * @param world The current world.
      */
     // START DAY HANDLER METHOD -->
@@ -42,7 +49,7 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
     }
 
     /**
-     * This is the method will grow the baby rabbit to an adult rabbit.
+     * This method will grow the baby rabbit to an adult rabbit.
      * @param world The current world.
      */
     private void grow(World world) {

@@ -24,6 +24,10 @@ public class Rabbit extends Animal implements Actor, PRNG {
         this.isInBurrow = false;
     }
 
+    /**
+     * This method accounts for all the behavior of rabbits in the superclass animal
+     * @param world The current world
+     */
     @Override
     public void act(World world) {
         super.act(world);
