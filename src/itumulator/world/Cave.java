@@ -8,6 +8,9 @@ import java.awt.*;
 
 public class Cave implements DynamicDisplayInformationProvider {
 
+    /**
+     * This method display a cave png.
+     */
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.blue, "cave");
     }

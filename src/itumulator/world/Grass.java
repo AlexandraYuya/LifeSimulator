@@ -13,14 +13,18 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     // counter to track how many steps, we only want grass to move randomly for every X amount of steps
     private int stepCount = 0;
 
-
+    /**
+     * This method display a grass png.
+     */
     @Override
     public DisplayInformation getInformation() {
             return new DisplayInformation(Color.GREEN, "grass");
     }
+
     /**
-     * counts steps and spread grass every 10 steps
-     * @param world The current world.
+     * counts steps and spread grass every 10 steps.
+     * And it can spread every 20 steps.
+     * @param world The current world
      */
     @Override
     public void act(World world) {
@@ -36,8 +40,8 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     }
 
     /**
-     * Spreads grass to a random empty surrounding tile.
-     * @param world The current world.
+     * The method spread grass to a random empty surrounding tile.
+     * @param world The current world
      */
     private void spreadGrass(World world) {
         Location curLocation = world.getLocation(this);

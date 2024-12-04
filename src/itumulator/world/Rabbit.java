@@ -25,7 +25,7 @@ public class Rabbit extends Animal implements Actor, PRNG {
     }
 
     /**
-     * This method accounts for all the behavior of rabbits in the superclass animal
+     * This method accounts for all the behavior of rabbits in the superclass animal.
      * @param world The current world
      */
     @Override
@@ -34,9 +34,9 @@ public class Rabbit extends Animal implements Actor, PRNG {
     }
 
     /**
-     * This is the method we are using to handle night. It will make is possible for rabbits to in or
-     * outside the borrow.
-     * @param world The current world.
+     * This is the method we are using to handle night.
+     * It makes it possible for rabbits to sleep inside or outside the borrow.
+     * @param world The current world
      */
     @Override
     public void handleNight(World world) {
@@ -63,6 +63,11 @@ public class Rabbit extends Animal implements Actor, PRNG {
         }
     }
 
+    /**
+     * This is the method we are using to handle day from the super class Animal.
+     * The method does also implement the method of checkInBorrow.
+     * @param world The current world
+     */
     @Override
     public void handleDay(World world) {
         checkInBurrow(world);
@@ -70,9 +75,8 @@ public class Rabbit extends Animal implements Actor, PRNG {
 
     /**
      * This is the method make the rabbits move random in the world.
-     * @param world The current world.
+     * @param world The current world
      */
-
     @Override
     public void moveRandomly(World world) {
         super.moveRandomly(world);
@@ -80,7 +84,7 @@ public class Rabbit extends Animal implements Actor, PRNG {
 
     /**
      * This is the method is giving energy and removing grass when a rabbit eats it.
-     * @param world The current world.
+     * @param world The current world
      */
     @Override
     public void eat(World world) {
@@ -96,9 +100,9 @@ public class Rabbit extends Animal implements Actor, PRNG {
         }
     }
 
-    /**\
+    /**
      * This method checks if rabbit is in burrow and reinstates them if so.
-     * @param world The current world.
+     * @param world The current world
      */
     public void checkInBurrow(World world) {
         if(isInBurrow) {
@@ -121,8 +125,8 @@ public class Rabbit extends Animal implements Actor, PRNG {
     }
 
     /**
-     * This is the method place the rabbit in the world
-     * @param world The current world.
+     * This is the method place the rabbit in the world.
+     * @param world The current world
      */
     @Override
     public void placeInWorld(World world) {

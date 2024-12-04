@@ -47,8 +47,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *
-     * @return
+     * This will display a wolf png.
+     * @return wolf
      */
     @Override
     public DisplayInformation getInformation() {
@@ -66,6 +66,10 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * This method adds a cave on an empty tile in the world.
+     * @param world The current world
+     */
     public void addCave(World world) {
             Location curLocation = world.getLocation(this);
             Set<Location> emptyTiles = world.getEmptySurroundingTiles(curLocation);
@@ -87,6 +91,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method accounts for all the behavior of wolves
+     * It uses the superclass animal.
      * @param world The current world
      */
     @Override
@@ -101,6 +106,12 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * The method handle the night of the wolves.
+     * If moves all the wolves into a cave for sleeping.
+     * It uses the superclass animal.
+     * @param world The Current world
+     */
     @Override
     public void handleNight(World world) {
         super.handleNight(world);
@@ -142,8 +153,12 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *
-     * @param world
+     * This method handle normal day behavior.
+     * If the wolves is in the cave then is will try to mate, but it will decrease their energy.
+     * If the wolves is outside the cave the wolves will follow the alpha wolf.
+     * The alpha wolf will walk random around.
+     * It uses the superclass animal.
+     * @param world The current world
      */
     @Override
     public void handleDay(World world) {
@@ -197,7 +212,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method determines the probability of eating a rabbit.
+     * This method determines the probability of eating a rabbit or a carcass.
      * Replenishes energy.
      * @param world The current world
      */
@@ -231,7 +246,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method moves the alpha to a random nearby empty tile.
-     * @param world The current world.
+     * @param world The current world
      */
     @Override
     public void moveRandomly(World world) {
@@ -241,7 +256,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     /**
      * This method moves the alpha's pack wolves in accordance to the alphas location, always following it.
      * Only used by non-alpha wolves.
-     * @param world The current world.
+     * @param world The current world
      */
     private void followAlpha(World world) {
         if (alphaWolf != null && world.contains(alphaWolf)) {
@@ -257,7 +272,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This is the method we are using for matting so there will come baby rabbits.
+     * This is the method we are using for reproducing wolves.
      * @param world The current world.
      */
     private void tryToMate(World world) {

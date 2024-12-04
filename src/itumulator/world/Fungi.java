@@ -32,7 +32,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
     /**
      * This method accounts for all the behavior of fungi.
-     * @param world The current world.
+     * @param world The current world
      */
     @Override
     public void act(World world) {
@@ -44,15 +44,14 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
     /**
      * This is the method is for the Fungi to find surrounding carcass without fungi in it.
      * It transforms normal carcass into carcassFungi.
-     * @param world The current world.
+     * @param world The current world
      */
     public void nearFungi(World world) {
-
         // Get location of the carcassFungi
         Location curLocation = world.getLocation(this);
 
         int radius = 8;
-//        boolean carcassTransformed = false;
+        //boolean carcassTransformed = false;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {

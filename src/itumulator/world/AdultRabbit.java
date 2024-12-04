@@ -32,7 +32,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     /**
      * This is the method we are using to handle day.
      * The method implement normal day behavior for rabbits such as move random, eat, mating and dig borrows.
-     * handleDay, moveRandom and eat all comes from the super class Animal
+     * handleDay, moveRandom and eat all comes from the super class Rabbit.
      * @param world The current world
      */
     @Override

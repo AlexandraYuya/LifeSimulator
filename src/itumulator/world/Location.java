@@ -7,7 +7,7 @@ public class Location {
     private int x, y;
 
     /**
-     * Creates a new location
+     * Creates a new location.
      * @param x coordinate
      * @param y coordinate
      */
@@ -17,7 +17,7 @@ public class Location {
     }
 
     /**
-     * Gets the x coordinate of the location
+     * Gets the x coordinate of the location.
      * @return the x coordinate (int)
      */
     public int getX(){
@@ -25,7 +25,7 @@ public class Location {
     }
 
     /**
-     * Gets the y coordinate of the location
+     * Gets the y coordinate of the location.
      * @return the y coordinate (int)
      */
     public int getY(){
@@ -41,7 +41,7 @@ public class Location {
     }
 
     /**
-     * Allows comparison of two locations according to their x,y coordinates
+     * Allows comparison of two locations according to their x,y coordinates.
      */
     @Override
     public boolean equals(Object o){
