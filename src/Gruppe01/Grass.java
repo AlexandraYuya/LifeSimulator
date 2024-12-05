@@ -54,8 +54,9 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
             List<Location> availableTiles = new ArrayList<>();
 
             for (Location tile : surroundingTiles) {
+                Object entity = world.getTile(tile);
                 // Only add tiles without grass
-                if (world.getNonBlocking(tile) == null) {
+                if (world.getNonBlocking(tile) == null && !(entity instanceof Grass)) {
                     availableTiles.add(tile);
                 }
             }
@@ -65,6 +66,7 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
                 Location spreadLocation = availableTiles.get(PRNG.rand().nextInt(availableTiles.size()));
                 Grass newGrass = new Grass();
                 world.setTile(spreadLocation, newGrass);
+                System.out.println("SPREADING GRASS >:C");
             }
         }
     }

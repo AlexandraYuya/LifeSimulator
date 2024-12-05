@@ -235,8 +235,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 continue;
             }
 
-            for(Wolf wolf : pack) {
-                if(wolf.hasBeenAttacked) {
+            for(Wolf wolfInPack : pack) {
+                if(wolfInPack.hasBeenAttacked) {
                     continue;
                 }
 
@@ -245,13 +245,13 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 List<Location> list = new ArrayList<>(surroundingTiles);
                 for(Location loc : list) {
                     Object entity = world.getTile(loc);
-                    if(entity == wolf) {
+                    if(entity == wolfInPack && !(entity instanceof BabyWolf)) {
                         double chance = PRNG.rand().nextDouble();
                         if(chance < 0.5) {
-                            wolf.life -= 3;
-                            wolf.energy -= 20;
-                            wolf.hasBeenAttacked = true;
-                            System.out.println("Enemy Wolf in territory! >:C Be prepared to ATTACKKK!!!" + " Energy: " + wolf.energy + " Life: " + wolf.life);
+                            wolfInPack.life -= 3;
+                            wolfInPack.energy -= 20;
+                            wolfInPack.hasBeenAttacked = true;
+                            System.out.println("Enemy Wolf in territory! >:C Be prepared to ATTACKKK!!!" + " Energy: " + wolfInPack.energy + " Life: " + wolfInPack.life);
                         }
                     }
                 }

@@ -1,7 +1,4 @@
-import java.awt.Color;
-
 import Gruppe01.*;
-import itumulator.executable.DisplayInformation;
 import itumulator.executable.Program;
 import itumulator.world.*;
 
@@ -22,7 +19,7 @@ public class Main implements PRNG {
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
-        File file = new File("./resources/data/t2-6a.txt");
+        File file = new File("./resources/data/t3-2ab.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
