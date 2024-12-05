@@ -31,6 +31,6 @@ public class BabyRabbitTest {
     @Test
     public void grow() {
         babyRabbit.grow(world);
-        
+
     }
 }
