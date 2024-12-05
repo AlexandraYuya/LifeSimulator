@@ -14,6 +14,7 @@ public class BerryTest {
     }
 
     @Test public void testBerry() {
-
+    berry.consumeBerries(world);
+    assertTrue(curren);
     }
 }
