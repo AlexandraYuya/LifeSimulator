@@ -8,13 +8,10 @@ import itumulator.world.World;
 import java.awt.*;
 
 public class Fungi extends CarcassFungi implements DynamicDisplayInformationProvider {
-    private int stepCount;
-    private int life;
     private boolean carcassTransformed;
 
     public Fungi(){
-        this.stepCount = 0;
-        this.life = 5;
+        amount = 5;
         carcassTransformed = false;
     }
 
@@ -25,7 +22,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
      */
     @Override
     public DisplayInformation getInformation() {
-        if(!isSmall) {
+        if(!isSmall && amount > 2) {
             return new DisplayInformation(Color.DARK_GRAY, "fungi");
         }else {
             return new DisplayInformation(Color.BLACK, "fungi-small");
@@ -40,7 +37,17 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
     public void act(World world) {
         stepCount++;
 
+        if (stepCount % 20 == 0) {
+            System.out.println(amount + " Fungi decayed by -1!");
+            amount--;
+        }
+
         nearFungi(world);
+
+        if (amount <= 0) {
+            world.delete(this);
+            System.out.println("Fungi removed!");
+        }
     }
 
     /**
@@ -70,7 +77,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
                     Object tileObject = world.getTile(checkLocation);
                     if (tileObject == null) {
-                        System.out.println("No object at: " + checkLocation);
+//                        System.out.println("No object at: " + checkLocation);
                         continue;
                     }
 
@@ -84,6 +91,8 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
                         System.out.println("Carcass transformed at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
                         carcassTransformed = true;
+                        amount+=3;
+                        System.out.println("Fungi successfully infected carcass");
                         return;
                     }
                 }

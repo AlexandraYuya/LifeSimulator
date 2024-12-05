@@ -63,7 +63,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      */
     public void eatCarcass(World world) {
         if (hasAmount) {
-            amount-=3;
+            amount--;
         } else {
             System.out.println("Attempted to consume carcass but not enough amount available"); // Debug print
         }

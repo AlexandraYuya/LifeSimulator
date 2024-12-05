@@ -6,10 +6,8 @@ import itumulator.world.World;
 
 
 public class CarcassFungi extends Carcass implements Actor {
-//    protected int stepCount;
 
     public CarcassFungi() {
-        stepCount = 0;
         amount = 5;
     }
 
