@@ -49,7 +49,7 @@ public class Main implements PRNG {
                     break;
                 }
             }
-            if (parts.length > 2){
+            if (parts.length > 2 && parts[0].equalsIgnoreCase("carcass") && parts[1].equalsIgnoreCase("fungi") ) {
                 parts = new String[]{name.toString(),parts[2]}; // new array
             }
             System.out.println(name + " " + parts[0]);
@@ -64,7 +64,7 @@ public class Main implements PRNG {
                 int count = parseCount(parts[1].trim());
                 Wolf alphaWolf = null;
 
-                if (parts.length > 2) {
+                if (parts.length > 2 && parts[0].equalsIgnoreCase("bear")) {
                     hasCoordinate = true;
                     String[] coordinate = parts[2].split(",");
                     String coordinate1 = coordinate[0];
