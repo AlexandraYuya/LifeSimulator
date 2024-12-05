@@ -1,15 +1,15 @@
 package itumulator.world;
-import Gruppe01.Berry;
+import Gruppe01.BushBerry;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BerryTest {
-    private Berry berry;
+    private BushBerry berry;
 
 
     @Before
     public void setUp() {
-        berry = new Berry();
+        berry = new BushBerry();
 
     }
 

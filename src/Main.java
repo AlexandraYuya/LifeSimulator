@@ -22,7 +22,7 @@ public class Main implements PRNG {
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
-        File file = new File("./resources/data/tf2-4.txt");
+        File file = new File("./resources/data/t2-6a.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 
@@ -30,10 +30,6 @@ public class Main implements PRNG {
         int size = Integer.parseInt(sc.nextLine());
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
-
-        // Here we set the default display information for all entities, so the grass will get the png image fx
-        program.setDisplayInformation(Berry.class, new DisplayInformation(Color.red, "bush-berries"));
-        program.setDisplayInformation(Bush.class, new DisplayInformation(Color.red, "bush"));
 
         // Process each line for entities (grass, rabbit, burrow) and each of their counts, (since each file have varying number of lines)
         while (sc.hasNextLine()) {
@@ -114,7 +110,7 @@ public class Main implements PRNG {
                                 }
                                 break;
                             case "berry":
-                                Berry berry = new Berry();
+                                BushBerry berry = new BushBerry();
                                 berry.placeInWorld(world);
                                 break;
                             case "carcass":
