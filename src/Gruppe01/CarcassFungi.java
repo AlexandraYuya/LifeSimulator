@@ -1,16 +1,18 @@
-package itumulator.world;
+package Gruppe01;
 
 import itumulator.simulator.Actor;
+import itumulator.world.Location;
+import itumulator.world.World;
 
 
 public class CarcassFungi extends Carcass implements Actor {
     protected int stepCount;
-    protected int amount;
+//    protected int amount;
     //private boolean hasAmount;
 
     public CarcassFungi() {
         stepCount = 0;
-        amount = 10;
+//        amount = 10;
         //this.hasAmount = true;
     }
 

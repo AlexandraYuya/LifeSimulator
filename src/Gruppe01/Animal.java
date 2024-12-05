@@ -1,4 +1,7 @@
-package itumulator.world;
+package Gruppe01;
+
+import itumulator.world.Location;
+import itumulator.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +14,13 @@ public abstract class Animal implements PRNG {
     protected Location location;
     protected boolean isNight = false;
     protected boolean isSmall;
+    protected int amount;
 
-    public Animal(int life, int energy, boolean isSmall) {
+    public Animal(int life, int energy, boolean isSmall, int amount) {
         this.life = life;
         this.energy = energy;
         this.isSmall = isSmall;
+        this.amount = amount;
     }
 
     /**
@@ -63,7 +68,7 @@ public abstract class Animal implements PRNG {
     public boolean die(World world) {
         if(life <= 0 && world.isOnTile(this)) {
             Location curLocation = world.getLocation(this);
-            Carcass carcass = new Carcass(isSmall);
+            Carcass carcass = new Carcass(isSmall, amount);
             world.delete(this);
             world.setTile(curLocation, carcass);
             if (this instanceof Wolf) {
