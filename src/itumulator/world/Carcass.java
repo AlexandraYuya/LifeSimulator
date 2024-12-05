@@ -9,13 +9,19 @@ import java.awt.*;
 public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
     protected int stepCount;
     protected boolean hasAmount;
-    protected boolean isBig;
     protected int amount;
+    protected boolean isSmall;
+
+    public Carcass(boolean isSmall) {
+        this.isSmall = isSmall;
+        stepCount = 0;
+        this.hasAmount = true;
+        this.amount = 25;
+    }
 
     public Carcass() {
         stepCount = 0;
         this.hasAmount = true;
-        this.isBig = false;
         this.amount = 25;
     }
 
@@ -28,7 +34,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      * @return false
      */
     public boolean isSmall() {
-        return isBig = false;
+        return true;
     }
 
     /**
@@ -38,7 +44,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      */
     @Override
     public DisplayInformation getInformation() {
-       if (isBig){
+       if (!isSmall){
            return new DisplayInformation(Color.DARK_GRAY, "carcass");
        } else {
            return new DisplayInformation(Color.BLACK, "carcass-small");

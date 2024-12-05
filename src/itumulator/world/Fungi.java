@@ -23,7 +23,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
      */
     @Override
     public DisplayInformation getInformation() {
-        if(isBig) {
+        if(!isSmall) {
             return new DisplayInformation(Color.DARK_GRAY, "fungi");
         }else {
             return new DisplayInformation(Color.BLACK, "fungi-small");

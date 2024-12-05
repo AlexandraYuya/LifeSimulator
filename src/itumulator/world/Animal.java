@@ -10,12 +10,12 @@ public abstract class Animal implements PRNG {
     protected int stepCount;
     protected Location location;
     protected boolean isNight = false;
-    protected boolean isBig;
+    protected boolean isSmall;
 
-    public Animal(int life, int energy, boolean isBig) {
+    public Animal(int life, int energy, boolean isSmall) {
         this.life = life;
         this.energy = energy;
-        this.isBig = isBig;
+        this.isSmall = isSmall;
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class Animal implements PRNG {
     public boolean die(World world) {
         if(life <= 0 && world.isOnTile(this)) {
             Location curLocation = world.getLocation(this);
-            Carcass carcass = new Carcass();
+            Carcass carcass = new Carcass(isSmall);
             world.delete(this);
             world.setTile(curLocation, carcass);
             if (this instanceof Wolf) {
