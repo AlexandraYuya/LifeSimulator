@@ -207,9 +207,9 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             } else {
                 followAlpha(world);
             }
+            eat(world);
             energy--;
         }
-        eat(world);
     }
 
     /**
@@ -224,22 +224,23 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
 
         if (!surroundingTiles.isEmpty()) {
-            Location rabbitLocation = surroundingTiles.iterator().next();
-            Object entity = world.getTile(rabbitLocation);
-            if (entity instanceof AdultRabbit) {
+            for(Location nearbyLocation : surroundingTiles) {
+                Object entity = world.getTile(nearbyLocation);
                 double chance = PRNG.rand().nextDouble();
-                // 80% chance of eating a rabbit whilst having energy
-                if(energy > 0 && chance <= 0.8) {
+
+                if (entity instanceof AdultRabbit && chance <= 0.8) {
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall, 10);
-                    world.setTile(rabbitLocation, carcass);
+                    world.setTile(nearbyLocation, carcass);
                     System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
+                    break;
                 }
-            }
-            if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
-                energy += 5;
-                System.out.println("Wolf ate a bit of a Carcass - New energy level:" + energy);
-                ((Carcass) entity).eatCarcass(world);
+                if (entity instanceof Carcass) {
+                    energy += 5;
+                    ((Carcass) entity).eatCarcass(world);
+                    System.out.println("Wolf ate a bit of a Carcass - New energy level:" + energy);
+                    break;
+                }
             }
         }
     }
