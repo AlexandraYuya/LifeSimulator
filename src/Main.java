@@ -21,7 +21,7 @@ public class Main implements PRNG {
         // Load the file -->
         // Change filename as needed
 //        File file = new File("./resources/data/tf3-1a.txt");
-        File file = new File("./resources/data/t2-4b.txt");
+        File file = new File("./resources/data/tf2-4.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
 

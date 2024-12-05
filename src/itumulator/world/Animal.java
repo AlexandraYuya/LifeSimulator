@@ -10,10 +10,12 @@ public abstract class Animal implements PRNG {
     protected int stepCount;
     protected Location location;
     protected boolean isNight = false;
+    protected boolean isBig;
 
-    public Animal(int life, int energy) {
+    public Animal(int life, int energy, boolean isBig) {
         this.life = life;
         this.energy = energy;
+        this.isBig = isBig;
     }
 
     /**
