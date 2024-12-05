@@ -12,14 +12,14 @@ import java.util.Set;
 
 public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
     // Reference to the alpha wolf of this pack
-    public Wolf alphaWolf;
+    protected Wolf alphaWolf;
     // Check whether this wolf is the alpha
-    private boolean isAlphaWolf;
+    protected boolean isAlphaWolf;
     // Wolves in this pack (only populated for the alpha wolf)
-    public List<Wolf> pack;
-    private boolean hasCave;
-    private Cave myCave;
-    private boolean isInCave;
+    protected List<Wolf> pack;
+    protected boolean hasCave;
+    protected Cave myCave;
+    protected boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
         super(10, 100, false, 15);
@@ -30,6 +30,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
         if (alphaWolf == null) {
             // If there is no alpha, this wolf becomes the alpha
+            this.alphaWolf = this;
             this.isAlphaWolf = true;
             // Initialize a new pack
             this.pack = new ArrayList<>();
@@ -290,7 +291,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
             if(chance < 0.3) {
                 // Create a baby
-                BabyWolf baby = new BabyWolf(this.alphaWolf);
+                BabyWolf baby = new BabyWolf(alphaWolf);
                 world.add(baby);
 
                 // Decrease energy after successful reproduction
