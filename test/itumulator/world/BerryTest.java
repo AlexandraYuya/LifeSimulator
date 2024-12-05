@@ -11,7 +11,6 @@ public class BerryTest {
 
     @Before
     public void setUp() {
-
         berry = new Berry();
 
     }
