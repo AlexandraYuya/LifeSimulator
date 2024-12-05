@@ -120,4 +120,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
             }
         }
     }
+    public void setLife(int life) {
+        this.life = life;
+    }
 }

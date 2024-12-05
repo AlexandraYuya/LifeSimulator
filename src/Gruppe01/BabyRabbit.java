@@ -54,7 +54,7 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
      * This method will grow the baby rabbit to an adult rabbit.
      * @param world The current world
      */
-    void grow(World world) {
+    public void grow(World world) {
         Location curLocation = world.getLocation(this);
         // Delete baby rabbit (this will remove it from both world and tile)
         world.delete(this);
@@ -65,4 +65,5 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
         // Place adult rabbit at the location
         world.setTile(curLocation, adultRabbit);
     }
+
 }

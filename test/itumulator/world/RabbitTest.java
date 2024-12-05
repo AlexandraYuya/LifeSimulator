@@ -23,7 +23,7 @@ public class RabbitTest {
 
     @Test
     public void die() {
-        rabbit.life = 0;
+        rabbit.setLife(0);
         rabbit.die(world);
         assertTrue(!world.contains(rabbit));
         //check if it was deleted properly
