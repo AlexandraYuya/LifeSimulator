@@ -21,7 +21,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     private boolean isInCave;
 
     public Wolf(Wolf alphaWolf) {
-        super(10, 100, false);
+        super(10, 100, false, 15);
         this.alphaWolf = alphaWolf;
         this.myCave = null;
         this.hasCave = false;
@@ -230,7 +230,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 // 70% chance of eating a rabbit whilst having energy
                 if(energy > 0 && chance <= 0.7) {
                     world.delete(entity);
-                    Carcass carcass = new Carcass(isSmall);
+                    Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(rabbitLocation, carcass);
                     System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
                 }

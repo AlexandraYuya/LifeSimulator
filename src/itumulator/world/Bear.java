@@ -14,7 +14,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
 
     public Bear() {
-        super(10,100, false);
+        super(15,100, false, 20);
         this.radius = 2;
     }
 
@@ -110,7 +110,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                 if (entity instanceof AdultRabbit && chance <= 0.7) { //here checked if it is a rabbit and adds 70% chance
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     world.delete(entity);
-                    Carcass carcass = new Carcass(isSmall);
+                    Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(nearbyLocation, carcass);
                     break;
                 }

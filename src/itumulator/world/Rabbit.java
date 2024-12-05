@@ -17,7 +17,7 @@ public class Rabbit extends Animal implements Actor, PRNG {
     protected boolean isInBurrow;
 
     public Rabbit() {
-        super(0,100, true);
+        super(0,100, true, 10);
         this.hasDugBurrow = false;
         this.myBurrow = null;
         this.previousLocation = null;

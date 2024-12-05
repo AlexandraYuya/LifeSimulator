@@ -12,17 +12,16 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
     protected int amount;
     protected boolean isSmall;
 
-    public Carcass(boolean isSmall) {
+    public Carcass(boolean isSmall, int amount) {
         this.isSmall = isSmall;
         stepCount = 0;
+        this.amount = amount;
         this.hasAmount = true;
-        this.amount = 15;
     }
 
     public Carcass() {
         stepCount = 0;
         this.hasAmount = true;
-        this.amount = 25;
     }
 
     /**
@@ -32,7 +31,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      */
     @Override
     public DisplayInformation getInformation() {
-       if (!isSmall){
+       if (!isSmall && amount > 10) {
            return new DisplayInformation(Color.DARK_GRAY, "carcass");
        } else {
            return new DisplayInformation(Color.BLACK, "carcass-small");
@@ -49,7 +48,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         stepCount++;
 
         if (stepCount % 20 == 0) {
-            System.out.println("carcass decayed by -1!");
+            System.out.println(amount + " carcass decayed by -1!");
             amount--;
         }
     }
@@ -61,7 +60,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      */
     public void eatCarcass(World world) {
         if (hasAmount) {
-            amount--;
+            amount-=3;
         } else {
             System.out.println("Attempted to consume carcass but not enough amount available"); // Debug print
         }
