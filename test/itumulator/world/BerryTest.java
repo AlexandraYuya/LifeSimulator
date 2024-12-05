@@ -1,9 +1,7 @@
 package itumulator.world;
-import itumulator.executable.Program;
+import Gruppe01.Berry;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class BerryTest {
     private Berry berry;

@@ -1,10 +1,11 @@
-package itumulator.world;
+package Gruppe01;
 
 import itumulator.simulator.Actor;
+import itumulator.world.Location;
+import itumulator.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public class Rabbit extends Animal implements Actor, PRNG {

@@ -1,4 +1,4 @@
-package itumulator.world;
+package Gruppe01;
 import java.time.Instant;
 import java.util.Random;
 

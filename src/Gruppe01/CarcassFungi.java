@@ -1,6 +1,8 @@
-package itumulator.world;
+package Gruppe01;
 
 import itumulator.simulator.Actor;
+import itumulator.world.Location;
+import itumulator.world.World;
 
 
 public class CarcassFungi extends Carcass implements Actor {

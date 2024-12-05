@@ -1,5 +1,6 @@
 package itumulator.world;
 
+import Gruppe01.AdultRabbit;
 import itumulator.executable.Program;
 import org.junit.Before;
 import org.junit.Test;

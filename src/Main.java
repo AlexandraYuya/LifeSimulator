@@ -1,11 +1,12 @@
 import java.awt.Color;
+
+import Gruppe01.*;
 import itumulator.executable.DisplayInformation;
 import itumulator.executable.Program;
 import itumulator.world.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Random;
 import java.util.Scanner;
 
 /**

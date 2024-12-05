@@ -1,5 +1,8 @@
-package itumulator.world;
+package Gruppe01;
 
+
+import itumulator.world.Location;
+import itumulator.world.World;
 
 public class Berry implements PRNG {
     private boolean hasBerries;

@@ -1,12 +1,13 @@
-package itumulator.world;
+package Gruppe01;
 import itumulator.executable.DisplayInformation;
 import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
+import itumulator.world.Location;
+import itumulator.world.World;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
@@ -227,8 +228,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             Object entity = world.getTile(rabbitLocation);
             if (entity instanceof AdultRabbit) {
                 double chance = PRNG.rand().nextDouble();
-                // 70% chance of eating a rabbit whilst having energy
-                if(energy > 0 && chance <= 0.7) {
+                // 80% chance of eating a rabbit whilst having energy
+                if(energy > 0 && chance <= 0.8) {
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(rabbitLocation, carcass);

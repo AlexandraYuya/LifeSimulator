@@ -1,4 +1,7 @@
-package itumulator.world;
+package Gruppe01;
+
+import itumulator.world.Location;
+import itumulator.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
