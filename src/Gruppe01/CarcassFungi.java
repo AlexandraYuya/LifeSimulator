@@ -6,14 +6,11 @@ import itumulator.world.World;
 
 
 public class CarcassFungi extends Carcass implements Actor {
-    protected int stepCount;
-//    protected int amount;
-    //private boolean hasAmount;
+//    protected int stepCount;
 
     public CarcassFungi() {
         stepCount = 0;
-//        amount = 10;
-        //this.hasAmount = true;
+        amount = 5;
     }
 
     /**
@@ -28,7 +25,7 @@ public class CarcassFungi extends Carcass implements Actor {
 
         // After 20 steps (half day), remove carcass
         if (stepCount % 20 == 0) {
-            System.out.println("CarcassFungi decayed by -1!");
+            System.out.println(amount + " CarcassFungi decayed by -1!");
             amount--;
         }
         if (amount <= 0) {
