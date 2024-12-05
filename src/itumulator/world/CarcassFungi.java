@@ -10,7 +10,7 @@ public class CarcassFungi extends Carcass implements Actor {
 
     public CarcassFungi() {
         stepCount = 0;
-        amount = 2;
+        amount = 10;
         //this.hasAmount = true;
     }
 

@@ -16,7 +16,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         this.isSmall = isSmall;
         stepCount = 0;
         this.hasAmount = true;
-        this.amount = 25;
+        this.amount = 15;
     }
 
     public Carcass() {
