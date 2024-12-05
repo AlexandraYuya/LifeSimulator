@@ -73,7 +73,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
                     }
 
 
-                    if (tileObject instanceof Carcass && !(tileObject instanceof Fungi)) {
+                    if (tileObject instanceof Carcass && !(tileObject instanceof CarcassFungi)) {
                         System.out.println("Carcass found at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
 
                         world.delete(tileObject);

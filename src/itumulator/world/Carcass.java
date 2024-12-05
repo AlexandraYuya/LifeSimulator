@@ -85,7 +85,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         int size = world.getSize();
         Location location = null;
 
-        while (location == null || world.getNonBlocking(location) != null) {
+        while (location == null || world.getTile(location) != null) {
             int x = PRNG.rand().nextInt(size);
             int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);
