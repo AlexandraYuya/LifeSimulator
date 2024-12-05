@@ -14,7 +14,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
 
     public Bear() {
-        super(10,100);
+        super(1,100);
         this.radius = 2;
     }
 
