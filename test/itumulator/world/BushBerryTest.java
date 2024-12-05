@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class BerryTest {
+public class BushBerryTest {
     private BushBerry berry;
     private World world;
 
@@ -21,7 +21,8 @@ public class BerryTest {
     }
 
     @Test public void testBerry() {
+        Location x = world.getLocation(berry);
         berry.consumeBerries(world);
-    assertTrue();
+        assertTrue(world.getTile(x) instanceof BushBerry);
     }
 }
