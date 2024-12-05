@@ -1,15 +1,24 @@
 package Gruppe01;
 
 
+import itumulator.executable.DisplayInformation;
+import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.world.Location;
 import itumulator.world.World;
 
-public class Berry implements PRNG {
+import java.awt.*;
+
+public class BushBerry implements PRNG, DynamicDisplayInformationProvider {
     private boolean hasBerries;
 
-    public Berry() {
+    public BushBerry() {
         // Initialize berries to true when created
         this.hasBerries = true;
+    }
+
+    @Override
+    public DisplayInformation getInformation() {
+        return new DisplayInformation(Color.red, "bush-berries");
     }
 
     /**
@@ -51,7 +60,7 @@ public class Berry implements PRNG {
         int size = world.getSize();
         Location location = null;
 
-        while (location == null || world.getNonBlocking(location) != null) {
+        while (location == null || world.getTile(location) != null) {
             int x = PRNG.rand().nextInt(size);
             int y = PRNG.rand().nextInt(size);
             location = new Location(x, y);

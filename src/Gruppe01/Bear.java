@@ -116,10 +116,10 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                     world.setTile(nearbyLocation, carcass);
                     break;
                 }
-                if (entity instanceof Berry && chance <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
+                if (entity instanceof BushBerry && chance <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
                     energy += 5;
                     System.out.println("Bear Ate some berries - New energy level:" + energy);
-                    ((Berry) entity).consumeBerries(world);
+                    ((BushBerry) entity).consumeBerries(world);
                     break;
                 }
                 if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
