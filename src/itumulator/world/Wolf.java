@@ -231,7 +231,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 if(energy > 0 && chance <= 0.7) {
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall);
-                    carcass.isSmall();
                     world.setTile(rabbitLocation, carcass);
                     System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
                 }

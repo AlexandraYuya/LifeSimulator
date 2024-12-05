@@ -25,18 +25,6 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
         this.amount = 25;
     }
 
-    public boolean hasAmount() {
-        return true;
-    }
-
-    /**
-     * It set the isBig to false when isSmall is true
-     * @return false
-     */
-    public boolean isSmall() {
-        return true;
-    }
-
     /**
      * This method looks if the dead animal is big or small.
      * If the dead animal was big it will replace it with a big carcass.
