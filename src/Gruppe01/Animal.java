@@ -67,13 +67,27 @@ public abstract class Animal implements PRNG {
      */
     public boolean die(World world) {
         if(life <= 0 && world.isOnTile(this)) {
+
+            if (this instanceof Wolf) {
+                Wolf wolf = (Wolf) this;
+                wolf.pack.remove(wolf);
+
+                if(wolf.isAlphaWolf) {
+                    System.out.println("Alpha Wolf has DIIEDD, promoting noob");
+                    if(!wolf.pack.isEmpty()) {
+                        Wolf newAlpha = wolf.pack.get(0);
+                        newAlpha.isAlphaWolf = true;
+                        for(Wolf w : wolf.pack) {
+                            w.alphaWolf = newAlpha;
+                        }
+                    }
+                }
+            }
+
             Location curLocation = world.getLocation(this);
             Carcass carcass = new Carcass(isSmall, amount);
             world.delete(this);
             world.setTile(curLocation, carcass);
-            if (this instanceof Wolf) {
-                System.out.println("Wolf died :ooooo");
-            }
             System.out.println(this + "has Died and turned into a carcass!!!!");
             return true;
         }

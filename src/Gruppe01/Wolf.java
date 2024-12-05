@@ -20,6 +20,8 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     protected boolean hasCave;
     protected Cave myCave;
     protected boolean isInCave;
+    public boolean hasBeenAttacked = false;
+    private static final List<List<Wolf>> wolfNet = new ArrayList<>();
 
     public Wolf(Wolf alphaWolf) {
         super(10, 100, false, 15);
@@ -36,6 +38,9 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             this.pack = new ArrayList<>();
             // Alpha includes itself in the pack
             this.pack.add(this);
+            if(!wolfNet.contains(this.pack)) {
+                wolfNet.add(this.pack);
+            }
         } else {
             // If there is already an alpha, join its pack
             this.isAlphaWolf = false;
@@ -117,6 +122,11 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     @Override
     public void handleNight(World world) {
         super.handleNight(world);
+
+        if(this.hasBeenAttacked) {
+            this.hasBeenAttacked = false;
+        }
+
         if (isAlphaWolf) {
 
             if (myCave != null) {
@@ -209,7 +219,43 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 followAlpha(world);
             }
             eat(world);
+            fight(world);
             energy--;
+        }
+    }
+
+    public void fight(World world) {
+        for(List<Wolf> pack : wolfNet) {
+            if(this.pack == pack) {
+                continue;
+            }
+
+            if(pack.isEmpty()) {
+                wolfNet.remove(pack);
+                continue;
+            }
+
+            for(Wolf wolf : pack) {
+                if(wolf.hasBeenAttacked) {
+                    continue;
+                }
+
+                Location wolfLoc = world.getLocation(this);
+                Set<Location> surroundingTiles = world.getSurroundingTiles(wolfLoc);
+                List<Location> list = new ArrayList<>(surroundingTiles);
+                for(Location loc : list) {
+                    Object entity = world.getTile(loc);
+                    if(entity == wolf) {
+                        double chance = PRNG.rand().nextDouble();
+                        if(chance < 0.5) {
+                            wolf.life -= 3;
+                            wolf.energy -= 20;
+                            wolf.hasBeenAttacked = true;
+                            System.out.println("Enemy Wolf in territory! >:C Be prepared to ATTACKKK!!!" + " Energy: " + wolf.energy + " Life: " + wolf.life);
+                        }
+                    }
+                }
+            }
         }
     }
 
