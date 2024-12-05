@@ -10,14 +10,12 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
     protected int stepCount;
     protected boolean hasAmount;
     protected boolean isBig;
-    protected boolean isSmall;
     protected int amount;
 
     public Carcass() {
         stepCount = 0;
         this.hasAmount = true;
         this.isBig = false;
-        this.isSmall = false;
         this.amount = 25;
     }
 
@@ -31,14 +29,6 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
      */
     public boolean isSmall() {
         return isBig = false;
-    }
-
-    /**
-     * It set the isSmall to false when isSmall is true
-     * @return false
-     */
-    public boolean isBig() {
-        return isSmall = false;
     }
 
     /**
