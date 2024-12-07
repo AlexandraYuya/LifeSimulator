@@ -7,6 +7,10 @@ import itumulator.world.World;
 
 public class CarcassFungi extends Carcass implements Actor {
 
+    public CarcassFungi(boolean isSmall, int amount) {
+        super(isSmall, amount);
+    }
+
     public CarcassFungi() {
         amount = 5;
     }
@@ -29,7 +33,7 @@ public class CarcassFungi extends Carcass implements Actor {
         if (amount <= 0) {
             Location curLocation = world.getLocation(this);
             world.delete(this);
-            Fungi fungi = new Fungi();
+            Fungi fungi = new Fungi(isSmall);
             world.setTile(curLocation, fungi);
             System.out.println("CarcassFungi removed!");
         }

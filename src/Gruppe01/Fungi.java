@@ -9,11 +9,13 @@ import java.awt.*;
 
 public class Fungi extends CarcassFungi implements DynamicDisplayInformationProvider {
     private boolean carcassTransformed;
+    protected boolean isSmall;
 
-    public Fungi(){
+    public Fungi(boolean isSmall){
         amount = 5;
         carcassTransformed = false;
-    }
+        this.isSmall = isSmall;
+  }
 
     /**
      * This method give the fungi a small or at normal size.
@@ -77,28 +79,37 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
                     Object tileObject = world.getTile(checkLocation);
                     if (tileObject == null) {
-//                        System.out.println("No object at: " + checkLocation);
                         continue;
                     }
 
 
-                    if (tileObject instanceof Carcass && !(tileObject instanceof CarcassFungi)) {
+                    if (tileObject instanceof Carcass foundCarcass && !(tileObject instanceof CarcassFungi)) {
+
                         System.out.println("Carcass found at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
 
                         world.delete(tileObject);
-                        CarcassFungi newCarcassFungi = new CarcassFungi();
+                        CarcassFungi newCarcassFungi = new CarcassFungi(foundCarcass.isSmall, 5);
                         world.setTile(checkLocation, newCarcassFungi);
+
+                        //Find out if carcass is small or big
+                        if (foundCarcass.isSmall) {
+                            amount +=2;
+                            System.out.println("Fungi ate a small carcass, new amount: " + amount);
+                        } else {
+                            amount += 4;
+                            System.out.println("Fungi ate a big carcass, new amount: " + amount);
+
+                        }
 
                         System.out.println("Carcass transformed at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
                         carcassTransformed = true;
-                        amount+=3;
                         System.out.println("Fungi successfully infected carcass");
                         return;
                     }
                 }
             }
         }
-        System.out.println("No carcass found in the radius of " + radius);
+//        System.out.println("No carcass found in the radius of " + radius);
     }
 }
 
