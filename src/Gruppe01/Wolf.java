@@ -14,7 +14,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     // Reference to the alpha wolf of this pack
     protected Wolf alphaWolf;
     // Check whether this wolf is the alpha
-    protected boolean isAlphaWolf;
+    public boolean isAlphaWolf;
     // Wolves in this pack (only populated for the alpha wolf)
     protected List<Wolf> pack;
     protected boolean hasCave;
@@ -224,7 +224,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
-    public void fight(World world) {
+    private void fight(World world) {
         for(List<Wolf> pack : wolfNet) {
             if(this.pack == pack) {
                 continue;

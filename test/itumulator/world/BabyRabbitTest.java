@@ -42,9 +42,15 @@ public class BabyRabbitTest {
     @Test
     public void test_handleDay() {
         babyRabbit.life = 3;  // Directly set life to trigger growth
+        world.getEntities().forEach((key, value) -> {
+            Assert.assertEquals(BabyRabbit.class, key.getClass());
+            Assert.assertEquals(3, ((BabyRabbit)key).life);
+        });
         babyRabbit.handleDay(world);
-        world.getEntities().forEach((key, value) ->
-                Assert.assertEquals(AdultRabbit.class, key.getClass()));
+        world.getEntities().forEach((key, value) -> {
+            Assert.assertEquals(AdultRabbit.class, key.getClass());
+            Assert.assertEquals(3, ((AdultRabbit)key).life);
+        });
     }
 
 
