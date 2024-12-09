@@ -59,8 +59,6 @@ public class WolfTest {
         //usar handleday()
         //asert not equals com a loca antiga com a atual dos que nao sao alpha
 
-
-
     }
 
 

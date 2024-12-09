@@ -32,21 +32,18 @@ public class BushBerry implements PRNG, DynamicDisplayInformationProvider {
     /**
      * This method is used when they are berry's get eaten.
      * When it gets eat the berry will be deleted from the world and become a bush.
+     * // Get current location before deleting
      * @param world The current world
      */
     public void consumeBerries(World world) {
         System.out.println("consumeBerries called, hasBerries is: " + hasBerries()); // Debug print
         if (hasBerries) {
-            hasBerries = false;  // False
-            // Get current location before deleting
+            hasBerries = false;
             Location currentLocation = world.getLocation(this);
             System.out.println("Transforming berry at " + currentLocation); // Debug print
-            // Remove the Berry
             world.delete(this);
-            // Create and place new Bush in same location
             Bush bush = new Bush();
             world.setTile(currentLocation, bush);
-            System.out.println("Bush placed at: " + currentLocation); // Debug print
         } else {
             System.out.println("Attempted to consume berries but none available"); // Debug print
         }

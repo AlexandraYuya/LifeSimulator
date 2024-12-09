@@ -29,15 +29,10 @@ public class BabyWolf extends Wolf implements Actor, DynamicDisplayInformationPr
      */
     public void grow(World world) {
         Location curLocation = world.getLocation(this);
-        // Remove ourselves from the pack since baby is now grown
         this.alphaWolf.pack.remove(this);
-        // Delete baby rabbit (this will remove it from both world and tile)
         world.delete(this);
-        // Create new adult rabbit
         Wolf adultWolf = new Wolf(this.alphaWolf);
-        // Add adult rabbit to world
         world.add(adultWolf);
-        // Place adult rabbit at the location
         world.setTile(curLocation, adultWolf);
     }
 }

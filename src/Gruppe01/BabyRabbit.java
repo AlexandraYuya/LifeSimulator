@@ -11,7 +11,7 @@ import java.awt.*;
 public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
 
     public BabyRabbit() {
-        life = 5; // reduced to 5 life
+        life = 5;
     }
 
     /**
@@ -37,8 +37,6 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
     // START DAY HANDLER METHOD -->
     public void handleDay(World world) {
         super.handleDay(world);
-
-        // Resume normal daytime behavior
         if (life > 0 && energy > 0) {
             energy--;
             super.moveRandomly(world);
@@ -51,18 +49,14 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
     }
 
     /**
-     * This method will grow the baby rabbit to an adult rabbit.
+     * This method will "grow" the baby rabbit to an adult rabbit.
      * @param world The current world
      */
     public void grow(World world) {
         Location curLocation = world.getLocation(this);
-        // Delete baby rabbit (this will remove it from both world and tile)
         world.delete(this);
-        // Create new adult rabbit
         AdultRabbit adultRabbit = new AdultRabbit();
-        // Add adult rabbit to world
         world.add(adultRabbit);
-        // Place adult rabbit at the location
         world.setTile(curLocation, adultRabbit);
     }
 

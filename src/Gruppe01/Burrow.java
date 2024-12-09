@@ -13,7 +13,6 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider, P
     private AdultRabbit owner;
 
     public Burrow() {
-        // initially there's no owner
         this.owner = null;
     }
 

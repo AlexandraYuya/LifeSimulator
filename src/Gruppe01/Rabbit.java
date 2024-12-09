@@ -9,11 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Rabbit extends Animal implements Actor, PRNG {
-    // Tracks if the rabbit has already dug a burrow
     protected boolean hasDugBurrow;
-    // Reference to the burrow the rabbit dug
     protected Burrow myBurrow;
-    // Stores location before entering a burrow
     protected Location previousLocation;
     protected boolean isInBurrow;
 
@@ -36,6 +33,10 @@ public class Rabbit extends Animal implements Actor, PRNG {
 
     /**
      * This is the method we are using to handle night.
+     // Get only surrounding tiles
+     // Find burrows in surrounding tiles
+     // check if curLocation is on a burrow
+     // Only proceed if there are nearby burrows or on a burrow
      * It makes it possible for rabbits to sleep inside or outside the borrow.
      * @param world The current world
      */
@@ -45,14 +46,10 @@ public class Rabbit extends Animal implements Actor, PRNG {
         if (world.isOnTile(this)) {
             previousLocation = world.getLocation(this); // get the location before removal
             Location curLocation = world.getLocation(this);
-            // Get only surrounding tiles
             Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
-            // Find burrows in surrounding tiles
             Set<Burrow> nearbyBurrow = world.getAll(Burrow.class, surroundingTiles);
-            // check if curLocation is on a burrow
             Object onBurrow = world.getNonBlocking(curLocation);
 
-            // Only proceed if there are nearby burrows or on a burrow
             if (!nearbyBurrow.isEmpty() || onBurrow instanceof Burrow) {
                 world.remove(this);
                 isInBurrow = true;
@@ -95,7 +92,6 @@ public class Rabbit extends Animal implements Actor, PRNG {
         if(entity instanceof Grass) {
             if(energy <= 95) {
                 energy += 5;
-                System.out.println("Ate grass new energy:" + energy);
             }
             world.delete(entity);
         }
@@ -109,7 +105,6 @@ public class Rabbit extends Animal implements Actor, PRNG {
         if(isInBurrow) {
             if (previousLocation != null) {
                 if(world.isTileEmpty(previousLocation)) {
-                    // Restore to previous location
                     world.setTile(previousLocation, this);
                 }else {
                     Set<Location> emptyNeighbours = world.getEmptySurroundingTiles(previousLocation);

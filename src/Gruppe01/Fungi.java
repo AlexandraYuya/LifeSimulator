@@ -54,24 +54,23 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
     /**
      * This is the method is for the Fungi to find surrounding carcass without fungi in it.
+     * // Get location of the carcassFungi
+     * // check if the location is within radius
+     * then Find out if carcass is small or big
      * It transforms normal carcass into carcassFungi.
      * @param world The current world
      */
     public void nearFungi(World world) {
-        // Get location of the carcassFungi
         Location curLocation = world.getLocation(this);
 
         int radius = 8;
-        //boolean carcassTransformed = false;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
-                // Skip current location
                 if (dx == 0 && dy == 0) continue;
 
                 Location checkLocation = new Location(curLocation.getX() + dx, curLocation.getY() + dy);
 
-                // check if the location is within radius
                 if (    checkLocation.getX() >=0 &&
                         checkLocation.getX() < world.getSize() &&
                         checkLocation.getY() >=0 &&
@@ -82,7 +81,6 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
                         continue;
                     }
 
-
                     if (tileObject instanceof Carcass foundCarcass && !(tileObject instanceof CarcassFungi)) {
 
                         System.out.println("Carcass found at: " + checkLocation.getX() + ", " + checkLocation.getY() + ")");
@@ -91,7 +89,6 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
                         CarcassFungi newCarcassFungi = new CarcassFungi(foundCarcass.isSmall, 5);
                         world.setTile(checkLocation, newCarcassFungi);
 
-                        //Find out if carcass is small or big
                         if (foundCarcass.isSmall) {
                             amount +=2;
                             System.out.println("Fungi ate a small carcass, new amount: " + amount);
@@ -109,7 +106,6 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
                 }
             }
         }
-//        System.out.println("No carcass found in the radius of " + radius);
     }
 }
 

@@ -16,7 +16,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     // Check whether this wolf is the alpha
     public boolean isAlphaWolf;
     // Wolves in this pack (only populated for the alpha wolf)
-    protected List<Wolf> pack;
+    public List<Wolf> pack;
     protected boolean hasCave;
     protected Cave myCave;
     protected boolean isInCave;

@@ -32,8 +32,6 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     @Override
     public void act(World world) {
         stepCount++;
-
-        // Spread grass every 20 steps
         if (stepCount % 20 == 0) {
             double chance = PRNG.rand().nextDouble();
             if (chance < 0.7) {

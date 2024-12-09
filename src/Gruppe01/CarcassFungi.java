@@ -25,7 +25,6 @@ public class CarcassFungi extends Carcass implements Actor {
     public void act(World world) {
         stepCount++;
 
-        // After 20 steps (half day), remove carcass
         if (stepCount % 20 == 0) {
             System.out.println(amount + " CarcassFungi decayed by -1!");
             amount--;

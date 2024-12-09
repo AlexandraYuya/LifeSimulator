@@ -11,8 +11,8 @@ import java.awt.*;
 public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
     protected int stepCount;
     protected boolean hasAmount;
-    protected int amount;
-    protected boolean isSmall;
+    public int amount;
+    public boolean isSmall;
 
     public Carcass(boolean isSmall, int amount) {
         this.isSmall = isSmall;

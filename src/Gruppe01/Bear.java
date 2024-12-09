@@ -96,6 +96,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method makes it possible for the bears to eat rabbits, berries and carcasses.
+     * The for Loop goes through all surrounding tiles
      * @param world The current world.
      */
     @Override
@@ -105,27 +106,26 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
 
         if (!surroundingTiles.isEmpty()) {
-            for (Location nearbyLocation : surroundingTiles) {  // Loop through all surrounding tiles
+            for (Location nearbyLocation : surroundingTiles) {
                 Object entity = world.getTile(nearbyLocation);
                 double chance = PRNG.rand().nextDouble();
 
-                if (entity instanceof AdultRabbit && chance <= 0.7) { //here checked if it is a rabbit and adds 70% chance
+                if (entity instanceof AdultRabbit && chance <= 0.7) {
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(nearbyLocation, carcass);
                     System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     break;
                 }
-                if (entity instanceof BushBerry && chance <= 0.9 && !(entity instanceof Bush)) { //here checked if it is a berry and adds 90% chance
+                if (entity instanceof BushBerry && chance <= 0.9 && !(entity instanceof Bush)) {
                     energy += 5;
                     ((BushBerry) entity).consumeBerries(world);
                     System.out.println("Bear Ate some berries - New energy level:" + energy);
                     break;
                 }
-                if (entity instanceof Carcass) { //here checked if it is a carcassFungi or carcass
+                if (entity instanceof Carcass) {
                     energy += 5;
                     ((Carcass) entity).eatCarcass(world);
-                    System.out.println("Bear Ate a bit of a carcass - New energy level:" + energy);
                     break;
                 }
             }
