@@ -1,10 +1,11 @@
 package itumulator.world;
-import Gruppe01.BabyRabbit;
-import Gruppe01.Bear;
+import Gruppe01.*;
 
 import itumulator.executable.Program;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Set;
 
 import static org.junit.Assert.*;
 public class BearTest {
@@ -29,10 +30,40 @@ public class BearTest {
     }
 
     @Test
-    public void eat() {
-        //oq fazer aqui? Criar um BerryBush? para testar se vai comer e nivel de energia
-        bear.eat(world);
+    public void testEnergyDecrease() {
+        int initialEnergy = bear.energy;
+        bear.handleDay(world);
+        assertEquals(initialEnergy - 1, bear.energy);
+    }
 
+    @Test
+    public void testEatBerry() {
+        Location bearLoc = world.getLocation(bear);
+        Set<Location> validNeighbors = world.getEmptySurroundingTiles(bearLoc);
+
+        if (!validNeighbors.isEmpty()) {
+            Location nearbyLoc = validNeighbors.iterator().next();
+            int initialEnergy = bear.energy;
+
+            BushBerry berry = new BushBerry();
+            world.setTile(nearbyLoc, berry);
+            bear.eat(world);
+            assertEquals(initialEnergy + 5, bear.energy);
+        }
+    }
+
+    @Test
+    public void testEatRabbit() {
+        Location bearLoc = world.getLocation(bear);
+        Set<Location> validNeighbors = world.getEmptySurroundingTiles(bearLoc);
+
+        if (!validNeighbors.isEmpty()) {
+            Location nearbyLoc = validNeighbors.iterator().next();
+            AdultRabbit rabbit = new AdultRabbit();
+            world.setTile(nearbyLoc, rabbit);
+            bear.eat(world);
+            assertTrue(world.getTile(nearbyLoc) instanceof Carcass);
+        }
     }
 
 

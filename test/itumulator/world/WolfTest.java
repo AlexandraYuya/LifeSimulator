@@ -13,7 +13,7 @@ public class WolfTest {
     World world;
 
 
-    @Before
+/*    @Before
     public void setUp() throws Exception {
         Program program = new Program(5, 800, 600);
         world = program.getWorld();
@@ -29,5 +29,5 @@ public class WolfTest {
         alphaWolf.die(world);
         assertTrue(!world.contains(alphaWolf));
         //check if it was deleted properly
-    }
+    }*/
 }

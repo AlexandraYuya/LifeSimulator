@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class Animal implements PRNG {
-    protected int life;
-    protected int energy;
+    public int life;
+    public int energy;
     protected int stepCount;
     protected Location location;
     protected boolean isNight = false;
