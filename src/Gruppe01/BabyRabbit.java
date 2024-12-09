@@ -34,7 +34,6 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
      * Handle day comes from the super class.
      * @param world The current world
      */
-    // START DAY HANDLER METHOD -->
     public void handleDay(World world) {
         super.handleDay(world);
         if (life > 0 && energy > 0) {

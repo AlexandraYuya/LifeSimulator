@@ -56,7 +56,6 @@ public class Rabbit extends Animal implements Actor, PRNG {
                 if(energy <= 90) {
                     energy += 10;
                 }
-                System.out.println("Rabbit entered a burrow at: " + previousLocation);
             }
         }
     }

@@ -89,13 +89,10 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 this.myCave = cave;
                 this.hasCave = true;
 
-                System.out.println("Cave created for alpha wolf and pack at: " + caveLocation);
             } else {
-                System.out.println("FATAL!!! No empty tiles found");
                 System.exit(1);
             }
         }
-
     /**
      * This method accounts for all the behavior of wolves
      * It uses the superclass animal.
@@ -108,7 +105,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         if (this instanceof BabyWolf) {
             if(life == 10) {
                 ((BabyWolf) this).grow(world);
-                System.out.println("Baby wolf finally grew up!!!");
             }
         }
     }
@@ -158,7 +154,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                     }
                 }
             } else {
-                System.out.println("FATAL!!! Wolf has no cave associated with it!");
                 System.exit(1);
             }
         }

@@ -42,6 +42,9 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
 
     /**
      * The method spread grass to a random empty surrounding tile.
+     *  // Only add tiles without grass
+     *  // Randomly pick one empty surrounding tile
+     *
      * @param world The current world
      */
     private void spreadGrass(World world) {
@@ -53,18 +56,14 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
 
             for (Location tile : surroundingTiles) {
                 Object entity = world.getTile(tile);
-                // Only add tiles without grass
                 if (world.getNonBlocking(tile) == null && !(entity instanceof Grass)) {
                     availableTiles.add(tile);
                 }
             }
-
             if (!availableTiles.isEmpty()) {
-                // Randomly pick one empty surrounding tile
                 Location spreadLocation = availableTiles.get(PRNG.rand().nextInt(availableTiles.size()));
                 Grass newGrass = new Grass();
                 world.setTile(spreadLocation, newGrass);
-                System.out.println("SPREADING GRASS >:C");
             }
         }
     }

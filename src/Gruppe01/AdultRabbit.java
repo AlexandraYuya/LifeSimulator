@@ -16,7 +16,6 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
         life = 3;
     }
 
-
     /**
      * This method give the rabbit a sleeping png or an awake png.
      * If the Rabbit is a sleep it will get a sleeping rabbit png.
