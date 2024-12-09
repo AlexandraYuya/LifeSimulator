@@ -28,6 +28,13 @@ public class BearTest {
         //check if it was deleted properly
     }
 
+    @Test
+    public void eat() {
+        //oq fazer aqui? Criar um BerryBush? para testar se vai comer e nivel de energia
+        bear.eat(world);
+
+    }
+
 
 
 }

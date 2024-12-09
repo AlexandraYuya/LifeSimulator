@@ -29,9 +29,5 @@ public class BabyRabbitTest {
         //check if it was deleted properly
     }
 
-    @Test
-    public void grow() {
-        babyRabbit.grow(world);
 
-    }
 }
