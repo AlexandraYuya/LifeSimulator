@@ -16,7 +16,7 @@ public class BearTest {
         Program program = new Program(5, 800, 1200);
         world = program.getWorld();
 
-        bear = new BabyRabbit();
+        bear = new Bear();
         bear.placeInWorld(world);
         bear.act(world);
     }
@@ -27,7 +27,7 @@ public class BearTest {
         assertTrue(true);
         //check if it was deleted properly
     }
-    
+
 
 
 }
