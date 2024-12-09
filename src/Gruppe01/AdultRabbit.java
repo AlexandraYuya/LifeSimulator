@@ -11,7 +11,8 @@ import java.util.*;
 import java.util.List;
 
 
-public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider, PRNG {
+public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider{
+
     public AdultRabbit() {
         life = 3;
     }

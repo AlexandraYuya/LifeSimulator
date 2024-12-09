@@ -10,18 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
-    // Reference to the alpha wolf of this pack
+public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider {
     protected Wolf alphaWolf;
-    // Check whether this wolf is the alpha
-    public boolean isAlphaWolf;
-    // Wolves in this pack (only populated for the alpha wolf)
+    protected boolean isAlphaWolf;
     public List<Wolf> pack;
     protected boolean hasCave;
     protected Cave myCave;
     protected boolean isInCave;
-    public boolean hasBeenAttacked = false;
-    private static final List<List<Wolf>> wolfNet = new ArrayList<>();
+    protected boolean hasBeenAttacked = false;
+    protected static final List<List<Wolf>> wolfNet = new ArrayList<>();
 
     public Wolf(Wolf alphaWolf) {
         super(10, 100, false, 15);

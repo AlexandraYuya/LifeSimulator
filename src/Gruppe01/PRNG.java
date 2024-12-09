@@ -11,7 +11,7 @@ public interface PRNG {
     int seed = (int) Instant.now().getEpochSecond();
     Random rand = new Random(seed);
     
-    public static Random rand() {
+    static Random rand() {
         return rand;
     }
 }

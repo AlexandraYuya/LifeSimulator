@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Rabbit extends Animal implements Actor, PRNG {
+public class Rabbit extends Animal implements Actor {
     protected boolean hasDugBurrow;
     protected Burrow myBurrow;
     protected Location previousLocation;

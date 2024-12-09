@@ -8,7 +8,7 @@ import itumulator.world.World;
 
 import java.awt.*;
 
-public class Carcass implements Actor, DynamicDisplayInformationProvider, PRNG {
+public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
     protected boolean hasAmount;
     public int amount;

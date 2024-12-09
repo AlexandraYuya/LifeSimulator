@@ -8,7 +8,7 @@ import itumulator.world.World;
 import java.awt.*;
 
 public class Fungi extends CarcassFungi implements DynamicDisplayInformationProvider {
-    private boolean carcassTransformed;
+    protected boolean carcassTransformed;
     protected boolean isSmall;
 
     public Fungi(boolean isSmall){

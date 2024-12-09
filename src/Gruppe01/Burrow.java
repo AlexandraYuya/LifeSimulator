@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Burrow implements NonBlocking, DynamicDisplayInformationProvider, PRNG {
     // Associate rabbit that dug this burrow
-    private AdultRabbit owner;
+    protected AdultRabbit owner;
 
     public Burrow() {
         this.owner = null;

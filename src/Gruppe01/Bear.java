@@ -5,15 +5,13 @@ import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 import itumulator.world.Location;
 import itumulator.world.World;
-
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider, PRNG {
+public class Bear extends Animal implements Actor, DynamicDisplayInformationProvider{
     private int radius;
     private Location startingPoint;
-
 
     public Bear() {
         super(15,100, false, 20);
@@ -64,22 +62,20 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
      * @param world The current world.
      */
     private void moveInCircRandomly(World world) {
-        if(energy > 0) {
-            Location curLocation = world.getLocation(this);
-            Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
-            Set<Location> limitedNeighbours = new HashSet<>();
+        Location curLocation = world.getLocation(this);
+        Set<Location> neighbours = world.getEmptySurroundingTiles(curLocation);
+        Set<Location> limitedNeighbours = new HashSet<>();
 
-            for (Location loc : neighbours) {
-                if(isWithinRadius(startingPoint, loc, radius)){
-                    limitedNeighbours.add(loc);
-                }
+        for (Location loc : neighbours) {
+            if(isWithinRadius(startingPoint, loc, radius)){
+                limitedNeighbours.add(loc);
             }
+        }
 
-            if (!limitedNeighbours.isEmpty()) {
-                List<Location> list = new ArrayList<>(limitedNeighbours);
-                Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
-                world.move(this, newLocation);
-            }
+        if (!limitedNeighbours.isEmpty()) {
+            List<Location> list = new ArrayList<>(limitedNeighbours);
+            Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
+            world.move(this, newLocation);
         }
     }
 
@@ -132,21 +128,22 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
-        /**
-         * This is the method place the Bear in the world.
-         * @param world The current world.
-         */
-        @Override
-        public void placeInWorld (World world){
-            super.placeInWorld(world);
+    /**
+     * This is the method place the Bear in the world.
+     * @param world The current world.
+     */
+    @Override
+    public void placeInWorld (World world){
+        super.placeInWorld(world);
+        startingPoint = location;
+    }
+
+    public void placeInWorld (World world,int x, int y){
+        Location location = new Location(x, y);
+        if (!world.containsNonBlocking(location)) {
+            world.setTile(location, this);
             startingPoint = location;
         }
-        public void placeInWorld (World world,int x, int y){
-            Location location = new Location(x, y);
-            if (!world.containsNonBlocking(location)) {
-                world.setTile(location, this);
-                startingPoint = location;
-            }
-        }
     }
+}
 

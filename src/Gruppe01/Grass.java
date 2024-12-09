@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvider, PRNG {
+public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvider, PRNG{
     // counter to track how many steps, we only want grass to move randomly for every X amount of steps
     private int stepCount = 0;
 

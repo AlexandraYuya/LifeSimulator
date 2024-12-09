@@ -16,9 +16,7 @@ import java.util.Scanner;
 public class Main implements PRNG {
     public static void main(String[] args) throws FileNotFoundException {
     System.out.println("USING SEED: " + seed);
-        // Load the file -->
         // Change filename as needed
-//        File file = new File("./resources/data/tf3-1a.txt");
         File file = new File("./resources/data/t3-2ab.txt");
 
         Scanner sc = new Scanner(file); // scans the file content
