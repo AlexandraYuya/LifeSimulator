@@ -21,14 +21,6 @@ public class BushBerry implements DynamicDisplayInformationProvider {
     }
 
     /**
-     * This method is used for getting the value of hasBerries.
-     * @return hasBerries
-     */
-    public boolean hasBerries() {
-        return hasBerries;
-    }
-
-    /**
      * This method is used when they are berry's get eaten.
      * When it gets eat the berry will be deleted from the world and become a bush.
      * // Get current location before deleting

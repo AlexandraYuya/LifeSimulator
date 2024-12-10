@@ -5,13 +5,12 @@ import itumulator.executable.DynamicDisplayInformationProvider;
 import itumulator.simulator.Actor;
 import itumulator.world.Location;
 import itumulator.world.World;
-
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 
-public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider{
+public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformationProvider {
 
     public AdultRabbit() {
         life = 3;
