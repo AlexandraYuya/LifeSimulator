@@ -25,13 +25,13 @@ public class BabyRabbitTest {
     }
 
     @Test
-    public void testInitialState() {
+    public void testExists() {
         assertEquals(5, babyRabbit.getLife());
         assertTrue(world.contains(babyRabbit));
     }
 
     @Test
-    public void test_grow() {
+    public void testGrow() {
         world.getEntities().forEach((key, value) -> Assert.assertEquals(BabyRabbit.class, key.getClass()));
         babyRabbit.grow(world);
         world.getEntities().forEach((key, value) -> Assert.assertEquals(AdultRabbit.class, key.getClass()));
@@ -40,7 +40,7 @@ public class BabyRabbitTest {
     }
 
     @Test
-    public void test_handleDay() {
+    public void testHandleDay() {
         babyRabbit.setLife();  // Directly set life to trigger growth
         world.getEntities().forEach((key, value) -> {
             Assert.assertEquals(BabyRabbit.class, key.getClass());
