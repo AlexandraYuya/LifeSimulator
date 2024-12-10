@@ -70,7 +70,4 @@ public class BabyRabbitTest {
                 babyRabbit.getEnergy());
     }
 
-    
-
-
 }
