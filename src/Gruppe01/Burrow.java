@@ -8,7 +8,7 @@ import itumulator.world.World;
 
 import java.awt.*;
 
-public class Burrow implements NonBlocking, DynamicDisplayInformationProvider, PRNG {
+public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
     // Associate rabbit that dug this burrow
     protected AdultRabbit owner;
 

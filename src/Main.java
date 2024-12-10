@@ -13,9 +13,9 @@ import java.util.Scanner;
  * So the steps are: reads the file, place the correct entities from the file, place the entities in our wold,
  * then run the simulation with the entities
  */
-public class Main implements PRNG {
+public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-    System.out.println("USING SEED: " + seed);
+//    System.out.println("USING SEED: " + seed);
         // Change filename as needed
         File file = new File("./resources/data/t3-2ab.txt");
 

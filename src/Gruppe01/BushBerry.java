@@ -8,7 +8,7 @@ import itumulator.world.World;
 
 import java.awt.*;
 
-public class BushBerry implements PRNG, DynamicDisplayInformationProvider {
+public class BushBerry implements DynamicDisplayInformationProvider {
     private boolean hasBerries;
 
     public BushBerry() {
