@@ -21,7 +21,7 @@ public class CarcassTest {
     @Test
     public void testConstructorWithParameters() {
         Carcass carcass = new Carcass(true, 5);
-        assertTrue("Carcass should be small", carcass.isSmall);
+        assertTrue("Carcass should be small", carcass.getIsSmall());
         assertEquals("Amount should be 5", 5, carcass.getAmount());
     }
 

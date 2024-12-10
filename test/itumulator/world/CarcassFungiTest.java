@@ -15,7 +15,7 @@ public class CarcassFungiTest {
     @Test
     public void testConstructorWithParameters() {
         CarcassFungi carcassFungi = new CarcassFungi(true, 10);
-        assertTrue("CarcassFungi should be small", carcassFungi.isSmall);
+        assertTrue("CarcassFungi should be small", carcassFungi.getIsSmall());
         assertEquals("Amount should be 10", 10, carcassFungi.getAmount());
     }
 

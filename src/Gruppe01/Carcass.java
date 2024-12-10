@@ -31,8 +31,8 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
         return amount;
     }
 
-    public boolean isSmall() {
-        return true;
+    public boolean getIsSmall() {
+        return isSmall;
     }
 
     /**
