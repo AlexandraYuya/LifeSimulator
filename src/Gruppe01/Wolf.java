@@ -13,7 +13,7 @@ import java.util.Set;
 public class Wolf extends Animal implements Actor, DynamicDisplayInformationProvider {
     protected Wolf alphaWolf;
     protected boolean isAlphaWolf;
-    public List<Wolf> pack;
+    protected List<Wolf> pack;
     protected boolean hasCave;
     protected Cave myCave;
     protected boolean isInCave;
@@ -48,6 +48,10 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
             alphaWolf.addPackMember(this);
         }
+    }
+
+    public List<Wolf> getPack() {
+        return pack;
     }
 
     /**

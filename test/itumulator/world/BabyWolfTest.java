@@ -37,7 +37,7 @@ public class BabyWolfTest {
         assertEquals(15, babyWolf.life);
         assertTrue(world.contains(babyWolf));
         assertTrue("Baby wolf should be in alpha's pack",
-                alphaWolf.pack.contains(babyWolf));
+                alphaWolf.getPack().contains(babyWolf));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class BabyWolfTest {
         }
         assertTrue("Should find an adult wolf after growth", foundAdultWolf);
         assertFalse("Baby wolf should be removed from alpha's pack after growth",
-                alphaWolf.pack.contains(babyWolf));
+                alphaWolf.getPack().contains(babyWolf));
     }
 
     @Test
@@ -75,10 +75,10 @@ public class BabyWolfTest {
     @Test
     public void testPackMembership() {
         assertTrue("Baby wolf should be in alpha's pack initially",
-                alphaWolf.pack.contains(babyWolf));
+                alphaWolf.getPack().contains(babyWolf));
         babyWolf.grow(world);
         assertFalse("Baby wolf should not be in alpha's pack after growing",
-                alphaWolf.pack.contains(babyWolf));
+                alphaWolf.getPack().contains(babyWolf));
     }
 
     @Test
