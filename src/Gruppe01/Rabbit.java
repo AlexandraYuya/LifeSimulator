@@ -89,7 +89,7 @@ public class Rabbit extends Animal implements Actor {
         Location curLocation = world.getLocation(this);
         Object entity = world.getNonBlocking(curLocation);
         if(entity instanceof Grass) {
-                energy += 5;
+            energy += 5;
             world.delete(entity);
         }
     }

@@ -12,7 +12,7 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
     protected boolean hasAmount;
     protected int amount;
-    public boolean isSmall;
+    protected boolean isSmall;
 
     public Carcass(boolean isSmall, int amount) {
         this.isSmall = isSmall;
@@ -29,6 +29,10 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
 
     public int getAmount() {
         return amount;
+    }
+
+    public boolean isSmall() {
+        return true;
     }
 
     /**
