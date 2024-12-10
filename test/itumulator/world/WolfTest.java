@@ -47,19 +47,26 @@ public class WolfTest {
     }
 
     @Test
-    public void followAlpha(){
+    public void followAlphaTest() {
         Location wolfLoc = world.getLocation(alphaWolf);
+
         Wolf packWolfExtra = new Wolf(alphaWolf);
         packWolfExtra.placeInWorld(world);
 
         Location curLocation1 = world.getLocation(packWolf);
         Location curLocation2 = world.getLocation(packWolfExtra);
 
-        //pegar loc que nao sao alphas (em variaveis)
-        //usar handleday()
-        //asert not equals com a loca antiga com a atual dos que nao sao alpha
+        packWolf.handleDay(world);
+        packWolfExtra.handleDay(world);
 
+        Location newLocation1 = world.getLocation(packWolf);
+        Location newLocation2 = world.getLocation(packWolfExtra);
+
+        assertNotEquals(curLocation1, newLocation1);
+        assertNotEquals(curLocation2, newLocation2);
     }
+
+
 
 
 

@@ -28,4 +28,6 @@ public class RabbitTest {
         assertTrue(!world.contains(rabbit));
         //check if it was deleted properly
     }
+
+
 }

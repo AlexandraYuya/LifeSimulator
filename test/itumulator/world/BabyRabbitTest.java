@@ -2,17 +2,19 @@ package itumulator.world;
 
 import Gruppe01.AdultRabbit;
 import Gruppe01.BabyRabbit;
+import Gruppe01.Rabbit;
 import itumulator.executable.Program;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import Gruppe01.Grass;
+import static org.junit.Assert.assertNull;
 
 import static org.junit.Assert.*;
 
 public class BabyRabbitTest {
     BabyRabbit babyRabbit;
     World world;
-
 
     @Before
     public void setUp() throws Exception {
@@ -35,13 +37,11 @@ public class BabyRabbitTest {
         world.getEntities().forEach((key, value) -> Assert.assertEquals(BabyRabbit.class, key.getClass()));
         babyRabbit.grow(world);
         world.getEntities().forEach((key, value) -> Assert.assertEquals(AdultRabbit.class, key.getClass()));
-
-        //check if it was deleted properly
     }
 
     @Test
     public void testHandleDay() {
-        babyRabbit.setLife();  // Directly set life to trigger growth
+        babyRabbit.setLife();
         world.getEntities().forEach((key, value) -> {
             Assert.assertEquals(BabyRabbit.class, key.getClass());
             Assert.assertEquals(3, ((BabyRabbit)key).getLife());
@@ -53,5 +53,21 @@ public class BabyRabbitTest {
         });
     }
 
+    @Test
+    public void eatTest() {
+        Location rabbitLocation = world.getLocation(babyRabbit);
+        Grass grass = new Grass();
+        world.setTile(rabbitLocation, grass);
+
+        int initialEnergy = babyRabbit.getEnergy();
+        babyRabbit.eat(world);
+
+        Object entityAfterEating = world.getNonBlocking(rabbitLocation);
+
+        assertNull("Grass will be eaten", entityAfterEating);
+        assertEquals("Energy increses after eating",
+                initialEnergy + 5,
+                babyRabbit.getEnergy());
+    }
 
 }
