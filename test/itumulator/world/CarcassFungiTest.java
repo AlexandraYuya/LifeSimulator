@@ -78,12 +78,9 @@ public class CarcassFungiTest {
         Location location = new Location(5, 5);
 
         world.setTile(location, carcassFungi);
-
-        // Simulate 40 steps (2 decay cycles)
         for (int i = 0; i < 40; i++) {
             carcassFungi.act(world);
         }
-
         assertEquals("Amount should decrease by 2 after 40 steps", 1, carcassFungi.getAmount());
     }
 }
