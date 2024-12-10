@@ -23,6 +23,17 @@ public abstract class Animal implements PRNG {
         this.amount = amount;
     }
 
+    public int getEnergy(){
+        return energy;
+    }
+
+    public int getLife(){
+        return life;
+    }
+
+    public int setLife(){
+        return life = 3;
+    }
 
     /**
      * This method accounts for all the behavior of all the animals in the world.
@@ -139,14 +150,5 @@ public abstract class Animal implements PRNG {
         if (!world.containsNonBlocking(location)) {
             world.setTile(location, this);
         }
-    }
-
-    public int getEnergy(){
-        return energy;
-    }
-
-
-    public int getLife(){
-        return life;
     }
 }

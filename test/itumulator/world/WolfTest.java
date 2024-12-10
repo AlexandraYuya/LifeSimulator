@@ -38,7 +38,7 @@ public class WolfTest {
 
         AdultRabbit rabbit = new AdultRabbit();
         world.setTile(nearbyLoc, rabbit);
-        assertEquals(100, alphaWolf.getEnergy();
+        assertEquals(100, alphaWolf.getEnergy());
         alphaWolf.eat(world);
         assertEquals(100, alphaWolf.getEnergy());
         alphaWolf.eat(world);

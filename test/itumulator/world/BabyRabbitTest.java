@@ -41,7 +41,7 @@ public class BabyRabbitTest {
 
     @Test
     public void test_handleDay() {
-        babyRabbit.getLife() = 3;  // Directly set life to trigger growth
+        babyRabbit.setLife();  // Directly set life to trigger growth
         world.getEntities().forEach((key, value) -> {
             Assert.assertEquals(BabyRabbit.class, key.getClass());
             Assert.assertEquals(3, ((BabyRabbit)key).getLife());
