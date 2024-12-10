@@ -46,7 +46,6 @@ public abstract class Animal implements PRNG {
         stepCount++;
         if (stepCount % 20 == 0) {
             life--;
-            System.out.println(this +" Life: "+ life + " Energy: " + energy);
         }
 
         if (world.isNight()) {
@@ -85,7 +84,6 @@ public abstract class Animal implements PRNG {
                 wolf.pack.remove(wolf);
 
                 if(wolf.isAlphaWolf) {
-                    System.out.println("Alpha Wolf has DIIEDD, promoting noob");
                     if(!wolf.pack.isEmpty()) {
                         Wolf newAlpha = wolf.pack.get(0);
                         newAlpha.isAlphaWolf = true;
@@ -100,7 +98,6 @@ public abstract class Animal implements PRNG {
             Carcass carcass = new Carcass(isSmall, amount);
             world.delete(this);
             world.setTile(curLocation, carcass);
-            System.out.println(this + "has Died and turned into a carcass!!!!");
             return true;
         }
         return false;

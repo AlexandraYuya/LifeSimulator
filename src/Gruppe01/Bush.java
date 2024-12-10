@@ -29,7 +29,6 @@ public class Bush extends BushBerry implements Actor, DynamicDisplayInformationP
         stepCount++;
 
         if (stepCount >= 60) {
-            System.out.println("Bush growing berries again!");
             Location currentLocation = world.getLocation(this);
             world.delete(this);
             BushBerry berry = new BushBerry();

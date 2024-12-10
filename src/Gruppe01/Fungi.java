@@ -40,7 +40,6 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
         stepCount++;
 
         if (stepCount % 20 == 0) {
-            System.out.println(amount + " Fungi decayed by -1!");
             amount--;
         }
 
@@ -48,7 +47,6 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
 
         if (amount <= 0) {
             world.delete(this);
-            System.out.println("Fungi removed!");
         }
     }
 

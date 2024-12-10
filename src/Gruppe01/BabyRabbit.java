@@ -43,7 +43,6 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
         }
         if (life == 3){
             grow(world);
-            System.out.println("Baby rabbit finally grew up!!!");
         }
     }
 

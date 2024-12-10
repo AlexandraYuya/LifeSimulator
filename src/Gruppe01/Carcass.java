@@ -55,7 +55,6 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
         stepCount++;
 
         if (stepCount % 20 == 0) {
-            System.out.println(amount + " carcass decayed by -1!");
             amount--;
         }
     }
@@ -68,8 +67,6 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
     public void eatCarcass(World world) {
         if (hasAmount) {
             amount--;
-        } else {
-            System.out.println("Attempted to consume carcass but not enough amount available"); // Debug print
         }
         if(amount <= 0){
             hasAmount = false;

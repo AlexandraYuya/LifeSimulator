@@ -15,21 +15,16 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-//    System.out.println("USING SEED: " + seed);
-        // Change filename as needed
         File file = new File("./resources/data/t3-2ab.txt");
 
-        Scanner sc = new Scanner(file); // scans the file content
+        Scanner sc = new Scanner(file);
 
-        // Read the world size dynamically, extracted from file
         int size = Integer.parseInt(sc.nextLine());
         Program program = new Program(size, 800, 1200);
         World world = program.getWorld();
 
-        // Process each line for entities (grass, rabbit, burrow) and each of their counts, (since each file have varying number of lines)
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            // can be in <type> <count> pairs or <type> <countMIN-MAX> <(x,y)>
             String[] parts = line.split(" ");
             StringBuilder name = new StringBuilder();
 
@@ -37,22 +32,18 @@ public class Main {
                 if (!part.matches(".*\\d+.*")) {
                     name.append(part);
                 } else {
-                    //if it is a number it stops
                     break;
                 }
             }
             if (parts.length > 2 && parts[0].equalsIgnoreCase("carcass") && parts[1].equalsIgnoreCase("fungi") ) {
-                parts = new String[]{name.toString(),parts[2]}; // new array
+                parts = new String[]{name.toString(),parts[2]};
             }
-            System.out.println(name + " " + parts[0]);
 
             if (parts.length >= 2) {
                 int coord1 = 0;
                 int coord2 = 0;
                 boolean hasCoordinate = false;
-                // normalize type
                 String type = parts[0].trim().toLowerCase();
-                // calls partsCount method, defined lower in file
                 int count = parseCount(parts[1].trim());
                 Wolf alphaWolf = null;
 
@@ -63,7 +54,6 @@ public class Main {
                     String coordinate2 = coordinate[1];
                     coord1 = Integer.parseInt(coordinate1.substring(1, coordinate1.length()));
                     coord2 = Integer.parseInt(coordinate2.substring(0, coordinate2.length() - 1));
-                    System.out.println(coord1 + " " + coord2);
                 }
 
                     for (int i = 0; i < count; i++) {
@@ -91,14 +81,12 @@ public class Main {
                                 bear.act(world);
                                 break;
                             case "wolf":
-                                // Create an alpha wolf for the first iteration
                                 if (i == 0) {
                                     alphaWolf = new Wolf(null);
                                     alphaWolf.placeInWorld(world);
                                     alphaWolf.addCave(world);
                                     alphaWolf.act(world);
                                 } else {
-                                    // Assign wolf to the alpha's pack
                                     Wolf wolf = new Wolf(alphaWolf);
                                     wolf.placeInWorld(world);
                                     wolf.act(world);
@@ -117,25 +105,20 @@ public class Main {
                                 carcassFungi.placeInWorld(world);
                                 break;
                             default:
-                                System.out.println("Unknown entity type: " + type);
                                 break;
                         }
                     }
                 }
         }
-        // closes the scanner
         sc.close();
 
-        // Show the simulation
         program.show();
 
-        // Simulate the world
         for (int i = 0; i < 250; i++) {
             program.simulate();
         }
     }
 
-    // here we handle the count (as in grass 3 or rabbit 10-20), either an integer is a value between min-max or it is just a single value
     /**
      * Parses(decodes) a count string that represents either a single number or a range of numbers
      * fx:("3" or "10-20"). If the count string contains a range (has a dash),
@@ -146,16 +129,12 @@ public class Main {
      * See comments for better understanding of the code
      */
     private static int parseCount(String countStr) {
-        // only executes in integers with intervals
         if (countStr.contains("-")) {
-            // split by dash so we can process min and max value
             String[] range = countStr.split("-");
             int min = Integer.parseInt(range[0].trim());
             int max = Integer.parseInt(range[1].trim());
-            // pick a random value between min and max
             return min + (PRNG.rand().nextInt(max - min + 1));
         } else {
-            // else returns directly the one digit integer
             return Integer.parseInt(countStr);
         }
     }

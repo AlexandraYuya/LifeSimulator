@@ -44,7 +44,7 @@ public class Rabbit extends Animal implements Actor {
     public void handleNight(World world) {
         super.handleNight(world);
         if (world.isOnTile(this)) {
-            previousLocation = world.getLocation(this); // get the location before removal
+            previousLocation = world.getLocation(this);
             Location curLocation = world.getLocation(this);
             Set<Location> surroundingTiles = world.getSurroundingTiles(curLocation);
             Set<Burrow> nearbyBurrow = world.getAll(Burrow.class, surroundingTiles);

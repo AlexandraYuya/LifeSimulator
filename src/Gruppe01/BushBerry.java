@@ -12,7 +12,6 @@ public class BushBerry implements DynamicDisplayInformationProvider {
     private boolean hasBerries;
 
     public BushBerry() {
-        // Initialize berries to true when created
         this.hasBerries = true;
     }
 
@@ -36,16 +35,12 @@ public class BushBerry implements DynamicDisplayInformationProvider {
      * @param world The current world
      */
     public void consumeBerries(World world) {
-        System.out.println("consumeBerries called, hasBerries is: " + hasBerries()); // Debug print
         if (hasBerries) {
             hasBerries = false;
             Location currentLocation = world.getLocation(this);
-            System.out.println("Transforming berry at " + currentLocation); // Debug print
             world.delete(this);
             Bush bush = new Bush();
             world.setTile(currentLocation, bush);
-        } else {
-            System.out.println("Attempted to consume berries but none available"); // Debug print
         }
     }
 

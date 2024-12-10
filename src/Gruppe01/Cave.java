@@ -11,5 +11,4 @@ public class Cave implements DynamicDisplayInformationProvider {
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.blue, "cave");
     }
-
 }

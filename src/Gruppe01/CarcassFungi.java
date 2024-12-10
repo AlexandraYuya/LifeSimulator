@@ -27,7 +27,6 @@ public class CarcassFungi extends Carcass implements Actor {
         stepCount++;
 
         if (stepCount % 20 == 0) {
-            System.out.println(amount + " CarcassFungi decayed by -1!");
             amount--;
         }
         if (amount <= 0) {
@@ -35,7 +34,6 @@ public class CarcassFungi extends Carcass implements Actor {
             world.delete(this);
             Fungi fungi = new Fungi(isSmall);
             world.setTile(curLocation, fungi);
-            System.out.println("CarcassFungi removed!");
         }
     }
 

@@ -49,7 +49,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     @Override
     public void handleDay(World world) {
         super.handleDay(world);
-        // Resume normal daytime behavior
         if (life > 0 && energy > 0) {
             energy--;
             eat(world);
@@ -110,13 +109,11 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(nearbyLocation, carcass);
-                    System.out.println("Bear Ate a poor Rabbit - New energy level:" + energy);
                     break;
                 }
                 if (entity instanceof BushBerry && chance <= 0.9 && !(entity instanceof Bush)) {
                     energy += 5;
                     ((BushBerry) entity).consumeBerries(world);
-                    System.out.println("Bear Ate some berries - New energy level:" + energy);
                     break;
                 }
                 if (entity instanceof Carcass) {

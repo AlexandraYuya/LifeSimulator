@@ -28,18 +28,14 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         this.isInCave = false;
 
         if (alphaWolf == null) {
-            // If there is no alpha, this wolf becomes the alpha
             this.alphaWolf = this;
             this.isAlphaWolf = true;
-            // Initialize a new pack
             this.pack = new ArrayList<>();
-            // Alpha includes itself in the pack
             this.pack.add(this);
             if(!wolfNet.contains(this.pack)) {
                 wolfNet.add(this.pack);
             }
         } else {
-            // If there is already an alpha, join its pack
             this.isAlphaWolf = false;
             this.myCave = this.alphaWolf.myCave;
             this.hasCave = this.alphaWolf.hasCave;
@@ -131,7 +127,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
 
                 if (caveLocation != null) {
 
-                    // Move all wolves in the pack to the cave
                     for (Wolf wolf : pack) {
                         if (!wolf.isInCave) {
                             Location wolfCurLocation = world.getLocation(wolf);
@@ -171,27 +166,21 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     @Override
     public void handleDay(World world) {
         super.handleDay(world);
-        // Only proceed if the wolf is in the cave
         if (isInCave) {
 
             if (life > 0 && energy >= 20) {
-                // NOTE: THIS DECREASES ENERGY!!!
                 tryToMate(world);
             }
 
             if (myCave != null) {
 
-                // Find the cave's location
                 Location caveLocation = world.getLocation(myCave);
                 if (caveLocation != null) {
-                    // Get all empty surrounding tiles around the cave
                     Set<Location> emptyTiles = world.getEmptySurroundingTiles(caveLocation);
                     if (!emptyTiles.isEmpty()) {
-                        // Randomly pick one of the empty tiles
                         List<Location> list = new ArrayList<>(emptyTiles);
                         for (Wolf wolf : pack) {
                             if (list.size() <= 0) {
-                                System.out.println("FATAL ERROR! NO MORE FREE SPACE TO MOVE TO IN handleDay wolf");
                                 System.exit(1);
                             }
                             int randomChoice = PRNG.rand().nextInt(list.size());
@@ -201,7 +190,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                             wolf.isInCave = false;
                         }
                     } else {
-                        System.out.println(" No space for wolf... \uD83E\uDD14");
                         System.exit(1);
                     }
                 }
@@ -247,7 +235,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                             wolfInPack.life -= 3;
                             wolfInPack.energy -= 20;
                             wolfInPack.hasBeenAttacked = true;
-                            System.out.println("Enemy Wolf in territory! >:C Be prepared to ATTACKKK!!!" + " Energy: " + wolfInPack.energy + " Life: " + wolfInPack.life);
                         }
                     }
                 }
@@ -275,13 +262,11 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                     world.delete(entity);
                     Carcass carcass = new Carcass(isSmall, 10);
                     world.setTile(nearbyLocation, carcass);
-                    System.out.println("Wolf ate a poor Rabbit - New energy level:" + energy);
                     break;
                 }
                 if (entity instanceof Carcass) {
                     energy += 5;
                     ((Carcass) entity).eatCarcass(world);
-                    System.out.println("Wolf ate a bit of a Carcass - New energy level:" + energy);
                     break;
                 }
             }
@@ -320,25 +305,18 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      * @param world The current world.
      */
     private void tryToMate(World world) {
-        // Don't try to mate if energy is too low
         if (energy < 20) {
             return;
         }
 
-        // Only proceed if there are at least two wolves in the pack (hermaphrodite wolves)
         if (pack.size() > 1) {
-            // 30% chance to create a baby
-            // Returns a value between 0.0 and 1.0
             double chance = PRNG.rand().nextDouble();
 
             if(chance < 0.3) {
-                // Create a baby
                 BabyWolf baby = new BabyWolf(alphaWolf);
                 world.add(baby);
 
-                // Decrease energy after successful reproduction
                 energy -= 20;
-                System.out.println("+++++++++++A baby wolf was born! Parent energy now: " + energy);
             }
         }
     }
@@ -349,12 +327,10 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     @Override
     public void placeInWorld(World world) {
-        // Places alpha wolf in the world
         if (isAlphaWolf) {
             super.placeInWorld(world);
 
         } else {
-            // Places pack wolves in the world based on alpha's location
             Location alphaLocation = world.getLocation(alphaWolf);
             Set<Location> nearbyTiles = world.getEmptySurroundingTiles(alphaLocation);
 
@@ -363,7 +339,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
                 Location newLocation = list.get(PRNG.rand().nextInt(list.size()));
                 world.setTile(newLocation, this);
                 this.location = newLocation;
-                System.out.println("Wolf placed near pack at: " + newLocation);
             } else {
                 super.placeInWorld(world);
             }
