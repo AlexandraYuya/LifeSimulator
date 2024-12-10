@@ -31,9 +31,9 @@ public class BearTest {
 
     @Test
     public void testEnergyDecrease() {
-        int initialEnergy = bear.energy;
+        int initialEnergy = bear.getEnergy();
         bear.handleDay(world);
-        assertEquals(initialEnergy - 1, bear.energy);
+        assertEquals(initialEnergy - 1, bear.getEnergy());
     }
 
     @Test
@@ -43,12 +43,12 @@ public class BearTest {
 
         if (!validNeighbors.isEmpty()) {
             Location nearbyLoc = validNeighbors.iterator().next();
-            int initialEnergy = bear.energy;
+            int initialEnergy = bear.getEnergy();
 
             BushBerry berry = new BushBerry();
             world.setTile(nearbyLoc, berry);
             bear.eat(world);
-            assertEquals(initialEnergy + 5, bear.energy);
+            assertEquals(initialEnergy + 5, bear.getEnergy());
         }
     }
 

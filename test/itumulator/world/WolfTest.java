@@ -38,11 +38,11 @@ public class WolfTest {
 
         AdultRabbit rabbit = new AdultRabbit();
         world.setTile(nearbyLoc, rabbit);
-        assertEquals(100, alphaWolf.energy);
+        assertEquals(100, alphaWolf.getEnergy();
         alphaWolf.eat(world);
-        assertEquals(100, alphaWolf.energy);
+        assertEquals(100, alphaWolf.getEnergy());
         alphaWolf.eat(world);
-        assertEquals(105, alphaWolf.energy);
+        assertEquals(105, alphaWolf.getEnergy());
         assertTrue(world.getTile(nearbyLoc) instanceof Carcass);
     }
 

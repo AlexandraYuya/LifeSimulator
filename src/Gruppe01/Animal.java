@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class Animal implements PRNG {
-    public int life;
-    public int energy;
+    protected int life;
+    protected int energy;
     protected int stepCount;
     protected Location location;
     protected boolean isNight = false;
@@ -22,6 +22,7 @@ public abstract class Animal implements PRNG {
         this.isSmall = isSmall;
         this.amount = amount;
     }
+
 
     /**
      * This method accounts for all the behavior of all the animals in the world.
@@ -138,5 +139,14 @@ public abstract class Animal implements PRNG {
         if (!world.containsNonBlocking(location)) {
             world.setTile(location, this);
         }
+    }
+
+    public int getEnergy(){
+        return energy;
+    }
+
+
+    public int getLife(){
+        return life;
     }
 }

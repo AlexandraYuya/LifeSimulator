@@ -34,7 +34,7 @@ public class BabyWolfTest {
 
     @Test
     public void testInitialState() {
-        assertEquals(15, babyWolf.life);
+        assertEquals(15, babyWolf.getLife());
         assertTrue(world.contains(babyWolf));
         assertTrue("Baby wolf should be in alpha's pack",
                 alphaWolf.getPack().contains(babyWolf));
