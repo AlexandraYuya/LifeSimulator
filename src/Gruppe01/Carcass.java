@@ -11,7 +11,7 @@ import java.awt.*;
 public class Carcass implements Actor, DynamicDisplayInformationProvider {
     protected int stepCount;
     protected boolean hasAmount;
-    public int amount;
+    protected int amount;
     public boolean isSmall;
 
     public Carcass(boolean isSmall, int amount) {
@@ -25,6 +25,10 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
         stepCount = 0;
         this.hasAmount = true;
         this.amount = 11;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     /**

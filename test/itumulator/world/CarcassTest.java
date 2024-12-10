@@ -22,13 +22,13 @@ public class CarcassTest {
     public void testConstructorWithParameters() {
         Carcass carcass = new Carcass(true, 5);
         assertTrue("Carcass should be small", carcass.isSmall);
-        assertEquals("Amount should be 5", 5, carcass.amount);
+        assertEquals("Amount should be 5", 5, carcass.getAmount());
     }
 
     @Test
     public void testDefaultConstructor() {
         Carcass carcass = new Carcass();
-        assertEquals("Default amount should be 11", 11, carcass.amount);
+        assertEquals("Default amount should be 11", 11, carcass.getAmount());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CarcassTest {
             carcass.act(world);
         }
 
-        assertEquals("Amount should decrease by 1 after 20 steps", 4, carcass.amount);
+        assertEquals("Amount should decrease by 1 after 20 steps", 4, carcass.getAmount());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CarcassTest {
         world.setTile(new Location(0, 0), carcass);
 
         carcass.eatCarcass(world);
-        assertEquals("Amount should decrease by 1 after eating", 1, carcass.amount);
+        assertEquals("Amount should decrease by 1 after eating", 1, carcass.getAmount());
 
         carcass.eatCarcass(world);
         assertNull("Carcass should be removed from world when amount reaches 0",
@@ -100,7 +100,7 @@ public class CarcassTest {
             carcass.act(world);
         }
 
-        assertEquals("Amount should decrease by 2 after 40 steps", 1, carcass.amount);
+        assertEquals("Amount should decrease by 2 after 40 steps", 1, carcass.getAmount());
     }
 
 }

@@ -16,13 +16,13 @@ public class CarcassFungiTest {
     public void testConstructorWithParameters() {
         CarcassFungi carcassFungi = new CarcassFungi(true, 10);
         assertTrue("CarcassFungi should be small", carcassFungi.isSmall);
-        assertEquals("Amount should be 10", 10, carcassFungi.amount);
+        assertEquals("Amount should be 10", 10, carcassFungi.getAmount());
     }
 
     @Test
     public void testDefaultConstructor() {
         CarcassFungi carcassFungi = new CarcassFungi();
-        assertEquals("Default amount should be 5", 5, carcassFungi.amount);
+        assertEquals("Default amount should be 5", 5, carcassFungi.getAmount());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class CarcassFungiTest {
             carcassFungi.act(world);
         }
 
-        assertEquals("Amount should decrease by 1 after 20 steps", 1, carcassFungi.amount);
+        assertEquals("Amount should decrease by 1 after 20 steps", 1, carcassFungi.getAmount());
     }
 
     @Test
@@ -84,6 +84,6 @@ public class CarcassFungiTest {
             carcassFungi.act(world);
         }
 
-        assertEquals("Amount should decrease by 2 after 40 steps", 1, carcassFungi.amount);
+        assertEquals("Amount should decrease by 2 after 40 steps", 1, carcassFungi.getAmount());
     }
 }
