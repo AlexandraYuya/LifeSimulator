@@ -16,14 +16,16 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
         life = 3;
     }
 
+    /**
+     * Sets the life, used for Junit accesibility
+     * @param life
+     */
     public void setLife(int life) {
         this.life = life;
     }
 
     /**
-     * This method give the rabbit a sleeping png or an awake png.
-     * If the Rabbit is a sleep it will get a sleeping rabbit png.
-     * If it was awake it will get an awake rabbit.
+     * This method sets the rabbits png based on certain conditions
      */
     @Override
     public DisplayInformation getInformation() {
@@ -35,7 +37,6 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This is the method we are using to handle day.
      * The method implement normal day behavior for rabbits such as move random, eat, mating and dig borrows.
      * handleDay, moveRandom and eat all comes from the super class Rabbit.
      * @param world The current world
