@@ -56,7 +56,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
     public void nearFungi(World world) {
         Location curLocation = world.getLocation(this);
 
-        int radius = 8;
+        int radius = 5;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
