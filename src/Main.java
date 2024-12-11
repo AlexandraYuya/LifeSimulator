@@ -7,11 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * The main class is where we run our simulating world from
- * Here we read the files (we were given txt files)
- * Then the world is initialized with entities(Grass,rabbits etc)
- * So the steps are: reads the file, place the correct entities from the file, place the entities in our wold,
- * then run the simulation with the entities
+ * The main class is where we run our simulating world from.
+ * Here we read the txt files with world size and various input types.
+ * The world is initialized with entities (Grass,rabbits etc.).
+ * Then we run the simulation with the entities.
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -120,13 +119,11 @@ public class Main {
     }
 
     /**
-     * Parses(decodes) a count string that represents either a single number or a range of numbers
-     * fx:("3" or "10-20"). If the count string contains a range (has a dash),
-     * a random number within the specified range is returned. Otherwise, the single value is returned.
-     *
+     * Parses(decodes) a count string that represents either a single number or a range of numbers f.eks. ("3" or "10-20").
+     * If the count string contains a range (has a dash), a random number within the specified range is returned.
+     * Otherwise, the single value is returned.
      * @param countStr the string representing the count (either a single number or a range)
-     * @return an integer representing the count, either a single value or a random value within a range
-     * See comments for better understanding of the code
+     * @return an integer representing the count, either a single value or a random value within a range.
      */
     private static int parseCount(String countStr) {
         if (countStr.contains("-")) {

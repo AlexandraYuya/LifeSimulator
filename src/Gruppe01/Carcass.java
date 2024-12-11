@@ -28,21 +28,21 @@ public class Carcass implements Actor, DynamicDisplayInformationProvider {
     }
 
     /**
-     * This is get method for amount.
+     * This is get method for amount, used for Junit testing accessibility.
      */
     public int getAmount() {
         return amount;
     }
 
     /**
-     * This is get method for isSmall.
+     * This is get method for isSmall, used for Junit testing accessibility.
      */
     public boolean getIsSmall() {
         return isSmall;
     }
 
     /**
-     * If the dead animal is big, then it will replace it with a big carcass.
+     * If the dead animal was big, then it will replace it with a big carcass.
      * If it was small, then it will replace it with a small carcass.
      */
     @Override

@@ -19,7 +19,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method give the Bear a sleeping png or an awake png.
+     * This method gives the bear a sleeping png or an awake png.
      */
     @Override
     public DisplayInformation getInformation() {
@@ -31,7 +31,8 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method accounts for all the behavior of bear in the superclass animal.
+     * This method accounts for all the behavior of bear.
+     * implements super-class method from Animal.
      * @param world The current world
      */
     @Override
@@ -40,12 +41,12 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This is the method is used for handle day from the super class animal.
+     * This method is used to handle daytime functionality.
+     * Implements super-class method from Animal.
      * @param world The current world.
      */
     @Override
     public void handleDay(World world) {
-        super.handleDay(world);
         if (life > 0 && energy > 0) {
             energy--;
             eat(world);
@@ -54,7 +55,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     *This method makes the bear walk random in a circular space within the radius of 2.
+     *This method makes the bear walk randomly in a circular space within the radius of 2.
      * @param world The current world.
      */
     private void moveInCircRandomly(World world) {
@@ -87,7 +88,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method makes it possible for the bears to eat rabbits, berries and carcasses.
+     * This method makes it possible for the bears to kill rabbits, eat berries and carcasses.
      * @param world The current world.
      */
     @Override
@@ -122,7 +123,8 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This is the method place the Bear in the world.
+     * This is the method to place the Bear in the world.
+     * Different for if they have a coordinate or not.
      * @param world The current world.
      */
     @Override

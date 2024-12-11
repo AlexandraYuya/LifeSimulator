@@ -16,7 +16,7 @@ public class BushBerry implements DynamicDisplayInformationProvider {
     }
 
     /**
-     * This method display a bushBarry png.
+     * This method displays a bushBarry png.
      */
     @Override
     public DisplayInformation getInformation() {
@@ -39,7 +39,7 @@ public class BushBerry implements DynamicDisplayInformationProvider {
     }
 
     /**
-     * This is the method place the berry in the world.
+     * This is the method to place the berry in the world.
      * @param world The current world
      */
     public void placeInWorld(World world) {

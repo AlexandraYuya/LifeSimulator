@@ -18,7 +18,7 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
   }
 
     /**
-     * This method give the fungi a small or at normal size regarding the size of the carcassFungi.
+     * This method gives the fungi a small or at normal size, dependent on the size of the carcassFungi.
      */
     @Override
     public DisplayInformation getInformation() {
@@ -49,8 +49,8 @@ public class Fungi extends CarcassFungi implements DynamicDisplayInformationProv
     }
 
     /**
-     * This is the method is for the Fungi to find surrounding tiles with healthy carcass.
-     * It transforms normal carcass into carcassFungi.
+     * This method is used for the Fungi to find surrounding tiles with healthy carcasses.
+     * It transforms a normal carcass into carcassFungi.
      * @param world The current world
      */
     public void nearFungi(World world) {

@@ -23,7 +23,8 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This method accounts for all the behavior of rabbits in the superclass animal.
+     * This method accounts for all the behavior of rabbits.
+     * Implements the super-class method in Animal.
      * @param world The current world
      */
     @Override
@@ -33,12 +34,11 @@ public class Rabbit extends Animal implements Actor {
 
     /**
      * This is the method we are using to handle night.
-     * It make it possible for rabbits to sleep inside or outside a borrow.
+     * It makes it possible for rabbits to sleep inside or outside a borrow.
      * @param world The current world
      */
     @Override
     public void handleNight(World world) {
-        super.handleNight(world);
         if (world.isOnTile(this)) {
             previousLocation = world.getLocation(this);
             Location curLocation = world.getLocation(this);
@@ -57,8 +57,8 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This is the method we are using to handle day from the super class Animal.
-     * The method does also implement the method of checkInBorrow.
+     * This is the method we are using to handle day.
+     * The method also implement the method of checkInBorrow.
      * @param world The current world
      */
     @Override
@@ -67,8 +67,8 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This is the method make the rabbits move random in the world.
-     * Is uses the superclass moveRandom.
+     * This method makes the rabbits move randomly in the world.
+     * Is uses the super-class method moveRandom from Animal class.
      * @param world The current world
      */
     @Override
@@ -77,7 +77,7 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This method gives energy and remove grass when a rabbit eats it.
+     * This method rejuvenates energy and removes grass when a rabbit eats it.
      * @param world The current world
      */
     @Override
@@ -92,7 +92,7 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This method checks if rabbit is in a burrow and reinstates them if so.
+     * This method checks if a rabbit is in a burrow and reinstates them if so.
      * @param world The current world
      */
     public void checkInBurrow(World world) {
@@ -115,7 +115,7 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This is the method place the rabbit in the world.
+     * This method places the rabbit in the world.
      * @param world The current world
      */
     @Override

@@ -16,7 +16,7 @@ public class Bush extends BushBerry implements Actor, DynamicDisplayInformationP
     }
 
     /**
-     * This method display a bush png.
+     * This method displays a bush png.
      */
     @Override
     public DisplayInformation getInformation() {
@@ -25,7 +25,7 @@ public class Bush extends BushBerry implements Actor, DynamicDisplayInformationP
 
 
     /**
-     * This method makes the bush grow into a bushBarry when the count is at 60 (3 days).
+     * This method makes the bush grow into a bushBerry when the count is at 60 (3 days).
      * @param world The current world
      */
     public void act(World world) {

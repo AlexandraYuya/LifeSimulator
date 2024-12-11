@@ -24,21 +24,21 @@ public abstract class Animal implements PRNG {
     }
 
     /**
-     * This is get method for energy.
+     * This is get method for energy, used for accessibility to Junit testing.
      */
     public int getEnergy(){
         return energy;
     }
 
     /**
-     * This is get method for life.
+     * This is get method for life, used for accessibility to Junit testing.
      */
     public int getLife(){
         return life;
     }
 
     /**
-     * This is set method for life.
+     * This is set method for life, used for accessibility to Junit testing.
      */
     public int setLife(){
         return life = 3;
@@ -66,21 +66,21 @@ public abstract class Animal implements PRNG {
     }
 
     /**
-     * This method handle night for animals.
+     * This method handles night for animals.
      * @param world The current world
      */
     public void handleNight(World world) {}
 
     /**
-     * This method handle day for animals.
+     * This method handles day for animals.
      * @param world The current world
      */
     public void handleDay(World world) {}
 
     /**
-     * This method accounts for all the dying animals and replace it with a carcass.
+     * This method accounts for all the dying animals and replaces it with a carcass.
      * If the animal is a wolf is will remove it from the pack and if the wolf is an alpha
-     * then the alpha will be switch out by another wolf in the pack.
+     * then the alpha will be replaced with another wolf in the pack.
      * @param world The current world
      */
     public boolean die(World world) {

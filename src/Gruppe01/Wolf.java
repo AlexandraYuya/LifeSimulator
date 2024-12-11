@@ -114,8 +114,6 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     @Override
     public void handleNight(World world) {
-        super.handleNight(world);
-
         if(this.hasBeenAttacked) {
             this.hasBeenAttacked = false;
         }
@@ -156,16 +154,15 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method handle normal day behavior.
-     * If the wolves is in the cave then is will try to mate, but it will decrease their energy.
-     * If the wolves is outside the cave the wolves will follow the alpha wolf.
-     * The alpha wolf will walk random around.
+     * This method handles normal day behavior.
+     * If the wolves are in the cave, they will try to mate, which will decrease their energy.
+     * If the wolves are outside the cave, they will follow the alpha wolf.
+     * The alpha wolf walks randomly around.
      * It uses the superclass animal.
      * @param world The current world
      */
     @Override
     public void handleDay(World world) {
-        super.handleDay(world);
         if (isInCave) {
 
             if (life > 0 && energy >= 20) {
@@ -208,6 +205,11 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * This method checks to see if other wolf packs are nearby, if so they fight.
+     * Wolves can only fight and be fought once per day.
+     * @param world The current world
+     */
     private void fight(World world) {
         for(List<Wolf> pack : wolfNet) {
             if(this.pack == pack) {
@@ -243,7 +245,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method determines the probability of eating a rabbit or a carcass.
+     * This method determines the probability of killing a rabbit and eating a carcass.
      * Replenishes energy.
      * @param world The current world
      */

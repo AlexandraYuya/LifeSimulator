@@ -24,7 +24,7 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     }
 
     /**
-     * Counts steps and spread grass every 10 steps, and can spread every 20 steps.
+     * Counts steps and spreads grass every 20 steps (1 day) with 70% chance.
      * @param world The current world
      */
     @Override
@@ -39,7 +39,7 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     }
 
     /**
-     * The method spread grass to a random empty surrounding tile.
+     * The method spreads grass to a random empty surrounding tile.
      * @param world The current world
      */
     private void spreadGrass(World world) {
@@ -64,7 +64,7 @@ public class Grass implements NonBlocking, Actor, DynamicDisplayInformationProvi
     }
 
     /**
-     * This is the method place the grass in the world
+     * This is the method to place the grass in the world
      * @param world The current world.
      */
     public void placeInWorld(World world) {

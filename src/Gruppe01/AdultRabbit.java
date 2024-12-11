@@ -25,7 +25,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This method sets the rabbits png based on certain conditions
+     * This method sets the rabbits png based on certain conditions.
      * @return DisplayInformation
      */
     @Override
@@ -38,14 +38,11 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * Implements superclass method
      * Normal day behavior for rabbits(move random, eat, mating and dig borrows).
      * @param world The current world
      */
     @Override
     public void handleDay(World world) {
-        super.handleDay(world);
-
         if (life > 0 && energy > 0) {
             energy--;
             super.moveRandomly(world);

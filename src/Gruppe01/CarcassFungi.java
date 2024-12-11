@@ -17,7 +17,7 @@ public class CarcassFungi extends Carcass implements Actor {
 
     /**
      * This method accounts for all the behavior of carcassFungi.
-     * If the amount is 0 the carcassFungi will be deleted from the world and be replaced it with a fungi.
+     * If the amount is 0 the carcassFungi will be deleted from the world and be replaced with a fungi.
      * @param world The current world
      */
     @Override
@@ -36,7 +36,7 @@ public class CarcassFungi extends Carcass implements Actor {
     }
 
     /**
-     * This method places the carcassFungi in the world by the superclass Carcass.
+     * This method places the carcassFungi in the world by the super-class method in Carcass.
      * @param world The current world
      */
     @Override

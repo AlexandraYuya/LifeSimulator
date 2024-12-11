@@ -16,11 +16,10 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
     }
 
     /**
-     * This is the method will get the owner of a borrow.
+     * This method will get the owner of a borrow.
      * @param rabbit The current rabbit
      */
     public void setOwner(AdultRabbit rabbit) {
-
         this.owner = rabbit;
     }
 
