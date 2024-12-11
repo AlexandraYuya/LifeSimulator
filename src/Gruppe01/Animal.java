@@ -23,23 +23,29 @@ public abstract class Animal implements PRNG {
         this.amount = amount;
     }
 
+    /**
+     * This is get method for energy.
+     */
     public int getEnergy(){
         return energy;
     }
 
+    /**
+     * This is get method for life.
+     */
     public int getLife(){
         return life;
     }
 
+    /**
+     * This is set method for life.
+     */
     public int setLife(){
         return life = 3;
     }
 
     /**
      * This method accounts for all the behavior of all the animals in the world.
-     * The method accounts for their life, energy and if it is night or day.
-     * If it is night it will turn on the handleNight.
-     * If it is not night it will turn on handle day.
      * @param world The current world
      */
     public void act(World world) {
@@ -73,7 +79,8 @@ public abstract class Animal implements PRNG {
 
     /**
      * This method accounts for all the dying animals and replace it with a carcass.
-     * Now it is only for wolves.
+     * If the animal is a wolf is will remove it from the pack and if the wolf is an alpha
+     * then the alpha will be switch out by another wolf in the pack.
      * @param world The current world
      */
     public boolean die(World world) {
@@ -104,7 +111,7 @@ public abstract class Animal implements PRNG {
     }
 
     /**
-     * This method accounts for the animals moving in random directions.
+     * This method accounts for animals moving in random directions.
      * @param world The current world
      */
     public void moveRandomly(World world) {
@@ -131,7 +138,7 @@ public abstract class Animal implements PRNG {
 
     /**
      * This method places the animals in the world.
-     * Is uses the PRNG interface.
+     * It uses the PRNG interface.
      * @param world The current world
      */
     public void placeInWorld(World world) {

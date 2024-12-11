@@ -15,14 +15,17 @@ public class Bush extends BushBerry implements Actor, DynamicDisplayInformationP
         this.stepCount = 0;
     }
 
+    /**
+     * This method display a bush png.
+     */
     @Override
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.red, "bush");
     }
 
+
     /**
-     * This method will count the steps, and it makes the bush grow into a barry when the count is at 60
-     * After 60 steps (3 days), transforms Bush back into BushBerry
+     * This method makes the bush grow into a bushBarry when the count is at 60 (3 days).
      * @param world The current world
      */
     public void act(World world) {

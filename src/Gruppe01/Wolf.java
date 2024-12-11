@@ -46,6 +46,9 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
         }
     }
 
+    /**
+     * This is get method for pack.
+     */
     public List<Wolf> getPack() {
         return pack;
     }
@@ -60,8 +63,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This adds new wolves to this alpha wolf's pack.
-     * Method only used by the alpha wolf.
+     * This adds new wolves to the alpha wolf's pack. The method only used by the alpha wolf.
      * @param wolf Takes in the current wolf
      */
     private void addPackMember(Wolf wolf) {
@@ -91,8 +93,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
             }
         }
     /**
-     * This method accounts for all the behavior of wolves
-     * It uses the superclass animal.
+     * This method accounts for all the behavior of wolves. It uses the superclass animal.
      * @param world The current world
      */
     @Override
@@ -107,8 +108,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * The method handle the night of the wolves.
-     * If moves all the wolves into a cave for sleeping.
+     * The method handle the night of the wolves. It moves all the wolves into a cave for sleeping.
      * It uses the superclass animal.
      * @param world The Current world
      */
@@ -301,7 +301,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This is the method we are using for reproducing wolves.
+     * This is the method is used for reproducing wolves.
      * @param world The current world.
      */
     private void tryToMate(World world) {
@@ -322,7 +322,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
     }
 
     /**
-     * This method places the wolves based on if they're the alpha, or pack wolves.
+     * This method places the wolves based on if they're an alpha, or pack wolves.
      * @param world The current world
      */
     @Override

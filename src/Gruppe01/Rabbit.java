@@ -33,11 +33,7 @@ public class Rabbit extends Animal implements Actor {
 
     /**
      * This is the method we are using to handle night.
-     // Get only surrounding tiles
-     // Find burrows in surrounding tiles
-     // check if curLocation is on a burrow
-     // Only proceed if there are nearby burrows or on a burrow
-     * It makes it possible for rabbits to sleep inside or outside the borrow.
+     * It make it possible for rabbits to sleep inside or outside a borrow.
      * @param world The current world
      */
     @Override
@@ -72,6 +68,7 @@ public class Rabbit extends Animal implements Actor {
 
     /**
      * This is the method make the rabbits move random in the world.
+     * Is uses the superclass moveRandom.
      * @param world The current world
      */
     @Override
@@ -80,7 +77,7 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This is the method is giving energy and removing grass when a rabbit eats it.
+     * This method gives energy and remove grass when a rabbit eats it.
      * @param world The current world
      */
     @Override
@@ -95,7 +92,7 @@ public class Rabbit extends Animal implements Actor {
     }
 
     /**
-     * This method checks if rabbit is in burrow and reinstates them if so.
+     * This method checks if rabbit is in a burrow and reinstates them if so.
      * @param world The current world
      */
     public void checkInBurrow(World world) {

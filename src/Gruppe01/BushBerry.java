@@ -15,15 +15,17 @@ public class BushBerry implements DynamicDisplayInformationProvider {
         this.hasBerries = true;
     }
 
+    /**
+     * This method display a bushBarry png.
+     */
     @Override
     public DisplayInformation getInformation() {
         return new DisplayInformation(Color.red, "bush-berries");
     }
 
     /**
-     * This method is used when they are berry's get eaten.
-     * When it gets eat the berry will be deleted from the world and become a bush.
-     * // Get current location before deleting
+     * This method is used when animals are eating the bushBerries.
+     * The berry will be deleted from the world and become a bush when consumed.
      * @param world The current world
      */
     public void consumeBerries(World world) {

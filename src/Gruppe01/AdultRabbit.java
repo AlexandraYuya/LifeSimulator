@@ -17,8 +17,8 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * Sets the life, used for Junit accesibility
-     * @param life
+     * Sets the life, used for Junit accessibility.
+     * @param life AdultRabbit
      */
     public void setLife(int life) {
         this.life = life;
@@ -26,6 +26,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
 
     /**
      * This method sets the rabbits png based on certain conditions
+     * @return DisplayInformation
      */
     @Override
     public DisplayInformation getInformation() {
@@ -37,8 +38,8 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * The method implement normal day behavior for rabbits such as move random, eat, mating and dig borrows.
-     * handleDay, moveRandom and eat all comes from the super class Rabbit.
+     * Implements superclass method
+     * Normal day behavior for rabbits(move random, eat, mating and dig borrows).
      * @param world The current world
      */
     @Override
@@ -55,8 +56,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
     }
 
     /**
-     * This method is for digging borrows.
-     * It makes sure that each rabbit only digs one borrow.
+     * The method makes sure that each rabbit only digs one borrow.
      * @param world The current world
      */
     private void digProbability(World world) {

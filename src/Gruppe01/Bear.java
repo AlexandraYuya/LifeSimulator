@@ -20,8 +20,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method give the Bear a sleeping png or an awake png.
-     * If the Bear is a sleep it will get a sleeping bear png.
-     * If it was awake it will get an awake bear.
      */
     @Override
     public DisplayInformation getInformation() {
@@ -43,7 +41,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This is the method is used for handle day from the super class animal.
-     * It makes them do normal daytime behavior.
      * @param world The current world.
      */
     @Override
@@ -91,7 +88,6 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
 
     /**
      * This method makes it possible for the bears to eat rabbits, berries and carcasses.
-     * The for Loop goes through all surrounding tiles
      * @param world The current world.
      */
     @Override

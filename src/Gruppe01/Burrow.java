@@ -20,6 +20,7 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
      * @param rabbit The current rabbit
      */
     public void setOwner(AdultRabbit rabbit) {
+
         this.owner = rabbit;
     }
 
@@ -28,11 +29,12 @@ public class Burrow implements NonBlocking, DynamicDisplayInformationProvider {
      */
     @Override
     public DisplayInformation getInformation() {
+
         return new DisplayInformation(Color.GRAY, "hole-small");
     }
 
     /**
-     * This is the method place the borrow in the world
+     * This method place the borrow in the world
      * @param world The current world
      */
     public void placeInWorld(World world) {
