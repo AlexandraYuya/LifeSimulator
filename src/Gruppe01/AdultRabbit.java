@@ -43,6 +43,7 @@ public class AdultRabbit extends Rabbit implements Actor, DynamicDisplayInformat
      */
     @Override
     public void handleDay(World world) {
+        super.handleDay(world);
         if (life > 0 && energy > 0) {
             energy--;
             super.moveRandomly(world);

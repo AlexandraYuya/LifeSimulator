@@ -47,6 +47,7 @@ public class Bear extends Animal implements Actor, DynamicDisplayInformationProv
      */
     @Override
     public void handleDay(World world) {
+        super.handleDay(world);
         if (life > 0 && energy > 0) {
             energy--;
             eat(world);

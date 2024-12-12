@@ -114,6 +114,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     @Override
     public void handleNight(World world) {
+        super.handleNight(world);
         if(this.hasBeenAttacked) {
             this.hasBeenAttacked = false;
         }
@@ -163,6 +164,7 @@ public class Wolf extends Animal implements Actor, DynamicDisplayInformationProv
      */
     @Override
     public void handleDay(World world) {
+        super.handleDay(world);
         if (isInCave) {
 
             if (life > 0 && energy >= 20) {

@@ -32,6 +32,7 @@ public class BabyRabbit extends Rabbit implements Actor, DynamicDisplayInformati
      * @param world The current world
      */
     public void handleDay(World world) {
+        super.handleDay(world);
         if (life > 0 && energy > 0) {
             energy--;
             super.moveRandomly(world);

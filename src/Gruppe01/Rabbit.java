@@ -39,6 +39,7 @@ public class Rabbit extends Animal implements Actor {
      */
     @Override
     public void handleNight(World world) {
+        super.handleNight(world);
         if (world.isOnTile(this)) {
             previousLocation = world.getLocation(this);
             Location curLocation = world.getLocation(this);
@@ -63,6 +64,7 @@ public class Rabbit extends Animal implements Actor {
      */
     @Override
     public void handleDay(World world) {
+        super.handleDay(world);
         checkInBurrow(world);
     }
 
